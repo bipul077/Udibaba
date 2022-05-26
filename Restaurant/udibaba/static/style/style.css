@@ -315,7 +315,7 @@ ol {
 .header__menu ul li {
 	list-style: none;
 	display: inline-block;
-	margin-right: 45px;
+	margin-right: 20px;
 	position: relative;
 }
 
@@ -406,7 +406,7 @@ ol {
 
 .header__nav__option a {
 	display: inline-block;
-	margin-right: 26px;
+	margin-right: 10px;
 	position: relative;
 }
 
@@ -458,7 +458,16 @@ ol {
 	.header__nav__option .price {
 		margin-left: 0;
 	}
-	
+	.search-box:hover > .searchtext{
+		width: 130px;
+		border-style: ridge;
+	}
+}
+@media only screen and (min-width: 768px) and (max-width: 820px) {
+	.search-box:hover > .searchtext{
+		width: 100px;
+		border-style: ridge;
+	}
 }
 
 /* Wide Mobile = 480px */
@@ -604,4 +613,86 @@ ol {
 	}
 	
 }
+/* for search button */
+.container{
+	max-width: 1400px;
+}
 
+.search-box{
+	position: relative;
+	width: 70%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.searchtext{
+	width: 0px;
+	border-radius: 5rem;
+	border: none;
+	transition: all 0.2s linear;
+}
+.searchtext:focus{
+	outline: none;
+}
+.searchbutton{
+	font-size: 20px;
+	position: absolute;
+	width: 1rem;
+	color: rgb(77, 73, 73);
+	cursor: pointer;
+	display: grid;
+	place-items: center;
+	right: 1rem;
+}
+
+.search-box:hover > .searchbutton{
+	color: red;
+}
+
+/* for mobilev version search box */
+.responsivesearch-box{
+	position: relative;
+	width: 70%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.responsivesearch-box:hover > .searchtext{
+	width: 200px;
+	border-style: ridge;
+}
+.responsivesearch-box:hover > .searchbutton{
+	color: red;
+}
+@media only screen and (min-width: 1000px) {
+	.search-box:hover > .searchtext{
+		width: 200px;
+		border-style: ridge;
+	} 
+}
+@media only screen and (min-width: 767px) {
+	#headerright{
+		display: flex;
+	}
+	.responsivesearch-box{
+		display: none;
+	}
+}
+@media only screen and (max-width: 767px) {
+	.responsivesearch-box{
+		float: left;
+		width: 10%;
+	}
+	.responsivesearch-box:hover > .searchtext{
+		width: 200px;
+		border-style: ridge;
+		margin-left: 8rem;
+	}
+	.responsivesearch-box:hover > .searchbutton{
+		color: red;
+		right: -8.5rem;
+	}
+	.searchbutton{
+		right: 0.5rem;
+	}
+}

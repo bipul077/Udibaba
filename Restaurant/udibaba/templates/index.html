@@ -34,7 +34,7 @@
     <div class="offcanvas-menu-overlay"></div>
     <div class="offcanvas-menu-wrapper">
         <div class="offcanvas__nav__option">
-            <a href="#" class="search-switch"><img src="{% static 'img/search.png' %}" alt=""></a>
+            <!-- <a href="#" class="search-switch"><img src="{% static 'img/search.png' %}" alt=""></a> -->
             <a href="#"><img src="{% static 'img/heart.png' %}" alt=""></a>
             <a href="#"><img src="{% static 'img/cart.png' %}" alt=""> <span>0</span></a>
             <div class="price">$0.00</div>
@@ -47,7 +47,7 @@
     <header class="header">
         <div class="container">
             <div class="row">
-                <div class="col-lg-3 col-md-3">
+                <div class="col-lg-3 col-md-2">
                     <div class="header__logo">
                         <a href="./index.html"><img src="{% static 'img/logo.jpg' %}" width="196" height="30" alt=""></a>
                     </div>
@@ -68,15 +68,27 @@
                             </li>
                             <li><a href="./blog.html">Blog</a></li>
                             <li><a href="./contact.html">Contacts</a></li>
+                            <div class="responsivesearch-box">
+                                <input type="text" class="searchtext" placeholder="Search...">
+                                <span class="searchbutton">
+                                    <i class="fa fa-search"></i>
+                                </span>
+                            </div>
                         </ul>
                     </nav>
                 </div>
-                <div class="col-lg-3 col-md-3">
-                    <div class="header__nav__option">
-                        <a href="#" class="search-switch"><img src="{% static 'img/search.png' %}" alt=""></a>
+                <div class="col-lg-3 col-md-4">
+                    <div class="header__nav__option" id="headerright">
+                        <!-- <a href="#" class="search-switch"><img src="{% static 'img/search.png' %}" alt=""></a> -->
+                        <div class="search-box">
+                            <input type="text" class="searchtext" placeholder="Search...">
+                            <span class="searchbutton">
+                                <i class="fa fa-search"></i>
+                            </span>
+                        </div>
                         <a href="#"><img src="{% static 'img/heart.png' %}" alt=""></a>
-                        <a href="#"><img src="{% static 'img/cart.png' %}" alt=""> <span>0</span></a>
-                        <div class="price">$0.00</div>
+                        <a href="#" style="margin-right: 25px;"><img src="{% static 'img/cart.png' %}" alt=""> <span>0</span></a>
+                        <div class="price">Rs22000</div>
                     </div>
                 </div>
             </div>
@@ -86,14 +98,14 @@
     <!-- Header Section End -->
 
     <!-- Search Begin -->
-    <div class="search-model">
+    <!-- <div class="search-model">
         <div class="h-100 d-flex align-items-center justify-content-center">
             <div class="search-close-switch">+</div>
             <form class="search-model-form">
                 <input type="text" id="search-input" placeholder="Search here.....">
             </form>
         </div>
-    </div>
+    </div> -->
     <!-- Search End -->
 
     <!-- Js Plugins -->
