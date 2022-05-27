@@ -1,0 +1,51 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block title %}Gallery{% endblock title %}
+{% block main-content %}
+<!-- Start gallery  -->
+<section id="mu-gallery">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="mu-gallery-area">
+           <!-- start title -->
+           <div class="mu-title">
+             <h2>Udibaba Moments</h2>
+           </div>
+           <!-- end title -->
+           <!-- start gallery content -->
+           <div class="mu-gallery-content">
+             <div class="mu-gallery-body">
+               <ul id="mixit-container" class="row">
+                 <!--Started using for loop in image-->
+                {% for gallery in gallery_list %}
+                 <!-- start single gallery image -->
+                 <li class="col-md-4 col-sm-6 col-xs-12 mix lab cl-gallery">
+                   <div class="mu-single-gallery">                  
+                     <div class="mu-single-gallery-item">
+                       <div class="mu-single-gallery-img">
+                         <a><img src="{{gallery.image.url}}"></a>
+                        </div>
+                       <div class="mu-single-gallery-info">
+                         <div class="mu-single-gallery-info-inner">
+                           <h4>{{ gallery.title }}</h4>
+                           <p>{{ gallery.description }}</p>
+                          <a href="{{gallery.image.url}}" data-fancybox-group="gallery" class="fancybox"><span class="fa fa-eye"></span></a>
+                         </div>
+                       </div>                  
+                     </div>
+                   </div>
+                 </li>
+                 <!--end single gallery image-->
+                {% endfor %}
+                 <!--for loop end-->
+               </ul>
+            </div>
+            </div>
+            <!-- end gallery content -->
+          </div>
+         </div>
+      </div>
+  </div>
+  </section><!-- End gallery  --> 
+{% endblock main-content %}
