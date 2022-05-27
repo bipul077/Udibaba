@@ -1,8 +1,10 @@
 from django.shortcuts import render
+from .models import Banner
 
 # Create your views here.
 def home(request):
-    return render(request,'index.html')
+    banners = Banner.objects.all().order_by('-id')
+    return render(request,'index.html',{'banner':banners})
 
 def cart(request):
     return render(request, 'cart/cart.html')
