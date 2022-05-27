@@ -48,7 +48,7 @@ ol {
 }
 
 .section-title span {
-	color: #e53637;
+	color: #036e31;
 	font-size: 14px;
 	font-weight: 700;
 	text-transform: uppercase;
@@ -321,7 +321,7 @@ ol {
 	bottom: 0;
 	width: 100%;
 	height: 2px;
-	background: #e53637;
+	background: #036e31;
 	content: "";
 	-webkit-transition: all, 0.5s;
 	-o-transition: all, 0.5s;
@@ -417,7 +417,7 @@ ol {
 		border-radius: 2px;
 		cursor: pointer;
 		position: absolute;
-		right: 19px;
+		right: 15px;
 		top: 25px;
 	}
 	.offcanvas-menu-overlay {
@@ -494,11 +494,10 @@ ol {
 		display: block !important;
 	}
 	
-	
 	.offcanvas__nav__option {
 		text-align: center;
 		margin-bottom: 25px;
-	}
+	}W
 	.offcanvas__nav__option a {
 		display: inline-block;
 		margin-right: 26px;
@@ -547,7 +546,7 @@ ol {
 }
 /* for search button */
 .container{
-	max-width: 1400px;
+	max-width: 100%;
 }
 
 .search-box{
@@ -574,7 +573,7 @@ ol {
 	cursor: pointer;
 	display: grid;
 	place-items: center;
-	right: 1rem;
+	right: 1.6rem;
 }
 
 
@@ -597,6 +596,7 @@ ol {
 		border-style: ridge;
 	} 
 }
+
 @media only screen and (min-width: 767px) {
 	#headerright{
 		display: flex;
@@ -607,7 +607,6 @@ ol {
 		display: none;
 	}
 }
-
 
 @media only screen and (max-width: 767px) {
 	.responsivesearch-box{
@@ -636,7 +635,7 @@ ol {
 	
 }
 .bd-example{
-	margin: 0px 20px;
+	margin: 0px 16px;
 }
 /* banner style end */
 
@@ -648,10 +647,58 @@ ol {
 	z-index: 10;
 	padding-top: 20px;
 	padding-bottom: 20px;
-	color: red;
+	color: white;
 	text-align: center;
 }
 .carousel-captions p{
-	color: red;
+	color: white;
 
 } 
+
+.carousel-captions{
+	position: absolute;
+	right: 35%;
+	bottom: 20px;
+	left: 35%;
+	z-index: 10;
+	padding-top: 20px;
+	padding-bottom: 0px;
+	text-align: center;
+	background: white;
+	border-radius: 3rem;
+	width: 30%;
+	animation-name: example;
+    animation-duration: 20s;
+	animation-iteration-count: infinite;
+	/* font-size: 300px; */
+}
+.carousel-captions h1{
+	background-image: -webkit-linear-gradient(
+		rgb(249, 244, 244) 50%, rgb(36, 213, 249) 50%);
+	background-size: 100% 50px;
+	-webkit-text-fill-color: transparent;
+	-webkit-background-clip: text;
+	-webkit-animation: stripes 2s linear infinite;
+	animation: stripes 5s linear infinite;
+	
+}
+.carousel-captions p{
+	font-size: 1rem;
+	font-family: "Lucida Console";
+}
+@-webkit-keyframes stripes {
+	100% {
+	  background-position: 0 -50px;
+	}
+  }
+  @keyframes stripes {
+	100% {
+	  background-position: 0 -50px;
+	}
+  }
+@keyframes example {
+	0%   {background-color: rgb(90, 182, 207);}
+	/* 25%  {background-color: rgb(15, 215, 241);}*/
+	25%  {background-color: rgb(156, 133, 232);}
+	/* 100% {background-color: rgb(12, 137, 233);} */ */
+  } 
