@@ -1,76 +1,8 @@
-/******************************************************************
-  Template Name: Male Fashion
-  Description: Male Fashion - ecommerce teplate
-  Author: Colorib
-  Author URI: https://www.colorib.com/
-  Version: 1.0
-  Created: Colorib 
-******************************************************************/
-
-/*------------------------------------------------------------------
-[Table of contents]
-
-1.  Template default CSS
-	1.1	Variables
-	1.2	Mixins
-	1.3	Flexbox
-	1.4	Reset
-2.  Helper Css
-3.  Header Section
-4.  Hero Section
-5.  Banner Section
-6.  Product Section
-7.  Intagram Section
-8.  Latest Section
-9.  Contact
-10.  Footer Style
--------------------------------------------------------------------*/
-
-/*----------------------------------------*/
-/* Template default CSS
-/*----------------------------------------*/
-
 html,
 body {
 	height: 100%;
 	font-family: "Nunito Sans", sans-serif;
 	-webkit-font-smoothing: antialiased;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-	margin: 0;
-	color: #111111;
-	font-weight: 400;
-	font-family: "Nunito Sans", sans-serif;
-}
-
-h1 {
-	font-size: 70px;
-}
-
-h2 {
-	font-size: 36px;
-}
-
-h3 {
-	font-size: 30px;
-}
-
-h4 {
-	font-size: 24px;
-}
-
-h5 {
-	font-size: 18px;
-}
-
-h6 {
-	font-size: 16px;
 }
 
 p {
@@ -300,7 +232,7 @@ ol {
 }
 
 .header__logo {
-	padding: 30px 0;
+	padding: 5px 0px;
 }
 
 .header__logo a {
@@ -485,7 +417,7 @@ ol {
 		border-radius: 2px;
 		cursor: pointer;
 		position: absolute;
-		right: 15px;
+		right: 19px;
 		top: 25px;
 	}
 	.offcanvas-menu-overlay {
@@ -645,9 +577,6 @@ ol {
 	right: 1rem;
 }
 
-.search-box:hover > .searchbutton{
-	color: red;
-}
 
 /* for mobilev version search box */
 .responsivesearch-box{
@@ -661,9 +590,7 @@ ol {
 	width: 200px;
 	border-style: ridge;
 }
-.responsivesearch-box:hover > .searchbutton{
-	color: red;
-}
+
 @media only screen and (min-width: 1000px) {
 	.search-box:hover > .searchtext{
 		width: 200px;
@@ -673,11 +600,15 @@ ol {
 @media only screen and (min-width: 767px) {
 	#headerright{
 		display: flex;
+		justify-content: flex-end;
+		margin-right: 5px;
 	}
 	.responsivesearch-box{
 		display: none;
 	}
 }
+
+
 @media only screen and (max-width: 767px) {
 	.responsivesearch-box{
 		float: left;
@@ -689,10 +620,38 @@ ol {
 		margin-left: 8rem;
 	}
 	.responsivesearch-box:hover > .searchbutton{
-		color: red;
 		right: -8.5rem;
 	}
 	.searchbutton{
 		right: 0.5rem;
 	}
 }
+
+/* for banners style */
+@media only screen and (min-width: 767px) {
+	/* banner styles */
+	.carousel-inner img{
+		height: 500px;
+	}
+	
+}
+.bd-example{
+	margin: 0px 20px;
+}
+/* banner style end */
+
+.carousel-captions{
+	position: absolute;
+	right: 15%;
+	bottom: 20px;
+	left: 15%;
+	z-index: 10;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	color: red;
+	text-align: center;
+}
+.carousel-captions p{
+	color: red;
+
+} 
