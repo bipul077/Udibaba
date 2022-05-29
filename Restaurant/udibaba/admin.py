@@ -1,14 +1,18 @@
 from django.contrib import admin
+<<<<<<< HEAD
+from .models import Banner,Video,Product,Category
+=======
+from .models import Banner
+>>>>>>> origin/rijanbranch
 from django.contrib import admin
-from .models import(
-    Banner,
-    Gallery,
-)
-
+# Register your models here.
 class BannerAdmin(admin.ModelAdmin):
-    list_display = ('headertext', 'img')
+    list_display = ('headertext','img')
 admin.site.register(Banner,BannerAdmin)
+<<<<<<< HEAD
 
-class GalleryAdmin(admin.ModelAdmin):
-    list_display = ('id', 'title')
-admin.site.register(Gallery, GalleryAdmin)
+admin.site.register(Video)
+admin.site.register(Category)
+admin.site.register(Product)
+=======
+>>>>>>> origin/rijanbranch
