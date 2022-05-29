@@ -1,10 +1,13 @@
 from django.shortcuts import render
-from .models import Banner, Gallery
-
+from .models import Banner, Gallery, Video, Product, Category, Event
 # Create your views here.
 def home(request):
     banners = Banner.objects.all().order_by('-id')
-    return render(request,'home.html',{'banner':banners})
+    video = Video.objects.all()
+    events = Event.objects.get()
+    featured = Product.objects.filter(is_featured=True)
+    context = {'banner':banners,'video':video,'event':events,'featured':featured}
+    return render(request,'home.html',context)
 
 def cart(request):
     return render(request, 'cart/cart.html')

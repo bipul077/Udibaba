@@ -7,12 +7,10 @@ body {
 
 p {
 	font-size: 15px;
-	font-family: "Nunito Sans", sans-serif;
-	color: #3d3d3d;
 	font-weight: 400;
 	line-height: 25px;
-	margin: 0 0 15px 0;
-}
+	margin: 0 0 0 0;
+} 
 
 img {
 	max-width: 100%;
@@ -630,7 +628,7 @@ ol {
 @media only screen and (min-width: 767px) {
 	/* banner styles */
 	.carousel-inner img{
-		height: 500px;
+		height: 600px;
 	}
 	
 }
@@ -674,7 +672,7 @@ ol {
 }
 .carousel-captions h1{
 	background-image: -webkit-linear-gradient(
-		rgb(249, 244, 244) 50%, rgb(36, 213, 249) 50%);
+	rgb(19, 17, 17) 50%, rgb(245, 241, 4) 50%);
 	background-size: 100% 50px;
 	-webkit-text-fill-color: transparent;
 	-webkit-background-clip: text;
@@ -698,7 +696,57 @@ ol {
   }
 @keyframes example {
 	0%   {background-color: rgb(90, 182, 207);}
-	/* 25%  {background-color: rgb(15, 215, 241);}*/
-	25%  {background-color: rgb(156, 133, 232);}
-	/* 100% {background-color: rgb(12, 137, 233);} */ 
+	25%  {background-color: rgb(75, 245, 8);}
+	50%  {background-color: rgb(156, 133, 232);}
+	100% {background-color: rgb(248, 95, 7);} 
   } 
+
+  /* for videos */
+.videocontainer{
+	width: 97.8%;
+	margin: 0px 16px;
+}
+.videos{
+	height: 500px;
+}
+@media only screen and (max-width: 767px) {
+	.videocontainer{
+		width: 93%;
+	}
+	.videos{
+		height: 250px;
+	}
+}
+/* videos end */
+.owl-carousel{
+	display: block;
+}
+
+/*  featured products slider */
+.mobileitem{
+	border: 2px solid #ccc;
+	display: flex;
+	justify-content: center;
+}
+.featuredslider{
+	margin: 10px 20px 20px 20px;
+}
+.cap{
+	text-align: center;
+	color: black;
+	font-family: cursive;
+	font-size: 14px; 
+}
+.pricecap{
+    font-weight: bold;
+    text-align: center;
+	color: black;
+	font-family: cursive;
+	font-size: 14px; 
+}
+.mobfcategories{
+	text-align: center;
+	font-family: 'Trebuchet MS', sans-serif;
+	padding-top: 5px;
+}
+/* featured products style ends */
