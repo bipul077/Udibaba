@@ -1,13 +1,14 @@
 from django.shortcuts import render
-from .models import Banner,Video,Product,Gallery
-from .models import Banner
-
+from .models import Banner, Gallery, Video, Product, Category
 # Create your views here.
 def home(request):
     banners = Banner.objects.all().order_by('-id')
     video = Video.objects.all()
     featured = Product.objects.filter(is_featured=True)
-    context={'banner':banners,'video':video,'featured':featured}
+    context = {'banner':banners,
+     'video':video,
+     'featured':featured
+     }
     return render(request,'home.html',context)
 
 def cart(request):
@@ -31,4 +32,3 @@ def gallery(request):
         'gallery_list':gal,
     }
     return render(request, 'gallery/gallery.html', context)
-     

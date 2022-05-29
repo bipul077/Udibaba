@@ -8,16 +8,14 @@
     <meta name="keywords" content="Male_Fashion, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title> Udibaba | {% block title %}{% endblock title %} </title>
+    <title> Udibaba | {% block title %} {% endblock title %} </title>
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- Css Styles -->
-
     <link rel="stylesheet" type="text/css" href="{% static 'style/jquery-ui.min.css' %}"> 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
     <link rel="stylesheet" type="text/css" href="{% static 'style/bootstrap.min.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'style/font-awesome.min.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'style/elegant-icons.css' %}">
@@ -25,10 +23,14 @@
     <link rel="stylesheet" type="text/css" href="{% static 'style/footer.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'style/contact.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'style/cart.css' %}">
-    
+    <link rel="stylesheet" type="text/css" href="{% static 'style/gallery.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'style/slick.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'style/nouislider.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'style/slick-theme.css' %}"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-   
 
+    <link rel="stylesheet" type="text/css" href="{% static 'style/slicknav.min.css' %}"> 
 </head>
 
 <body>
@@ -65,8 +67,8 @@
                             <li><a>Pages</a>
                                 <ul class="dropdown">
                                     <li><a href="{% url 'about' %}">About Us</a></li>
-                                    <li><a href="{% url 'review' %}">Review</a></li>
                                     <li><a href="{% url 'gallery' %}">Gallery</a></li>
+                                    <li><a href="{% url 'review' %}">Review</a></li>
                                 </ul>
                             </li>
                             <li><a href="{% url 'contact' %}">Contacts</a></li>
@@ -96,44 +98,7 @@
         </div>
     </header>
     <!-- Header Section End -->
-    {% block banner %} 
-    <!-- Carousel section -->
-    <div class="bd-example">
-        <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
-          <ol class="carousel-indicators">
-            {% for banners in banner %}
-            <li data-target="#carouselExampleCaptions" data-slide-to="{{forloop.counter0}}" class="active"></li>
-            <!-- <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
-            <li data-target="#carouselExampleCaptions" data-slide-to="2"></li> -->
-            {% endfor %}
-          </ol>
-          <div class="carousel-inner">
-            {% for banners in banner %}
-            <!-- <p>{{forloop.counter0}}</p> forloop.counter lets the index starts at 0 -->
-            {% if forloop.counter == 1 %}
-            <div class="carousel-item active">
-                {% else %}
-                <div class="carousel-item">
-                {% endif %}
-                    <img src="{{banners.img.url}}" class="d-block w-100" height="250px" alt="...">
-                    <div class="carousel-captions d-none d-md-block">
-                        <h1>{{banners.headertext}}</h1>
-                        <p>{{banners.subtext}}</p>
-                    </div>
-                </div>
-                {% endfor %}
-          </div>
-          <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-          </a>
-          <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-          </a>
-        </div>
-    </div>
-    {% endblock banner %}
+    {% block banner %} {% endblock banner %}
 
     {% block main-content %} {% endblock main-content %}
 
@@ -173,18 +138,14 @@
         </footer>
         <!--</footer> -->
     </div>
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="{% static 'js/owl.js' %}"></script>
-
-
     <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
     <script src="{% static 'js/jquery.slicknav.js' %}"></script>
     <script src="{% static 'js/main.js' %}"></script> 
     <script src="{% static 'js/contact.js' %}"></script> 
-
 </body>
 
 </html>

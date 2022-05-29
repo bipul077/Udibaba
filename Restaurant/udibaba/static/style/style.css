@@ -7,19 +7,10 @@ body {
 
 p {
 	font-size: 15px;
-<<<<<<< HEAD
 	font-weight: 400;
 	line-height: 25px;
 	margin: 0 0 0 0;
 } 
-=======
-	font-family: "Nunito Sans", sans-serif;
-	color: #3d3d3d;
-	font-weight: 400;
-	line-height: 25px;
-	margin: 0 0 15px 0;
-}
->>>>>>> origin/rijanbranch
 
 img {
 	max-width: 100%;
@@ -675,8 +666,6 @@ ol {
 	border-radius: 3rem;
 	width: 30%;
 	animation-name: example;
-    animation-duration: 10s;
-
     animation-duration: 20s;
 	animation-iteration-count: infinite;
 	/* font-size: 300px; */
@@ -747,7 +736,6 @@ ol {
 	color: black;
 	font-family: cursive;
 	font-size: 14px; 
-    
 }
 .pricecap{
     font-weight: bold;

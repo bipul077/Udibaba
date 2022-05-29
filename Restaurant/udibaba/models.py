@@ -5,8 +5,6 @@ class Banner(models.Model):
   img = models.ImageField(upload_to='banner_imgs/')
   headertext = models.CharField(max_length=300)
   subtext = models.CharField(max_length=300)
-
-
   def image_tag(self):
     return mark_safe('img src="%s" width="50" />' % (self.img.url))
 
@@ -36,9 +34,8 @@ class Product(models.Model):
   is_featured = models.BooleanField(default=False)
   def __str__(self):
     return str(self.id) + " " + str(self.title)
-
 def image_tag(self):
-    return mark_safe('img src="%s" width="50" />' % (self.img.url))
+      return mark_safe('img src="%s" width="50" />' % (self.img.url))
 
 def __str__(self):
     return str(self.id)+ " " + str(self.headertext)
@@ -49,4 +46,3 @@ class Gallery(models.Model):
   image = models.ImageField(upload_to='gallery_imgs/',default="default.jpg")
   def __str__(self):  
     return self.title 
-

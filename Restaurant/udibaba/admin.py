@@ -1,13 +1,21 @@
 from django.contrib import admin
-from .models import Banner,Video,Product,Category,Gallery
-from .models import Banner
-from django.contrib import admin
-# Register your models here.
+from .models import(
+    Banner,
+    Video,
+    Product,
+    Category,
+    Gallery,
+    
+)
 class BannerAdmin(admin.ModelAdmin):
-    list_display = ('headertext','img')
+    list_display = ('headertext', 'img')
 admin.site.register(Banner,BannerAdmin)
+
+class GalleryAdmin(admin.ModelAdmin):
+    list_display = ('id', 'title')
+admin.site.register(Gallery, GalleryAdmin)
+
 
 admin.site.register(Video)
 admin.site.register(Category)
 admin.site.register(Product)
-admin.site.register(Gallery)
