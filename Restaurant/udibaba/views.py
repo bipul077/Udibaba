@@ -1,10 +1,10 @@
 from django.shortcuts import render
-from .models import Banner
+from .models import Banner, Gallery
 
 # Create your views here.
 def home(request):
     banners = Banner.objects.all().order_by('-id')
-    return render(request,'index.html',{'banner':banners})
+    return render(request,'home.html',{'banner':banners})
 
 def cart(request):
     return render(request, 'cart/cart.html')
@@ -20,3 +20,10 @@ def review(request):
 
 def menu(request):
     return render(request, 'menu/menu.html')
+
+def gallery(request):
+    gal =  Gallery.objects.all()
+    context = {
+        'gallery_list':gal,
+    }
+    return render(request, 'gallery/gallery.html', context)
