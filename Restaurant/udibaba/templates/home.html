@@ -37,26 +37,57 @@
 </div>
 {% endblock banner %}
 {% block main-content %}
-<div class="container my-5">
-    <div class="row">
-      <div class="col-md-12">
-        <h3> Trending Products </h3>
-        <hr>
-        <div class="row owl-carousel owl-theme" id="slider1">
-            <div class="product_data item">
-              <div class="card my-2">
-                <a href="#">
-                  <div class="card-body">
-                    <div class="category-image m-2">
-                      <img src="#" alt="Product image" height="200px" width="200px">
-                    </div>
-                  </div>
-                </a>
-                <div class="row text-center"><span class="fs-5"><a href="#">{{item.title}}</a></span></div>
-              </div>
-            </div>
-        </div>
-      </div>
-    </div>
+<div class="featuredslider">
+  <!-- <button class="btn btn-primary" id="showbtn">Show more</button> -->
+  <h2 class="mobfcategories">Featured Products</h2>
+  <div class="owl-carousel owl-theme">
+  {% for b in featured %}
+  <div class="mobileitem">
+        <a href="#">
+        <img src="{{b.product_image.url}}" height="200">
+        <!-- product_image bhaneko models.y ko Product model ko product_image ho -->
+        <p class="cap">{{b.title}}</p>
+        <p class="pricecap">Rs {{b.item_price}}</p>
+        </a>     
   </div>
+  {% endfor %}
+  </div>        
+</div>
+
+  <!-- <div class="videocontainer">
+      {% for video in video %}
+        <iframe class="d-block w-100" height="500" src="{{video.caption}}"></iframe> 
+      {% endfor %}
+   </div>  -->
+
+  <!-- Carousel wrapper -->
+  <div class="container-fluid px-0 videocontainer">
+    <div id="carouselExampleControls" class="carousel slide" data-interval="10000"  data-ride="carousel">
+        <!-- data-interval for slider timer i.e.10000 = 10s -->
+        <div class="carousel-inner" role="listbox">
+            {% for videos in video %}
+            {% if forloop.counter == 1 %}
+            <div class="carousel-item active">
+            {% else %}
+            <div class="carousel-item">
+            {% endif %}
+                <div class="d-flex justify-content-center videos">
+                    <div class="embed-responsive embed-responsive-16by9">
+                        <iframe class="embed-responsive-item" src="{{videos.caption}}" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon bg-dark rounded-circle p-2 shadow d-block" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+            <span class="carousel-control-next-icon bg-dark rounded-circle p-2 shadow d-block" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+</div>
+<!-- Carousel wrapper -->
 {% endblock main-content %}
