@@ -36,10 +36,11 @@
     </div>
 </div>
 {% endblock banner %}
-{% block main-content %}
+
+{% block trending_products %}
 <div class="featuredslider">
   <!-- <button class="btn btn-primary" id="showbtn">Show more</button> -->
-  <h2 class="mobfcategories">Featured Products</h2>
+  <h2 class="mobfcategories">Popular Items</h2>
   <div class="owl-carousel owl-theme">
   {% for b in featured %}
   <div class="mobileitem">
@@ -48,11 +49,59 @@
         <!-- product_image bhaneko models.y ko Product model ko product_image ho -->
         <p class="cap">{{b.title}}</p>
         <p class="pricecap">Rs {{b.item_price}}</p>
-        </a>     
+        </a>
   </div>
   {% endfor %}
-  </div>        
+  </div>
 </div>
+{% endblock trending_products %}
+
+{% block livesale %}
+<!-- deal section starts  -->
+<section class="deal" id="deal">
+  <div class="containersed">
+    {% if event %}
+    <img src="{{event.image.url}}" height="500" alt="Snow" style="width:100%;">
+    {% else %}
+    <img src="{% static 'img/slider1.jpg' %}" height="500" alt="Snow" style="width:100%;">
+    {% endif %}
+    {% if event %}
+    <div class="contentsed">
+     
+      <!-- <p class="eventdesc">{{event.description}}</p> -->
+      
+      <h3 class="eventtitle">{{event.title}}</h3> 
+      <div class="count-down" id="countdown">
+          <div class="box">
+              <h3 id="day">00</h3>
+              <span>day</span>
+          </div>
+          <div class="box">
+              <h3 id="hour">00</h3>
+              <span>hour</span>
+          </div>
+          <div class="box">
+              <h3 id="minute">00</h3>
+              <span>minute</span>
+          </div>
+          <div class="box">
+              <h3 id="second">00</h3>
+              <span>second</span>
+          </div>
+          
+      </div>
+      <span id="date">Starting date & time: {{event.date|date:"Y-m-d H:i:s"}}</span>
+      <!-- <p>{{event.description}}</p> -->
+    </div>
+    {% else %}
+    <h2 class="noevent">No event available currently</h2>
+    {% endif %}
+  </div>
+</section>
+<!-- deal section ends -->
+{% endblock livesale %}
+
+{% block main-content %}
   <!-- Carousel wrapper -->
   <div class="container-fluid px-0 videocontainer">
     <div id="carouselExampleControls" class="carousel slide" data-interval="10000"  data-ride="carousel">

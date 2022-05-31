@@ -5,7 +5,7 @@ from .models import(
     Product,
     Category,
     Gallery,
-    
+    Event,
 )
 class BannerAdmin(admin.ModelAdmin):
     list_display = ('headertext', 'img')
@@ -19,3 +19,4 @@ admin.site.register(Gallery, GalleryAdmin)
 admin.site.register(Video)
 admin.site.register(Category)
 admin.site.register(Product)
+admin.site.register(Event)

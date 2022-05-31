@@ -705,6 +705,7 @@ ol {
 .videocontainer{
 	width: 97.8%;
 	margin: 0px 16px;
+	/* min-height: 35rem; */
 }
 .videos{
 	height: 500px;
@@ -716,11 +717,17 @@ ol {
 	.videos{
 		height: 250px;
 	}
+	/* .videocontainer{
+		min-height: 19rem;
+	} */
+	
 }
+/* @media only screen and (min-width: 768px) and (max-width: 820px) {
+	.videocontainer{
+		width: 96%;
+	}
+} */
 /* videos end */
-.owl-carousel{
-	display: block;
-}
 
 /*  featured products slider */
 .mobileitem{

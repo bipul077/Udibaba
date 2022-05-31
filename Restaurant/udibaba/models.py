@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.html import mark_safe
+from datetime import datetime
 
 class Banner(models.Model):
   img = models.ImageField(upload_to='banner_imgs/')
@@ -44,5 +45,13 @@ class Gallery(models.Model):
   title = models.CharField(max_length=50, unique=False)
   description = models.CharField(max_length=150)
   image = models.ImageField(upload_to='gallery_imgs/',default="default.jpg")
+  def __str__(self):  
+    return self.title 
+
+class Event(models.Model):
+  title = models.CharField(max_length=50, unique=False)
+  description = models.CharField(max_length=250)
+  date = models.DateTimeField(default=datetime.now, blank=True)
+  image = models.ImageField(upload_to='event_imgs/',default="default.jpg")
   def __str__(self):  
     return self.title 
