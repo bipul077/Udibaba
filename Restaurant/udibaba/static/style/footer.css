@@ -56,10 +56,17 @@ ul{
     /* the element is positioned absolutely to its first positioned parent */
     left: 0;
     bottom: -10px;
+<<<<<<< HEAD
     background-color: green;
     height: 2.5px;
     box-sizing: border-box;
     width: 60px;
+=======
+    background-color: #e91e63;
+    height: 2px;
+    box-sizing: border-box;
+    width: 50px;
+>>>>>>> 140c0d9e84bedf645a664cb672612cceaa0bfe5e
 }
 .footer-col ul li:not(:last-child){
     margin-bottom: 10px;
