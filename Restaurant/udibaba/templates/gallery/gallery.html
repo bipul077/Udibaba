@@ -1,6 +1,12 @@
 {% extends 'index.html' %}
 {% load static %}
 {% block title %}Gallery{% endblock title %}
+{% block livesale %}
+<div class="gallerycontainer">
+  <div class="title">Gallery</div>
+  <img src="{% static 'img/slider2.jpg' %}" height="500" alt="Snow" class="d-block w-100">
+</div>
+{% endblock livesale %}
 {% block main-content %}
 <!-- Start gallery  -->
 <section id="mu-gallery">
@@ -10,7 +16,7 @@
           <div class="mu-gallery-area">
            <!-- start title -->
            <div class="mu-title">
-             <h2>Udibaba Moments</h2>
+             <h2>Udibaba <span style="color: green;">Moments</span></h2>
            </div>
            <!-- end title -->
            <!-- start gallery content -->
@@ -24,7 +30,7 @@
                    <div class="mu-single-gallery">                  
                      <div class="mu-single-gallery-item">
                        <div class="mu-single-gallery-img">
-                         <a><img src="{{gallery.image.url}}"></a>
+                         <a><img src="{{gallery.image.url}}" height="400"></a>
                         </div>
                        <div class="mu-single-gallery-info">
                          <div class="mu-single-gallery-info-inner">

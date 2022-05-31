@@ -13,9 +13,9 @@
   
   .mu-title h2 {
   color: black;
-  margin-bottom: 15px;
+  margin-bottom: 5px;
   text-transform: uppercase;
-  padding: 50px;
+  padding: 36px;
   }
   
   .mu-read-more-btn {
@@ -53,7 +53,6 @@
   
   #mu-gallery {
     display: inline;
-    
     padding: 100px 0;
     width: 100%;
   }
@@ -66,9 +65,8 @@
     display: inline;
     float: left;
     width: 100%;
+    margin-top:-60px;
   }
-  
-  
   #mu-gallery .mu-gallery-area .mu-gallery-content .mu-gallery-body {
     display: inline;
     float: left;
@@ -173,4 +171,50 @@
     -o-transition: all 0.5s;
     transition: all 0.5s;
   }
-  
+.gallerycontainer{
+    background-size: cover;
+    padding-top: 0rem;
+    padding-bottom: 0rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    position: relative;
+}
+
+.gallerycontainer .title{
+  position: absolute;
+  left: 50%;
+  top: 90%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  padding-top: 10px;
+  padding-bottom: 0px;
+  text-align: center;
+  background: rgb(225, 232, 234);
+  width: 17%;
+  font-weight: bold;
+  font-size: 2rem;
+  color: white;
+}
+
+@media (max-width: 768px){
+  .gallerycontainer img{
+		height: 250px;
+	}
+  .gallerycontainer .title{
+    position: absolute;
+    top: 90%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    padding-top: 10px;
+    padding-bottom: 20px;
+    text-align: center;
+    background: rgb(225, 232, 234);
+    width: 20%;
+    font-weight: bold;
+    height: 15%;
+    font-size:1rem;
+  }
+}
+
+

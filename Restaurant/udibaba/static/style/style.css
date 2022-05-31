@@ -7,19 +7,10 @@ body {
 
 p {
 	font-size: 15px;
-<<<<<<< HEAD
 	font-weight: 400;
 	line-height: 25px;
 	margin: 0 0 0 0;
 } 
-=======
-	font-family: "Nunito Sans", sans-serif;
-	color: #3d3d3d;
-	font-weight: 400;
-	line-height: 25px;
-	margin: 0 0 15px 0;
-}
->>>>>>> origin/rijanbranch
 
 img {
 	max-width: 100%;
@@ -383,8 +374,6 @@ ol {
 
 /*--------------------------------- Responsive Media Quaries -----------------------------*/
 
-
-
 /* Tablet Device = 768px */
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
@@ -637,14 +626,11 @@ ol {
 @media only screen and (min-width: 767px) {
 	/* banner styles */
 	.carousel-inner img{
-<<<<<<< HEAD
 		height: 600px;
-=======
-		height: 500px;
->>>>>>> origin/rijanbranch
 	}
 	
 }
+
 .bd-example{
 	margin: 0px 16px;
 }
@@ -679,21 +665,13 @@ ol {
 	border-radius: 3rem;
 	width: 30%;
 	animation-name: example;
-<<<<<<< HEAD
-    animation-duration: 10s;
-=======
     animation-duration: 20s;
->>>>>>> origin/rijanbranch
 	animation-iteration-count: infinite;
 	/* font-size: 300px; */
 }
 .carousel-captions h1{
 	background-image: -webkit-linear-gradient(
-<<<<<<< HEAD
-		rgb(19, 17, 17) 50%, rgb(245, 241, 4) 50%);
-=======
-		rgb(249, 244, 244) 50%, rgb(36, 213, 249) 50%);
->>>>>>> origin/rijanbranch
+	rgb(19, 17, 17) 50%, rgb(245, 241, 4) 50%);
 	background-size: 100% 50px;
 	-webkit-text-fill-color: transparent;
 	-webkit-background-clip: text;
@@ -717,7 +695,6 @@ ol {
   }
 @keyframes example {
 	0%   {background-color: rgb(90, 182, 207);}
-<<<<<<< HEAD
 	25%  {background-color: rgb(75, 245, 8);}
 	50%  {background-color: rgb(156, 133, 232);}
 	100% {background-color: rgb(248, 95, 7);} 
@@ -727,6 +704,7 @@ ol {
 .videocontainer{
 	width: 97.8%;
 	margin: 0px 16px;
+	/* min-height: 35rem; */
 }
 .videos{
 	height: 500px;
@@ -738,11 +716,17 @@ ol {
 	.videos{
 		height: 250px;
 	}
+	/* .videocontainer{
+		min-height: 19rem;
+	} */
+	
 }
+/* @media only screen and (min-width: 768px) and (max-width: 820px) {
+	.videocontainer{
+		width: 96%;
+	}
+} */
 /* videos end */
-.owl-carousel{
-	display: block;
-}
 
 /*  featured products slider */
 .mobileitem{
@@ -758,7 +742,6 @@ ol {
 	color: black;
 	font-family: cursive;
 	font-size: 14px; 
-    
 }
 .pricecap{
     font-weight: bold;
@@ -773,9 +756,3 @@ ol {
 	padding-top: 5px;
 }
 /* featured products style ends */
-=======
-	/* 25%  {background-color: rgb(15, 215, 241);}*/
-	25%  {background-color: rgb(156, 133, 232);}
-	/* 100% {background-color: rgb(12, 137, 233);} */ */
-  } 
->>>>>>> origin/rijanbranch
