@@ -9,7 +9,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title> Udibaba | {% block title %} {% endblock title %} </title>
-
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -24,17 +23,17 @@
     <link rel="stylesheet" type="text/css" href="{% static 'style/contact.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'style/cart.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'style/gallery.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'style/about.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'style/livesale.css' %}">
+<!--    
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"> -->
 
 </head>
 
 <body>
-    <!-- Page Preloder -->
-    <div id="preloder">
-        <div class="loader"></div>
-    </div>
-
-    <!-- Offcanvas Menu Begin -->
+  
+    <div class="maincontent">
+        <!-- Offcanvas Menu Begin -->
     <div class="offcanvas-menu-overlay"></div>
     <div class="offcanvas-menu-wrapper">
         <div class="offcanvas__nav__option">
@@ -94,50 +93,46 @@
     </header>
     <!-- Header Section End -->
     {% block banner %} {% endblock banner %}
-
     {% block trending_products %} {% endblock trending_products %}
-
     {% block livesale %} {% endblock livesale %}
-
     {% block main-content %} {% endblock main-content %}
-
-
-    <div class="footer-last">
-        <!-- Footer-->
-        <footer id="footer" class="section footer">
-            <div class="container">
-            <div class="footer-container">
-                <div class="footer-center">
-                <h3>Electric Shop</h3>
-                <a href="#">Digital Payments</a>
-                <a href="#">Help Center</a>
+    <footer class="footer">
+		<div class="fcontainer">
+            <div class="frow">
+                <div class="footer-col">
+                    <h1>company</h1>
+                    <ul>
+                        <li><a href="aboutus.html">About</a></li>
+                        <li><a href="#">Terms</a></li>
+                        <li><a href="#">Conditions</a></li>
+                        <li><a href="#">Policy</a></li>
+                    </ul>
                 </div>
-                <div class="footer-center">
-                <h3>Information</h3>
-                <a href="#">Privacy Policy</a>
-                <a href="#">Terms & Conditions</a>
-                <a href="#">Site Map</a>
+                <div class="footer-col">
+                    <h1>get help</h1>
+                    <ul>
+                        <li><a href="help.html">Help center</a></li>
+                        <li><a href="#">Customer Care</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">Payment</a></li>
+                    </ul>
                 </div>
-                <div class="footer-center">
-                <h3>Customer Care</h3>
-                <a href="#">How to buy</a>
-                <a href="#">Track Your Order</a>
-                <a href="#">Returns and Refunds</a>
-                </div>
-                <div class="footer-center2">
-                <h3>Follow Us</h3>
-                <div class="social-links">
-                    <a href="#"><i class="fa fa-facebook-f"></i></a>
-                    <a href="#"><i class="fa fa-twitter"></i></a>
-                    <a href="#"><i class="fa fa-instagram"></i></a>
-                    <a href="#"><i class="fa fa-youtube"></i></a>
-                </div>
+                <div class="footer-col">
+                    <h1>follow us</h1>
+                    <div class="social-links">
+                        <a href="#"><i class="fa fa-facebook-f"></i></a>
+                        <a href="#"><i class="fa fa-twitter"></i></a>
+                        <a href="#"><i class="fa fa-instagram"></i></a>
+                        <a href="#"><i class="fa fa-youtube"></i></a>
+                    </div>
+                    <p>Copyright @<br>Above images are royalty free images</p>
                 </div>
             </div>
-            </div>
-        </footer>
+        </div>
+	</footer> 
         <!--</footer> -->
     </div>
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="{% static 'js/owl.js' %}"></script>
@@ -147,7 +142,6 @@
     <script src="{% static 'js/main.js' %}"></script> 
     <script src="{% static 'js/contact.js' %}"></script> 
     <script src="{% static 'js/script.js' %}"></script> 
-
 </body>
 
 </html>

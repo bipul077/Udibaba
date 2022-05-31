@@ -1,5 +1,6 @@
 
 let abc = document.getElementById("date").textContent
+let cc = document.getElementById("countdown")
 let countDate = new Date(abc).getTime();
 console.log(countDate)
 
@@ -23,6 +24,11 @@ function CountDown(){
     document.getElementById('minute').innerText = m;
     document.getElementById('second').innerText = s;
 
+    if(gap<0){
+        
+        cc.className += " newclass";
+        cc.innerText = "The above event has been completed or expired";
+    }
 }
 
 setInterval(function(){
