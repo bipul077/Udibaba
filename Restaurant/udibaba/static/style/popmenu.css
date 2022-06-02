@@ -1,0 +1,43 @@
+.menumodal{
+    height: 500px;
+}
+#modalbody{
+    margin-left: auto;
+    margin-right: auto;
+}
+.popfp{
+    text-align: center;
+    margin-top: 5px;
+}
+.buybutton{
+    font-family: cursive;
+}
+#foodtitle{
+    margin-left: auto;
+}
+.pro-qty {
+	width: 90px;
+	height: 40px;
+	border: 2px solid #0a0a0a;
+	padding: 0 8px;
+	margin-left: auto;
+    margin-right: auto;
+}
+.pro-qty .qtybtn {
+	font-size: 24px;
+	color: #242121;
+	float: left;
+	line-height: 38px;
+	cursor: pointer;
+	width: 18px;
+}
+.pro-qty input {
+	text-align: center;
+	width: 34px;
+	font-size: 14px;
+	font-weight: 700;
+	border: none;
+	color: #4c4c4c;
+	line-height: 34px;
+	float: left;
+}

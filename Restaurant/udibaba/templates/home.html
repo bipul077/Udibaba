@@ -44,14 +44,45 @@
   <div class="owl-carousel owl-theme">
   {% for b in featured %}
   <div class="mobileitem">
-        <a href="#">
-        <img src="{{b.product_image.url}}" height="200">
+        <a href=""  class="alink"  data-toggle="modal" data-target="#popmenu" data-img="{{b.product_image.url}}" data-name="{{b.title}}" data-price="{{b.item_price}}" data-des="{{b.description|linebreaks}}">
+        <img id="imgid" src="{{b.product_image.url}}" height="200">
         <!-- product_image bhaneko models.y ko Product model ko product_image ho -->
-        <p class="cap" style="font-family:Nunito Sans, sans-serif">{{b.title}}</p>
-        <p class="pricecap" style="font-family:Times New Roman;">Rs {{b.item_price}}</p>
+        <p class="cap">{{b.title}}</p>
+        <p class="pricecap">Rs {{b.item_price}}</p> 
         </a>
   </div>
   {% endfor %}
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="popmenu" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content menumodal">
+      <div class="modal-header">
+        <h5 class="modal-title" id="foodtitle">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" id="modalbody">
+        <img id="imgpop" src="{% static 'img/momo.jpg' %}" width="200" height="150">
+        <p class="popfp">Rs <span id="foodprice"></span></p>
+        <p id="fooddesc"></p>
+        <div class="pro-qty">
+          <form action="">
+              <span class="dec qtybtn decrement-btn">-</span>
+              <input type="text" name="quantity" class="qty-input" value="1" id="quantity">
+              <span class="dec qtybtn increment-btn newhover">+</span>
+              <!-- <input type="hidden" name="prod_id" id="prod_id">to get the product id we do this -->
+          </form>
+      </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger"><span class="buybutton">Order Now</span></button>
+        <button type="button" class="btn btn-warning"><span class="buybutton">Add to Cart</span></button>
+      </div>
+    </div>
   </div>
 </div>
 {% endblock trending_products %}
@@ -102,7 +133,7 @@
 
 {% block main-content %}
   <!-- Carousel wrapper -->
-  <div class="container-fluid px-0 videocontainer">
+  <div class="container-fluids">
     <div id="carouselExampleControls" class="carousel slide" data-interval="10000"  data-ride="carousel">
         <!-- data-interval for slider timer i.e.10000 = 10s -->
         <div class="carousel-inner" role="listbox">
@@ -130,5 +161,12 @@
         </a>
     </div>
 </div>
+<script>
+    //  $('.alink').click(function () {
+    //     console.log("clicked");
+    //     $('#modalbody').html($(this).data('name'));
+    // }) 
+ 
+</script>
 <!-- Carousel wrapper -->
 {% endblock main-content %}
