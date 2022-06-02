@@ -6,7 +6,6 @@ def home(request):
     video = Video.objects.all()
     featured = Product.objects.filter(is_featured=True)
     abc = Event.objects.count()
-    print("good"+str(abc))
     if abc:
         event = Event.objects.get()
         context = {'banner':banners,
@@ -34,7 +33,8 @@ def review(request):
     return render(request, 'review/review.html')
 
 def menu(request):
-    return render(request, 'menu/menu.html')
+    menu = Category.objects.all()
+    return render(request, 'menu/menu.html',{'menu':menu})
 
 def gallery(request):
     gal =  Gallery.objects.all()
