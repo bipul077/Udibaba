@@ -1,0 +1,54 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block title %}MenuList{% endblock title %}
+{% block main-content %}
+
+<div class="menucontainers">
+    <div class="title">
+      <a href="{{request.META.HTTP_REFERER}}"><i class="fa fa-arrow-left" aria-hidden="true"></i>Back to Menu</a>
+    </div>
+    <img src="{% static 'img/foodbg.webp' %}" height="auto" alt="Snow" class="d-block w-100">
+</div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="menulistpop" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content menumodal">
+        <div class="modal-header">
+          <h5 class="modal-title" id="foodtitle">Udibaba Menu</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-bodies" id="modalbodies">
+            {% for menulist in menulists %}
+            <div class="contentmodal">
+                <p class="grid-item">{{forloop.counter}}.</p>
+                <p class="grid-item" style="width: 115px">{{menulist.title}}</p>
+                <p class="grid-item" style="width: 65px">Rs {{menulist.item_price}}</p>
+                <div class="menulistqty grid-item">
+                    <form action="">
+                        <span class="dec qtybtn decrements-btn">-</span>
+                        <input type="text" name="quantity" class="qty-input" value="1" id="quantity">
+                        <span class="dec qtybtn increments-btn newhover">+</span> 
+                        <!-- <input type="hidden" name="prod_id" id="prod_id">to get the product id we do this -->
+                    </form>
+                  </div> 
+                  <button type="button" class="button grid-item"><i class="fa fa-bolt" aria-hidden="true"></i></button>
+                  <button type="button" class="buttonred grid-item"><i class="fa fa-shopping-cart" aria-hidden="true"></i></button>
+             </div>
+          
+          {% endfor %}
+         
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="button grid-item"><i class="fa fa-bolt" aria-hidden="true"></i></i></button>
+            <p>Order Now</p>
+          <button type="button" class="buttonred grid-item"><i class="fa fa-shopping-cart" aria-hidden="true"></i></button>
+          <p>Add to cart</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock main-content %}

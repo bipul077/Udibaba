@@ -41,3 +41,96 @@
 	line-height: 34px;
 	float: left;
 }
+.menulistqty{
+	width: 90px;
+	height: 30px;
+	border: 2px solid #0a0a0a;
+	padding: 0 8px;
+}
+.menulistqty .qtybtn {
+	font-size: 24px;
+	color: #242121;
+	float: left;
+	line-height: 24px;
+	cursor: pointer;
+	width: 18px;
+}
+.menulistqty input {
+	text-align: center;
+	width: 34px;
+	font-size: 14px;
+	font-weight: 700;
+	border: none;
+	color: #4c4c4c;
+	line-height: 24px;
+	float: left;
+}
+.button {
+	background-color: #4CAF50;
+	border: none;
+	color: white;
+	padding: 5px 5px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	height: 30px;
+	margin: 0px 2px;
+	cursor: pointer;
+}
+.buttonred {
+	background-color: #eb2704;
+	border: none;
+	color: white;
+	padding: 5px 5px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	height: 30px;
+	margin: 0px 2px;
+	cursor: pointer;
+}
+  .contentmodal{
+    display: grid;
+    column-gap: 4px;
+    grid-template-columns: auto auto auto auto auto auto;
+    padding: 5px;
+}
+.grid-item {
+    font-size: 15px;
+    text-align: center;
+}
+@media screen and (max-width:768px){
+    .menulistqty {
+        width: 65px;
+        height: 30px;
+        border: 2px solid #0a0a0a;
+        padding: 0 8px;
+    }
+    .menulistqty .qtybtn {
+        font-size: 24px;
+        color: #242121;
+        float: left;
+        line-height: 22px;
+        cursor: pointer;
+        width: 10px;
+    }
+    .menulistqty input {
+        width: 24px; 
+        line-height: 24px; 
+    }
+}
+@media screen and (max-width:300px){
+    .contentmodal {
+		display: grid;
+		column-gap: 4px;
+		grid-template-columns: auto auto auto;
+		padding: 5px;
+	}
+}
+.modal-bodies{
+    position: relative;
+    padding: 0;
+    flex: 1 1 auto;
+}

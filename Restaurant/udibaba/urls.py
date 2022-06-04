@@ -11,4 +11,5 @@ urlpatterns = [
      path('review/', views.review, name='review'),
      path('menu/', views.menu, name='menu'),
      path('gallery/', views.gallery, name='gallery'),
+     path('menulist/<int:pk>', views.menulist, name='menulist')
 ]

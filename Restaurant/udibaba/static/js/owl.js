@@ -66,6 +66,13 @@ function myFunction(x) {
     // img.src = ids;
     // div.appendChild(img);
 })
+$(document).ready(function(){
+    $("#menulistpop").modal('show');
+});
+$('.menulink').click(function () {
+    console.log("clicked");
+    console.log($(this).data('id'));
+})
 
 //increment btn in product detail
 $('.increment-btn').click(function (e) {
@@ -90,5 +97,32 @@ $('.decrement-btn').click(function (e) {
     {
         value--;
         $(this).closest('.pro-qty').find('.qty-input').val(value);
+    }
+});
+
+//for menulist page
+//increment btn in product detail
+$('.increments-btn').click(function (e) {
+    e.preventDefault();
+   
+    var inc_value = $(this).closest('.menulistqty').find('.qty-input').val();
+    var value = parseInt(inc_value,10);
+    value = isNaN(value) ? 0 : value;
+    if(value < 10)
+    {
+        value++;
+        $(this).closest('.menulistqty').find('.qty-input').val(value);
+    }
+});
+//decrement btn in product detail
+$('.decrements-btn').click(function (e) {
+    e.preventDefault();
+    var inc_value = $(this).closest('.menulistqty').find('.qty-input').val();
+    var value = parseInt(inc_value,10);
+    value = isNaN(value) ? 0 : value;
+    if(value > 1)
+    {
+        value--;
+        $(this).closest('.menulistqty').find('.qty-input').val(value);
     }
 });

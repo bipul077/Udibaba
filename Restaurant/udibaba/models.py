@@ -55,3 +55,11 @@ class Event(models.Model):
   image = models.ImageField(upload_to='event_imgs/',default="default.jpg")
   def __str__(self):  
     return self.title 
+
+class Contact(models.Model):
+  uname = models.CharField(max_length=200)
+  email =  models.CharField(max_length=200)
+  message = models.TextField()
+
+  def __str__(self):
+    return self.uname
