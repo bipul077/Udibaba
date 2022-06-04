@@ -40,8 +40,12 @@
     <div class="offcanvas-menu-overlay"></div>
     <div class="offcanvas-menu-wrapper">
         <div class="offcanvas__nav__option">
-            <a href="#"><img src="{% static 'img/user.png' %}" width="25" height="25" alt=""></a>
-            <a href="{% url 'cart' %}"><img src="{% static 'img/cart.png' %}" alt=""></a>
+        {% if request.user.is_authenticated %}
+            <a class="carts" href="{% url 'cart' %}"><img src="{% static 'img/cart.png' %}" width="20" height="20" alt=""></a>
+            <a href="{% url 'logout' %}"><img src="{% static 'img/logout.png' %}" width="20" height="20" alt=""></a>
+        {% else %}
+            <a href="{% url 'signup' %}"><img src="{% static 'img/user.png' %}" width="28" height="28" alt=""></a>
+        {% endif %}
         </div>
         <div id="mobile-menu-wrap"></div>
     </div>
@@ -86,8 +90,12 @@
                                 <i class="fa fa-search" style="color: black;"></i>
                             </span>
                         </div>
-                        <a href="#"><img src="{% static 'img/user.png' %}" width="25" height="25" alt=""></a>
-                        <a href="{% url 'cart' %}" style="margin-right: 0px;"><img src="{% static 'img/cart.png' %}" alt=""></a>
+                        {% if request.user.is_authenticated %}
+                            <a href="{% url 'cart' %}"><img src="{% static 'img/cart.png' %}" width="20" height="20" alt=""></a>
+                            <a href="{% url 'logout' %}"><img src="{% static 'img/logout.png' %}" width="20" height="20" alt=""></a>
+                        {% else %}
+                            <a href="{% url 'signup' %}"><img src="{% static 'img/user.png' %}" width="28" height="28" alt=""></a>
+                        {% endif %}
                     </div>
                 </div>
             </div>

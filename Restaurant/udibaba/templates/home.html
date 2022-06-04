@@ -44,7 +44,7 @@
   <div class="owl-carousel owl-theme">
   {% for b in featured %}
   <div class="mobileitem">
-        <a href=""  class="alink"  data-toggle="modal" data-target="#popmenu" data-img="{{b.product_image.url}}" data-name="{{b.title}}" data-price="{{b.item_price}}" data-des="{{b.description|linebreaks}}">
+        <a href=""  class="alink"  data-toggle="modal" data-target="#popmenu" data-img="{{b.product_image.url}}" data-name="{{b.title}}" data-price="{{b.item_price}}" data-des="{{b.description}}">
         <img id="imgid" src="{{b.product_image.url}}" height="200">
         <!-- product_image bhaneko models.y ko Product model ko product_image ho -->
         <p class="cap">{{b.title}}</p>
@@ -67,8 +67,8 @@
       </div>
       <div class="modal-body" id="modalbody">
         <img id="imgpop" src="{% static 'img/momo.jpg' %}" width="200" height="150">
-        <p class="popfp">Rs <span id="foodprice"></span></p>
-        <p id="fooddesc"></p>
+        <p class="popfp" style="font-weight: bold;">Rs <span id="foodprice"></span></p>
+        <p id="fooddesc" class="popfp"></p>
         <div class="pro-qty">
           <form action="">
               <span class="dec qtybtn decrement-btn">-</span>

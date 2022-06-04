@@ -336,7 +336,7 @@ ol {
 
 .header__nav__option a {
 	display: inline-block;
-	margin-right: 10px;
+	margin-right: 15px;
 	position: relative;
 }
 
@@ -763,7 +763,7 @@ ol {
 		right: -14px;
 	}
 	.mobfcategories{
-		margin-right: 12px;
+		margin-right: 2.5rem;
 	}
 	/* .videocontainer{
 		min-height: 19rem;
@@ -807,3 +807,11 @@ ol {
 	position: static;
 }
 /* product carousel ends */
+
+#font{
+	font-family: cursive;
+}
+
+.carts {
+    margin-right: 10px;
+}

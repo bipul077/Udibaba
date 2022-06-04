@@ -9,19 +9,25 @@
     text-align: center;
     margin-top: 5px;
 }
-.buybutton{
-    font-family: cursive;
-}
+
 #foodtitle{
     margin-left: auto;
 }
+
+#imgpop{
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
 .pro-qty {
 	width: 90px;
-	height: 40px;
-	border: 2px solid #0a0a0a;
-	padding: 0 8px;
-	margin-left: auto;
+    height: 40px;
+    border: 2px solid #0a0a0a;
+    padding: 0 8px;
+    margin-left: auto;
     margin-right: auto;
+    margin-top: 10px;
 }
 .pro-qty .qtybtn {
 	font-size: 24px;
