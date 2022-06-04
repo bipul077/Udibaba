@@ -824,7 +824,7 @@ ol {
 .header__nav__option ul li {
 	list-style: none;
 	display: inline-block;
-	margin-right: 20px;
+	margin-right: 0px;
 	position: relative;
 }
 
@@ -890,7 +890,7 @@ ol {
 	display: block;
 	font-weight: 400;
 	position: relative;
-	padding: 3px 0;
+	padding: 0px 0;
 }
 
 .header__nav__option ul li a:after {
@@ -906,4 +906,7 @@ ol {
 	-webkit-transform: scale(0);
 	-ms-transform: scale(0);
 	transform: scale(0);
+}
+.shopicons ul{
+	display: flex;
 }

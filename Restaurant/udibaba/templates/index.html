@@ -88,19 +88,21 @@
                                 <i class="fa fa-search" style="color: black;"></i>
                             </span>
                         </div>
+                       <div class="shopicons">
                         {% if request.user.is_authenticated %}
                             <ul>
                                 <a href="{% url 'cart' %}"><img src="{% static 'img/cart.png' %}" width="20" height="20" alt=""></a>
                                 <li><a><img src="{% static 'img/user.png' %}" width="28" height="28" alt=""></a>
                                     <ul class="dropdown">
                                         <li><a href="{% url 'contact' %}">Profile</a></li>
-                                        <li><a href="{% url 'logout' %}">Logout</li>
+                                        <li><a href="{% url 'logout' %}">Logout</a></li> 
                                     </ul>
                                 </li>
                             </ul>
                         {% else %}
                             <a href="{% url 'signup' %}"><img src="{% static 'img/user.png' %}" width="28" height="28" alt=""></a>
                         {% endif %}
+                       </div>
                     </div>
                 </div>
             </div>
@@ -157,6 +159,7 @@
     <script src="{% static 'js/jquery.slicknav.js' %}"></script>
     <script src="{% static 'js/main.js' %}"></script> 
     <script src="{% static 'js/contact.js' %}"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/AlertifyJS/1.13.1/alertify.min.js"></script>
     <script src="{% static 'js/script.js' %}"></script> 
 </body>
 
