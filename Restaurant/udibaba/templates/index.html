@@ -32,9 +32,7 @@
     <!--<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"> -->
 
 </head>
-
 <body>
-  
     <div class="maincontent">
         <!-- Offcanvas Menu Begin -->
     <div class="offcanvas-menu-overlay"></div>
@@ -91,8 +89,15 @@
                             </span>
                         </div>
                         {% if request.user.is_authenticated %}
-                            <a href="{% url 'cart' %}"><img src="{% static 'img/cart.png' %}" width="20" height="20" alt=""></a>
-                            <a href="{% url 'logout' %}"><img src="{% static 'img/logout.png' %}" width="20" height="20" alt=""></a>
+                            <ul>
+                                <a href="{% url 'cart' %}"><img src="{% static 'img/cart.png' %}" width="20" height="20" alt=""></a>
+                                <li><a><img src="{% static 'img/user.png' %}" width="28" height="28" alt=""></a>
+                                    <ul class="dropdown">
+                                        <li><a href="{% url 'contact' %}">Profile</a></li>
+                                        <li><a href="{% url 'logout' %}">Logout</li>
+                                    </ul>
+                                </li>
+                            </ul>
                         {% else %}
                             <a href="{% url 'signup' %}"><img src="{% static 'img/user.png' %}" width="28" height="28" alt=""></a>
                         {% endif %}
