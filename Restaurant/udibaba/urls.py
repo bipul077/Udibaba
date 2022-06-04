@@ -11,6 +11,7 @@ urlpatterns = [
      path('about/', views.about, name='about'),
      path('review/', views.review, name='review'),
      path('menu/', views.menu, name='menu'),
+     path('profile/', views.profile, name='profile'),
      path('gallery/', views.gallery, name='gallery'),
      path('signup/', views.signup, name='signup'),
      path('login/', LoginView.as_view(template_name = 'user/login.html'), name='login'),

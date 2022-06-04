@@ -39,6 +39,9 @@ def menu(request):
     menu = Category.objects.all()
     return render(request, 'menu/menu.html',{'menu':menu})
 
+def profile(request):
+    return render(request, 'profile/profile.html')
+
 def gallery(request):
     gal =  Gallery.objects.all()
     context = {
