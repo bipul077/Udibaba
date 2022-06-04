@@ -1,4 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from .forms import SignUpForm
+from django.contrib.auth.models import User
 from django.contrib import messages
 from .models import Banner, Gallery, Video, Product, Category,Event,Contact
 from django.shortcuts import render,get_object_or_404,redirect
@@ -60,3 +62,26 @@ def gallery(request):
         'gallery_list':gal,
     }
     return render(request, 'gallery/gallery.html', context)
+
+#Customer Registration
+def signup(request):
+    if request.method == 'POST':
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            email = form.cleaned_data.get('email')
+            name = form.cleaned_data.get('fullname').split(' ')
+            
+            usr = User.objects.get(username=username)
+            usr.email = email
+            usr.first_name = name[0]
+            usr.last_name = name[1]
+            usr.save()
+            messages.success(request, f'Congratulations!! Account created for {username}')
+            return redirect('login')
+    else:
+        form = SignUpForm()
+        
+    return render(request, 'user/signup.html', {'form':form})
+    

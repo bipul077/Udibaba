@@ -1,0 +1,43 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block title %}Sign Up{% endblock title %}
+{% load crispy_forms_tags %}
+{% block main-content %}
+<div class="container">
+    <div class="row my-3">
+        <div class="col-sm-6 offset-sm-3">
+            <div class="card o-hidden border-0 shadow-lg my-2 col-lg-15">
+                <div class="card-body">
+                    {% if messages %}
+                        {% for mess in messages %}
+                            <div class="alert alert-{{mess.tags}}" role="alert">
+                                {{mess}}
+                            </div>
+                        {% endfor %}
+                    {% endif %} 
+                    <form action="" method="post">
+                        {% csrf_token %}
+                        <fieldset class="form-group">
+                            <legend class="border-bottom display">
+                                <h3 class="float-left">Registration</h3>
+                                <img src="{% static 'img/logo.jpg' %}" class="logo float-right pt-1 mb-2" width="45" height="45">
+                            </legend>
+                            {{ form|crispy }}
+                        </fieldset>
+                        <div class="form-grounp">
+                            <button class="btn btn-success" type="submit">Sign Up</button>
+                            <small class="float-right text-muted">Already have a Account ?<a href="{% url 'login' %}" class="text-dark"> Login</a></small>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock main-content %}
+
+
+
+
+   
+

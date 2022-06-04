@@ -10,9 +10,6 @@
 'use strict';
 
 (function ($) {
-
-   
-
     /*------------------
         Background Set
     --------------------*/

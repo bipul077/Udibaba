@@ -336,7 +336,7 @@ ol {
 
 .header__nav__option a {
 	display: inline-block;
-	margin-right: 10px;
+	margin-right: 15px;
 	position: relative;
 }
 
@@ -807,3 +807,106 @@ ol {
 	position: static;
 }
 /* product carousel ends */
+
+#font{
+	font-family: cursive;
+}
+
+.carts {
+    margin-right: 10px;
+}
+
+/* .header__nav__option {
+	text-align: center;
+	padding: 26px 0 25px;
+} */
+
+.header__nav__option ul li {
+	list-style: none;
+	display: inline-block;
+	margin-right: 0px;
+	position: relative;
+}
+
+/* .header__nav__option ul li.active a:after {
+	-webkit-transform: scale(1);
+	-ms-transform: scale(1);
+	transform: scale(1);
+}
+
+.header__nav__option ul li:hover a:after {
+	-webkit-transform: scale(1);
+	-ms-transform: scale(1);
+	transform: scale(1);
+} */
+
+.header__nav__option ul li:hover .dropdown {
+	top: 32px;
+	opacity: 1;
+	visibility: visible;
+}
+
+/* .header__nav__option ul li:last-child {
+	margin-right: 0;
+} */
+
+.header__nav__option ul li .dropdown {
+	position: absolute;
+    left: -25px;
+    right: 60px;
+    top: 50px;
+    width: 85px;
+    background: #111111;
+    text-align: left;
+    padding: 5px 0;
+    z-index: 9;
+    opacity: 0;
+    visibility: hidden;
+    -webkit-transition: all, 0.3s;
+    -o-transition: all, 0.3s;
+    transition: all, 0.3s;
+}
+
+.header__nav__option ul li .dropdown li {
+	display: block;
+	margin-right: 0;
+}
+
+.header__nav__option ul li .dropdown li a {
+	font-size: 14px;
+	color: #ffffff;
+	font-weight: 400;
+	padding: 5px 20px;
+	text-transform: capitalize;
+} 
+
+.header__nav__option ul li .dropdown li a:after {
+	display: none;
+} 
+
+.header__nav__option ul li a {
+	font-size: 18px;
+	color: #111111;
+	display: block;
+	font-weight: 400;
+	position: relative;
+	padding: 0px 0;
+}
+
+.header__nav__option ul li a:after {
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	height: 2px;
+	content: "";
+	-webkit-transition: all, 0.5s;
+	-o-transition: all, 0.5s;
+	transition: all, 0.5s;
+	-webkit-transform: scale(0);
+	-ms-transform: scale(0);
+	transform: scale(0);
+}
+.shopicons ul{
+	display: flex;
+}
