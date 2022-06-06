@@ -30,7 +30,7 @@
    }
       .menucontainer .title{
       position: absolute;
-      top: 90%;
+      top: 80%;
       left: 50%;
       transform: translate(-50%, -50%);
       z-index: 10;
@@ -81,7 +81,7 @@
     padding-left: 12px;
 }
 .Photos{
-	padding: 0 16px;
+	padding: 6px 16px;
 	float: left;
 	width: 25%;
 }
@@ -110,4 +110,65 @@
 		width: 100%;
 		margin: 6px 0;
 	}
+}
+.title a{
+    color: green;
+}
+.title i{
+    margin-right: 5px;
+}
+/* for new redirect menu page */
+.menucontainers{
+    position: relative;
+    margin: 0 16px;
+}
+.menucontainers .title{
+    position: absolute;
+    left: 50%;
+    top: 85%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    text-align: center;
+    background: rgb(225, 232, 234);
+    width: 25%;
+    font-weight: bold;
+    font-size: 2rem;
+    color: green;
+  }
+  
+  @media (max-width: 768px){
+   .menucontainers{
+       position: relative;
+   }
+    .menucontainers img{
+          height: 250px;
+      }
+   .menucontainers{
+       position: relative;
+   }
+      .menucontainers .title{
+      position: absolute;
+      top: 80%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 10;
+      padding-top: 1px;
+      padding-bottom: 0px;
+      text-align: center;
+      background: rgb(225, 232, 234);
+      width: 50%;
+      font-weight: bold;
+      height: 12%;
+      font-size:1rem;
+      color: green;
+    }
+  }
+  /* for tablet version */
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+    .menucontainers .title{
+        width: 30%;
+        top: 80%;
+    }
 }

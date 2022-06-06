@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect
-from .models import Banner, Gallery, Video, Product, Category,Event
 from .forms import SignUpForm
 from django.contrib.auth.models import User
 from django.contrib import messages
+from .models import Banner, Gallery, Video, Product, Category,Event,Contact
+from django.shortcuts import render,get_object_or_404,redirect
 # Create your views here.
 def home(request):
     banners = Banner.objects.all().order_by('-id')
@@ -27,7 +28,16 @@ def cart(request):
     return render(request, 'cart/cart.html')
 
 def contact(request):
-    return render(request, 'contact/contact.html')
+    if request.method == 'POST':
+        ename = request.POST.get('name') 
+        email = request.POST.get('email')
+        msge = request.POST.get('message')
+        print(ename,email,msge)
+        contact = Contact(uname=ename,email=email,message=msge)
+        contact.save()
+        messages.success(request,'Message sent succesfully')
+        return redirect('/contact')
+    return render(request,'contact/contact.html')
 
 def about(request):
     return render(request, 'aboutus/about.html')
@@ -41,6 +51,11 @@ def menu(request):
 
 def profile(request):
     return render(request, 'profile/profile.html')
+
+def menulist(request,pk):
+    menulists = Product.objects.filter(category=pk)
+    print(menulists)
+    return render(request, 'menu/menulist.html',{'menulists':menulists})
 
 def gallery(request):
     gal =  Gallery.objects.all()

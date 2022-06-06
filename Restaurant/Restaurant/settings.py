@@ -132,11 +132,20 @@ STATIC_URL = '/static/'
 # MEDIA_URL = "/media/"#media url is the reference url for browser to access the files over HTTP
 # MEDIA_ROOT = os.path.join(BASE_DIR,"media/")#BASE_DIR means the directory of manage.py
 
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' #To send link in terminal
+#To send link in email
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend' 
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'dangolr05@gmail.com'  #sender's email-id
+EMAIL_HOST_PASSWORD = 'ramdangol123'  #password associated with above email-id
+
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 LOGIN_URL = 'login'
 
-LOGIN_REDIRECT = 'home'
+LOGIN_REDIRECT_URL = '/contact/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
@@ -151,3 +160,13 @@ CLOUDINARY_STORAGE = {
 
 #default file storage
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
+from django.contrib.messages import constants as messages
+
+MESSAGE_TAGS = {
+    messages.DEBUG: 'alert-info',
+    messages.INFO: 'alert-info',
+    messages.SUCCESS: 'alert-success',
+    messages.WARNING: 'alert-warning',
+    messages.ERROR: 'alert-danger',
+}

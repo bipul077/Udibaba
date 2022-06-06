@@ -24,6 +24,7 @@
                             </legend>
                             {{ form|crispy }}
                         </fieldset>
+                        <small><a href="{% url 'password_reset' %}" style="color:red">Forget Password ?</a></small>
                         <div class="form-grounp">
                             <button class="btn btn-success" type="submit">Log In</button>
                             <small class="float-right text-muted">Have't an Account ?<a href="{% url 'signup' %}" class="text-dark"> Signup</a></small>
