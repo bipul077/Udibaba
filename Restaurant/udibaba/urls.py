@@ -7,6 +7,7 @@ from django.contrib.auth.views import LoginView, LogoutView
 urlpatterns = [
      path('', views.home,name="home"),
      path('cart/', views.cart, name='cart'),
+     path('addtocart/', views.addtocart, name='addtocart'),
      path('contact/', views.contact, name='contact'),
      path('about/', views.about, name='about'),
      path('review/', views.review, name='review'),

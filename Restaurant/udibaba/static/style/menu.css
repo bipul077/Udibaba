@@ -28,22 +28,22 @@
    .menucontainer{
        position: relative;
    }
-      .menucontainer .title{
-      position: absolute;
-      top: 80%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      z-index: 10;
-      padding-top: 0px;
-      padding-bottom: 0px;
-      text-align: center;
-      background: rgb(225, 232, 234);
-      width: 30%;
-      font-weight: bold;
-      height: 12%;
-      font-size:1rem;
-      color: green;
-    }
+    .menucontainer .title{
+    position: absolute;
+    top: 80%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    text-align: center;
+    background: rgb(225, 232, 234);
+    width: 35%;
+    font-weight: bold;
+    height: 12%;
+    font-size:1rem;
+    color: green;
+}
   }
 .menuimages{
     margin: 0 16px;
@@ -167,8 +167,9 @@
   }
   /* for tablet version */
 @media only screen and (min-width: 768px) and (max-width: 991px) {
-    .menucontainers .title{
+    .menucontainer .title{
         width: 30%;
         top: 80%;
+        width: 25%;
     }
 }

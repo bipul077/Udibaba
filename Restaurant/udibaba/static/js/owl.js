@@ -126,3 +126,26 @@ $('.decrements-btn').click(function (e) {
         $(this).closest('.menulistqty').find('.qty-input').val(value);
     }
 });
+
+$('.addtocart').on('click',function(){
+    console.log("clicked");
+    var product_id = $(this).closest('.contentmodal').find('.product-id').val();
+    var product_qty = $(this).closest('.contentmodal').find('.qty-input').val();
+    var token = $('input[name=csrfmiddlewaretoken]').val();
+    console.log(product_id,product_qty);
+
+    $.ajax({
+        method: "POST",
+        url: "/addtocart/",
+        data: {
+            'product_id': product_id,
+            'product_qty': product_qty,
+            csrfmiddlewaretoken: token
+        },
+        success: function (response) {
+            alertify.success(response.status)
+            // document.getElementById('badge').innerText = response.cartcount
+        }
+    });
+
+});

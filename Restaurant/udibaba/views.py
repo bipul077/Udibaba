@@ -2,7 +2,8 @@ from django.shortcuts import render, redirect
 from .forms import SignUpForm
 from django.contrib.auth.models import User
 from django.contrib import messages
-from .models import Banner, Gallery, Video, Product, Category,Event,Contact
+from .models import Banner, Gallery, Video, Product, Category,Event,Contact,Cart
+from django.http.response import JsonResponse
 from django.shortcuts import render,get_object_or_404,redirect
 # Create your views here.
 def home(request):
@@ -27,6 +28,25 @@ def home(request):
 def cart(request):
     return render(request, 'cart/cart.html')
 
+def addtocart(request):
+    print("yahoo")
+    if request.method == 'POST':
+        if request.user.is_authenticated:
+            prod_id = int(request.POST.get('product_id'))
+            if(Cart.objects.filter(user=request.user.id, product_id=prod_id)):
+                return JsonResponse({'status':"Product Already in Cart"})
+            else:
+                prod_qty = int(request.POST.get('product_qty'))   
+                Cart.objects.create(user=request.user, product_id=prod_id, product_qty=prod_qty)
+                cart = Cart.objects.filter(user=request.user)
+                cartcount = cart.count()
+                context = {
+                    'cartcount':cartcount,
+                    'status':"Product Added Successfully"
+                }
+                return JsonResponse(context)     
+        else:
+            return JsonResponse({'status':"Login to Continue"})
 
 def contact(request):
     request.method == "POST"   
