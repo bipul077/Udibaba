@@ -816,11 +816,6 @@ ol {
     margin-right: 10px;
 }
 
-/* .header__nav__option {
-	text-align: center;
-	padding: 26px 0 25px;
-} */
-
 .header__nav__option ul li {
 	list-style: none;
 	display: inline-block;
@@ -828,27 +823,11 @@ ol {
 	position: relative;
 }
 
-/* .header__nav__option ul li.active a:after {
-	-webkit-transform: scale(1);
-	-ms-transform: scale(1);
-	transform: scale(1);
-}
-
-.header__nav__option ul li:hover a:after {
-	-webkit-transform: scale(1);
-	-ms-transform: scale(1);
-	transform: scale(1);
-} */
-
 .header__nav__option ul li:hover .dropdown {
 	top: 32px;
 	opacity: 1;
 	visibility: visible;
 }
-
-/* .header__nav__option ul li:last-child {
-	margin-right: 0;
-} */
 
 .header__nav__option ul li .dropdown {
 	position: absolute;

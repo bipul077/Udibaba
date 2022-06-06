@@ -43,10 +43,12 @@
   letter-spacing: .2rem;
   text-transform: uppercase; 
 }
-.btn.btn-primary {
+.btn .btn-primary {
     background: #036e31;
     color: #fff;
-    padding: 15px 20px; }
+    padding: 15px 20px; 
+}
+
 .btn:hover 
 {
     color: #fff; 

@@ -49,8 +49,7 @@ def addtocart(request):
             return JsonResponse({'status':"Login to Continue"})
 
 def contact(request):
-    request.method == "POST"   
-    if request.method == "POST":
+    if request.method == 'POST':
         ename = request.POST.get('name') 
         email = request.POST.get('email')
         msge = request.POST.get('message')
@@ -70,6 +69,9 @@ def review(request):
 def menu(request):
     menu = Category.objects.all()
     return render(request, 'menu/menu.html',{'menu':menu})
+
+def profile(request):
+    return render(request, 'profile/profile.html')
 
 def menulist(request,pk):
     menulists = Product.objects.filter(category=pk)

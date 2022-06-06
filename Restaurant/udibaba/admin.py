@@ -10,7 +10,7 @@ from .models import(
     Cart
 )
 class BannerAdmin(admin.ModelAdmin):
-    list_display = ('headertext', 'img')
+    list_display = ('headertext', 'img',)
 admin.site.register(Banner,BannerAdmin)
 
 class GalleryAdmin(admin.ModelAdmin):
@@ -22,5 +22,8 @@ admin.site.register(Video)
 admin.site.register(Category)
 admin.site.register(Product)
 admin.site.register(Event)
-admin.site.register(Contact)
 admin.site.register(Cart)
+
+class ContactAdmin(admin.ModelAdmin):
+    list_display = ('id', 'email')
+admin.site.register(Contact, ContactAdmin)
