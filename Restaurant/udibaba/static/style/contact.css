@@ -27,7 +27,7 @@
   font-size: 13px; }
 
 .btn, .form-control, .custom-select {
-  height: 45px; }
+  height: auto; }
 
 .custom-select:active, .custom-select:focus {
   outline: none;
