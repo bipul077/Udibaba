@@ -140,7 +140,14 @@ ol {
 /*---------------------
   Header
 -----------------------*/
-
+.cartlist{
+	font-weight: bold;
+    color: #0d0d0d;
+    font-size: 11px;
+    position: absolute;
+    left: 7px;
+    top: 8px;
+}
 .header {
 	background: #ffffff;
 }
@@ -886,11 +893,36 @@ ol {
 	transform: scale(0);
 }
 /* for userlogin letter */
-.userlog{
+/* .userlog{
 	padding: 0px 7px 4px 7px;
 	background-color: rgb(96, 165, 5);
   	border-radius: 50%;
 }
 .loginbtn{
 	width: auto;
+} */
+
+.userlog{
+	padding: 0px 7px 4px 7px;
+	background-color: black;
+	color: white;
+  	border-radius: 50%;
+}
+.loginbtn{
+	width: auto;
+} 
+
+/*for forget password*/
+.fpass{
+	margin-bottom: 10px;
+	font-size: 12px;
+}
+
+/*Sign UP*/
+@media screen and (max-width: 480px) {
+	.haacc{
+		margin-right: 5rem;
+		margin-top: 1rem;
+	}
+
 }

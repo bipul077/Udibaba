@@ -139,8 +139,7 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'dangolr05@gmail.com'  #sender's email-id
-EMAIL_HOST_PASSWORD = 'ramdangol123'  #password associated with above email-id
-
+EMAIL_HOST_PASSWORD = 'hwxklemzlyznucrm'  #password associated with above email-id
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 LOGIN_URL = 'login'

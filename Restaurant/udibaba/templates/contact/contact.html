@@ -35,7 +35,7 @@
               {% if messages %}
               {% for message in messages %}
               <br>
-                  <p {% if message.tags %} class="alert {{message.tags}} mb-5 text-center" {% endif %}>{{message}}</p>
+                  <p {% if message.tags %} class="alert alert- {{message.tags}} mb-5 text-center" {% endif %}>{{message}}</p>
               {% endfor %}
               {% endif %} 
             </form>

@@ -65,7 +65,6 @@ class Contact(models.Model):
   def __str__(self):
     return self.uname
 
-    
 class Cart(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
@@ -74,3 +73,10 @@ class Cart(models.Model):
     
     def __str__(self):
       return str(self.user)+ " " + str(self.product.title)
+
+#For OTP    
+class UserOTP(models.Model):
+  user = models.ForeignKey(User, on_delete = models.CASCADE)
+  time_st = models.DateTimeField(auto_now = True)
+  otp = models.IntegerField()
+  

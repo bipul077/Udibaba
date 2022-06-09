@@ -6,8 +6,7 @@ from django.contrib.auth.views import LoginView, LogoutView, PasswordResetView, 
 from .forms import MyPasswordChangeForm, MyPasswordResetForm, MySetPasswordForm
 
 urlpatterns = [
-     path('', views.home,name="home"),
-     path('cart/', views.cart, name='cart'),
+     path('', views.home, name='home'),
      path('addtocart/', views.addtocart, name='addtocart'),
      path('contact/', views.contact, name='contact'),
      path('about/', views.about, name='about'),
@@ -17,7 +16,7 @@ urlpatterns = [
      path('gallery/', views.gallery, name='gallery'),
      #registration and login
      path('signup/', views.signup, name='signup'),
-     path('accounts/login/', LoginView.as_view(template_name = 'user/login.html'), name='login'),
+     path('login/', views.login_view, name='login'),
      path('logout/', LogoutView.as_view(next_page = 'login'), name = 'logout'),
      #start of password change
      path('password-change/', auth_views.PasswordChangeView.as_view(template_name = 'user/change-password/passwordchange.html', form_class=MyPasswordChangeForm, success_url='/password-change-successfully/'), name='passwordchange'),
@@ -27,6 +26,10 @@ urlpatterns = [
      path('password-reset-sent/', auth_views.PasswordResetDoneView.as_view(template_name='user/reset-password/password_reset_sent.html'), name='password_reset_sent'),
      path('password-reset-confirm/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(template_name='user/reset-password/password_reset_confirm.html', form_class=MySetPasswordForm), name='password_reset_confirm'),
      path('password-reset-complete/', auth_views.PasswordResetCompleteView.as_view(template_name='user/reset-password/password_reset_complete.html'), name='password_reset_complete'),
-
+     #start of resend otp
+     path('resendOTP', views.resend_otp),
+     path('cart/',views.cart_list,name='cart'),
+     path('removecart/',views.removecart,name='removecart'),
+     path('updatecart/',views.updatecart,name='updatecart'),
      path('menulist/<int:pk>', views.menulist, name='menulist')
 ]
