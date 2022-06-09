@@ -3,5 +3,54 @@
 {% block title %}Cart{% endblock title %}
 {% block main-content %}
 
-
+<div class="cardcart" id="card">
+    <div class="row" id="row">
+        <div class="col-md-8 cart">
+            <div class="titles">
+                <div class="row">
+                    <div class="col">
+                        <h4 style="margin-top: 20px;"><b><span id="s1">Shopping Cart</span></b></h4>
+                    </div>
+                    <!-- <div class="col align-self-center text-right text-muted">3 items</div> -->
+                </div>
+            </div>
+            <hr>
+            <div class="row border-top border-bottom">
+                <div class="row main align-items-center">
+                    <div class="col-2"><img class="img-fluid" src="{% static 'img/logo.jpg' %}" alt="image"></div>
+                    <div class="col">
+                        <div class="row text-muted">CHicken</div>
+                        <div class="row">Chicken momo</div>
+                    </div>
+                    <div class="col"> <a class="minus-cart" href="#" pid="">-</a><span id="quantity">4</span><a class="plus-cart" href="#" pid="">+</a> </div>
+                    <div class="col">Rs. 300 <span class="remove-cart" id="s2" pid="{{cart.product.id}}" style="cursor: pointer;"><i class="fa fa-times" style="float: right;"></i></i></span></div>
+                </div>
+            </div>
+            <div class="back-to-shop"><a href="{{request.META.HTTP_REFERER}}">&leftarrow;<span class="text-muted">Back to shop</span></a></div>
+        </div>
+        <div class="col-md-4 summary">
+            <div>
+                <h5><b><span id="s3">Summary</span></b></h5>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col" style="padding-left:0;">Amount:</div>
+                <div class="col text-right"><span id="amount">Rs. 400</span></div>
+            </div>
+            <div class="row">
+                <div class="col" style="padding-left:0;">Shipping price:</div>
+                <div class="col text-right">Rs. 70</div>
+            </div>
+            <form>
+                <p>VOUCHER CODE</p><input placeholder="Enter your code" style="margin-bottom: 0px;">
+               <a class="btn btn-sm cart-btn-warning" id="discountcode" style="margin-top: 1rem;">Apply</a>
+            </form>
+            <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
+                <div class="col">TOTAL PRICE:</div>
+                <div class="col text-right"><span id="totalamount">Rs. <span id="totamount">600</span></span></div>
+            </div> 
+            <button class="btn btn-warning">CHECKOUT</button>
+        </div>
+    </div>
+</div>
 {% endblock main-content %}

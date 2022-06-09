@@ -14,7 +14,8 @@
   padding-left: 0;
   padding-right: 0;
   border-radius: 0;
-  background: none; }
+  background: none; 
+}
   .form-control:active, .form-control:focus {
     outline: none;
     -webkit-box-shadow: none;
@@ -27,7 +28,7 @@
   font-size: 13px; }
 
 .btn, .form-control, .custom-select {
-  height: 45px; }
+  height: auto; }
 
 .custom-select:active, .custom-select:focus {
   outline: none;

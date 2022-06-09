@@ -10,63 +10,55 @@
                 <div class="card-body">
                     {% if messages %}
                         {% for mess in messages %}
-                            <div class="alert alert-{{mess.tags}}" role="alert">
+                            <div class="alert alert- {{mess.tags}}" role="alert">
                                 {{mess}}
                             </div>
                         {% endfor %}
-                    {% endif %} 
-                    <form action="" method="post">
-                        {% csrf_token %}
-                        <fieldset class="form-group">
-                            <legend class="border-bottom display">
-                                <h3 class="float-left">Login</h3>
-                                <img src="{% static 'img/logo.jpg' %}" class="logo float-right pt-1 mb-2" width="45" height="45">
-                            </legend>
-                            {{ form|crispy }}
-                        </fieldset>
-                        <small><a href="{% url 'password_reset' %}" style="color:red">Forget Password ?</a></small>
-                        <div class="form-grounp">
-                            <button class="btn btn-success" type="submit">Log In</button>
-                            <small class="float-right text-muted">Have't an Account ?<a href="{% url 'signup' %}" class="text-dark"> Signup</a></small>
-                        </div>
-                    </form>
+                    {% endif %}
+                    <!--For OTP-->
+                    {% if otp %}
+                        <form method="POST">
+                            {% csrf_token %}
+                            <fieldset class="form-group">
+                                <legend class="border-bottom display">
+                                    <h3 class="float-left">Verify Your Email</h3>
+                                    <img src="{% static 'img/logo.jpg' %}" class="logo float-right pt-1 mb-2" width="45" height="45">
+                                </legend>
+                                <input type="hidden" name="usr" value="{{usr.username}}"><!--To know which user send it-->
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend" style="margin-right: 1px;">
+                                        <span class="input-group-text" id="basic-addon1">OTP</span>
+                                    </div>
+                                    <input type="text" maxlength="6" class="form-control" placeholder="Enter Your OTP" aria-label="OTP" aria-describedby="basic-addon1" name = 'otp'>
+                                </div> 
+                            </fieldset>
+                            <div class="form-grounp">
+                                <button class="btn btn-success loginbtn" type="submit">Verify</button>             <!--username and id-->
+                                <small class="float-right text-muted"><i><a href="#" class="text-dark" onclick="ReSendOTP('{{usr.username}}', 'resendOTPmess')"><i id="resendOTPmess">Resend</i> OTP</a></small>
+                            </div>
+                        </form>
+                    {% else %} 
+                        <form action="" method="post">
+                            {% csrf_token %}
+                            <fieldset class="form-group">
+                                <legend class="border-bottom display">
+                                    <h3 class="float-left">Login</h3>
+                                    <img src="{% static 'img/logo.jpg' %}" class="logo float-right pt-1 mb-2" width="45" height="45">
+                                </legend>
+                                {{ form|crispy }}
+                            </fieldset>
+                            <div class="fpass">
+                                <a href="{% url 'password_reset' %}" style="color:red">Forget Password ?</a>
+                            </div>
+                            <div class="form-grounp">
+                                <button class="btn btn-success loginbtn" type="submit">Log In</button>
+                                <small class="float-right text-muted">Have't an Account ?<a href="{% url 'signup' %}" class="text-dark"> Signup</a></small>
+                            </div>
+                        </form>
+                    {% endif %}
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-
 {% endblock main-content %}
-
-<!-- <div class="row">
-    <div class="col-md">
-    </div>
-    <div class="col-md-4">
-        {% if messages %}
-            {% for mess in messages %}
-            <div class="alert alert-success" role="alert">
-                {{mess}}
-            </div>
-            {% endfor %}
-        {% endif %}               
-        <form method="POST">
-            {% csrf_token %}
-            <fieldset class="form-group">
-                <legend class="border-bottom display">
-                    <h3 class="float-left">Login</h3>
-                <img src="{% static 'main/img/logo.png' %}" class="logo float-right pt-1" width="25">
-                </legend>
-                {{ form|crispy }}
-            </fieldset>
-            <div class="form-grounp">
-                <button class="btn btn-success" type="submit">Log In</button>
-                <small class="float-right text-muted">have't an Account ?<a href="{% url 'signup' %}" class="text-dark"> Signup</a></small>
-            </div>
-        </form>
-        <br>
-    </div>
-    <div class="col-md">
-
-    </div>
-</div> -->

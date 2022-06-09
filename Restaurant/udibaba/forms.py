@@ -6,13 +6,12 @@ from django.utils.translation import gettext, gettext_lazy as _
 from django.contrib.auth import password_validation
 
 class SignUpForm(UserCreationForm):
-    fullname = forms.CharField(label = ("Full Name"))
-    username = forms.CharField(label = ("User Name"))
-    email = forms.EmailField(label = ("Email")) 
+    name = forms.CharField(label = ("Full Name"))
+    username = forms.EmailField(label = ("Email"))
     
     class Meta:
-        model = User
-        fields = ['fullname', 'username', 'email', 'password1', 'password2']
+	    model = User
+	    fields = ('name', 'username', 'password1', 'password2')
         
 #Password Change Form
 class MyPasswordChangeForm(PasswordChangeForm):

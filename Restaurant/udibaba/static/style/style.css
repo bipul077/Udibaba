@@ -340,13 +340,13 @@ ol {
 	position: relative;
 }
 
-.header__nav__option a span {
+/* .header__nav__option a span {
 	color: #0d0d0d;
 	font-size: 11px;
 	position: absolute;
 	left: 5px;
 	top: 8px;
-}
+} */
 
 .header__nav__option a:last-child {
 	margin-right: 0;
@@ -499,13 +499,13 @@ ol {
 		margin-right: 26px;
 		position: relative;
 	}
-	.offcanvas__nav__option a span {
+	/* .offcanvas__nav__option a span {
 		color: #0d0d0d;
 		font-size: 11px;
 		position: absolute;
 		left: 5px;
 		top: 8px;
-	}
+	} */
 	.offcanvas__nav__option a:last-child {
 		margin-right: 0;
 	}
@@ -597,7 +597,7 @@ ol {
 	#headerright{
 		display: flex;
 		justify-content: flex-end;
-		margin-right: 5px;
+		margin-right: 0px;
 	}
 	.responsivesearch-box{
 		display: none;
@@ -831,8 +831,7 @@ ol {
 
 .header__nav__option ul li .dropdown {
 	position: absolute;
-    left: -25px;
-    right: 60px;
+    right: 0px;
     top: 50px;
     width: 85px;
     background: #111111;
@@ -885,4 +884,38 @@ ol {
 	-webkit-transform: scale(0);
 	-ms-transform: scale(0);
 	transform: scale(0);
+}
+/* for userlogin letter */
+/* .userlog{
+	padding: 0px 7px 4px 7px;
+	background-color: rgb(96, 165, 5);
+  	border-radius: 50%;
+}
+.loginbtn{
+	width: auto;
+} */
+
+.userlog{
+	padding: 0px 7px 4px 7px;
+	background-color: black;
+	color: white;
+  	border-radius: 50%;
+}
+.loginbtn{
+	width: auto;
+} 
+
+/*for forget password*/
+.fpass{
+	margin-bottom: 10px;
+	font-size: 12px;
+}
+
+/*Sign UP*/
+@media screen and (max-width: 480px) {
+	.haacc{
+		margin-right: 5rem;
+		margin-top: 1rem;
+	}
+
 }

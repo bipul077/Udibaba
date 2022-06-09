@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils.html import mark_safe
 from datetime import datetime
+from django.contrib.auth.models import User
 
 class Banner(models.Model):
   img = models.ImageField(upload_to='banner_imgs/')
@@ -63,3 +64,19 @@ class Contact(models.Model):
 
   def __str__(self):
     return self.uname
+
+class Cart(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    product_qty = models.IntegerField(null=False, blank=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    
+    def __str__(self):
+      return str(self.user)+ " " + str(self.product.title)
+
+#For OTP    
+class UserOTP(models.Model):
+  user = models.ForeignKey(User, on_delete = models.CASCADE)
+  time_st = models.DateTimeField(auto_now = True)
+  otp = models.IntegerField()
+  
