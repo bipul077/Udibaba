@@ -4,6 +4,7 @@ from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm, Pass
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext, gettext_lazy as _
 from django.contrib.auth import password_validation
+from .models import Review
 
 class SignUpForm(UserCreationForm):
     name = forms.CharField(label = ("Full Name"))
@@ -27,3 +28,8 @@ class MyPasswordResetForm(PasswordResetForm):
 class MySetPasswordForm(SetPasswordForm):
     new_password1 = forms.CharField(label=_("New Password "), strip=False, widget=forms.PasswordInput(attrs={'autocomplete':'new-password'}), help_text=password_validation.password_validators_help_text_html())
     new_password2 = forms.CharField(label=_("Confirm New Password "), strip=False, widget=forms.PasswordInput(attrs={'autocomplete':'new-password'}))
+    
+class ReviewForm(forms.ModelForm):
+    class Meta:
+        model = Review
+        fields = ['subject', 'review', 'rating']

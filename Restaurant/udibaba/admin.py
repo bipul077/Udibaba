@@ -7,7 +7,8 @@ from .models import(
     Gallery,
     Event,
     Contact,
-    Cart
+    Cart,
+    Review
 )
 class BannerAdmin(admin.ModelAdmin):
     list_display = ('headertext', 'img',)
@@ -27,3 +28,7 @@ admin.site.register(Cart)
 class ContactAdmin(admin.ModelAdmin):
     list_display = ('id', 'email')
 admin.site.register(Contact, ContactAdmin)
+
+class ReviewAdmin(admin.ModelAdmin):
+    list_display = ('id', 'user', 'subject', 'created_at', 'updated_at')
+admin.site.register(Review, ReviewAdmin)

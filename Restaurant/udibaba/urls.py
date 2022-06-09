@@ -29,6 +29,8 @@ urlpatterns = [
      path('password-reset-complete/', auth_views.PasswordResetCompleteView.as_view(template_name='user/reset-password/password_reset_complete.html'), name='password_reset_complete'),
      #start of resend otp
      path('resendOTP', views.resend_otp),
+     #reviews
+     path('submit-review/', views.submit_review, name='submit_review'),
      
      path('menulist/<int:pk>', views.menulist, name='menulist')
 ]

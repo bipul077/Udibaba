@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
-from .forms import SignUpForm
+from .forms import SignUpForm, ReviewForm
 from django.contrib.auth.models import User
 from django.contrib import messages
-from .models import Banner, Gallery, Video, Product, Category, Event, Contact, Cart, UserOTP
+from .models import Banner, Gallery, Video, Product, Category, Event, Contact, Cart, UserOTP, Review
 from django.http.response import JsonResponse
 from django.shortcuts import render,get_object_or_404,redirect
 import random
@@ -11,25 +11,30 @@ from django.conf import settings
 from django.http import HttpResponse
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import authenticate, login #inbuilt function
+from django.contrib.auth.decorators import login_required #for function based view
 
 def home(request):
     banners = Banner.objects.all().order_by('-id')
     video = Video.objects.all()
     featured = Product.objects.filter(is_featured=True)
-    abc = Event.objects.count()
-    if abc:
-        event = Event.objects.get()
-        context = {'banner':banners,
-        'video':video,
-        'featured':featured,
-        'event':event,
-        }
-    else:
-        context = {'banner':banners,
-        'video':video,
-        'featured':featured,
-        }
-    return render(request,'home.html',context)
+    myreviews = Review.objects.filter(status=True)
+    if request.user.is_authenticated:
+        abc = Event.objects.count()
+        if abc:
+            event = Event.objects.get()
+            context = {'banner':banners,
+            'video':video,
+            'featured':featured,
+            'event':event,
+            'review':myreviews,
+            }
+        else:
+            context = {'banner':banners,
+            'video':video,
+            'featured':featured,
+            'review':myreviews,
+            }
+        return render(request,'home.html',context)
 
 def cart(request):
     return render(request, 'cart/cart.html')
@@ -210,6 +215,37 @@ def login_view(request):
 
     form = AuthenticationForm()   
     return render(request, 'user/login.html', {'form':form})
+
+def submit_review(request):
+    if request.user.is_authenticated:
+        url = request.META.get('HTTP_REFERER')
+        if request.method == "POST":
+            try:
+                reviews = Review.objects.get(user__id=request.user.id)
+                form = ReviewForm(request.POST, instance=reviews)
+                form.save()
+                messages.success(request, 'Your reviews has been updated!!')
+                return redirect(url)
+            except Review.DoesNotExist:
+                form = ReviewForm(request.POST)
+                if form.is_valid():
+                    data = Review()
+                    data.subject = form.cleaned_data['subject']
+                    data.review = form.cleaned_data['review']
+                    data.rating = form.cleaned_data['rating']
+                    data.ip = request.META.get('REMOTE_ADDR')
+                    data.user_id = request.user.id
+                    data.save()
+                    messages.success(request, 'Thank you! Your review has been submitted')
+                    return redirect(url)
+                return render(request, 'review/review.html')
+    messages.error(request, 'You must be login to provide a review.')
+    return redirect('review')
+                
+
+
+                
+            
 
     
             
