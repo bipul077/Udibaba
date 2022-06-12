@@ -7,8 +7,6 @@ from .forms import MyPasswordChangeForm, MyPasswordResetForm, MySetPasswordForm
 
 urlpatterns = [
      path('', views.home, name='home'),
-     path('cart/', views.cart, name='cart'),
-     path('addtocart/', views.addtocart, name='addtocart'),
      path('contact/', views.contact, name='contact'),
      path('about/', views.about, name='about'),
      path('review/', views.review, name='review'),
@@ -31,6 +29,11 @@ urlpatterns = [
      path('resendOTP', views.resend_otp),
      #reviews
      path('submit-review/', views.submit_review, name='submit_review'),
+     #start of cart
+     path('cart/',views.cart_list,name='cart'),
+     path('addtocart/', views.addtocart, name='addtocart'),
+     path('removecart/',views.removecart,name='removecart'),
+     path('updatecart/',views.updatecart,name='updatecart'),
      
      path('menulist/<int:pk>', views.menulist, name='menulist')
 ]

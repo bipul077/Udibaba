@@ -34,7 +34,7 @@
                                 <input type="text" class="form-control review-form-control" name="subject" placeholder="Title" required> 
                                 <br>
                                 Review :
-                                <textarea name="review" class="form-control review-form-control" rows="4" placeholder="Your Review" required></textarea>
+                                <textarea name="review" class="form-control review-form-control" maxlength="100" rows="4" placeholder="Your Review" required></textarea>
                                 <br>
                                 <input type="submit" value="Submit Review" class="btn btn-success mb-2">    
                                 {% if not user.is_authenticated %}
