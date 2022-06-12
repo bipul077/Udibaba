@@ -56,7 +56,7 @@
                 <div class="col text-right"><span id="totalamount">Rs. <span id="totamount">{{finalamount}}</span></span></div>
             </div> 
             {% if totalitems %}
-            <button class="btn btn-warning yellow">CHECKOUT</button>
+            <a href="{% url 'checkout' %}"><button class="btn btn-warning yellow">CHECKOUT</button></a>
             {% endif %}
         </div>
     </div>

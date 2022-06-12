@@ -28,8 +28,13 @@ urlpatterns = [
      path('password-reset-complete/', auth_views.PasswordResetCompleteView.as_view(template_name='user/reset-password/password_reset_complete.html'), name='password_reset_complete'),
      #start of resend otp
      path('resendOTP', views.resend_otp),
+     #cart
      path('cart/',views.cart_list,name='cart'),
      path('removecart/',views.removecart,name='removecart'),
      path('updatecart/',views.updatecart,name='updatecart'),
-     path('menulist/<int:pk>', views.menulist, name='menulist')
+     #checkout
+     path('checkout/',views.checkout,name='checkout'),
+     path('menulist/<int:pk>', views.menulist, name='menulist'),
+     path('place-order/', views.place_order, name='placeorder'),
+     path('order/', views.order, name='order'),
 ]
