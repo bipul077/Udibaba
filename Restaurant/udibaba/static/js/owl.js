@@ -159,7 +159,7 @@ $(document).on('click',".addtocart",function(){
 // Delete item from cart
 $(document).on('click','.removeitem',function(){
     var pid=$(this).attr('data-item');
-    var _vm=$(this);
+    var vm=$(this);
     // Ajax
     $.ajax({
         url:'/removecart/',
@@ -167,7 +167,11 @@ $(document).on('click','.removeitem',function(){
             'id':pid,
         },
         dataType:'json',
+        beforeSend:function(){
+				vm.attr('disabled',true);
+			},
         success:function(res){
+            vm.attr('disabled',false);
             $(".cartlist").text(res.totalitems);
             $("#card").html(res.data);
         }
@@ -179,7 +183,7 @@ $(document).on('click','.removeitem',function(){
 $(document).on('click','.update-item',function(){
     var _pId=$(this).attr('data-item');
     var _pQty=$(".product-qty-"+_pId).val();
-    var _vm=$(this);
+    var vm=$(this);
     // Ajax
     $.ajax({
         url:'/updatecart/',
@@ -188,10 +192,20 @@ $(document).on('click','.update-item',function(){
             'qty':_pQty
         },
         dataType:'json',
+        beforeSend:function(){
+            vm.attr('disabled',true);
+        },
         success:function(res){
+            vm.attr('disabled',false);
             // $(".cart-list").text(res.totalitems);
             $("#card").html(res.data);
         }
     });
     // End
 });
+
+//For login 
+
+let text = document.getElementById("div_id_username").firstChild.innerHTML = "Email";
+
+console.log("abac")

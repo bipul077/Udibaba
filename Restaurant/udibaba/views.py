@@ -1,18 +1,22 @@
+from zipapp import create_archive
 from django.shortcuts import render, redirect
-from .forms import SignUpForm, ReviewForm
+from .forms import SignUpForm, ReviewForm, CustomerAddressForm, CustomerDetailsUpdateForm
 from django.contrib.auth.models import User
+from django.views import View
 from django.contrib import messages
-from .models import Banner, Gallery, Video, Product, Category, Event, Contact, Cart, UserOTP, Review
+from .models import Banner, Gallery, Video, Product, Category, Event, Contact, Review, UserOTP, Order, OrderItem, CustomerProfile
 from django.http.response import JsonResponse
 from django.shortcuts import render,get_object_or_404,redirect
 import random
 from django.core.mail import send_mail #for otp
 from django.conf import settings
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.template.loader import render_to_string
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import authenticate, login #inbuilt function
 from django.contrib.auth.decorators import login_required #for function based view
+from django.utils.decorators import method_decorator #for class based view
 
 def home(request):
     banners = Banner.objects.all().order_by('-id')
@@ -58,8 +62,26 @@ def menu(request):
     menu = Category.objects.all()
     return render(request, 'menu/menu.html',{'menu':menu})
 
+#update Customer Details
+@login_required
 def profile(request):
-    return render(request, 'profile/profile.html')
+    if request.method == "POST":
+        u_form = CustomerDetailsUpdateForm(request.POST, instance = request.user)
+        if u_form.is_valid():
+            u_form.save()
+            messages.success(request, 'Profile Updated Successfully')
+            return redirect('profile')
+        else:
+            messages.error(request, 'There was an error updating your profile')
+    else:
+        u_form = CustomerDetailsUpdateForm(instance=request.user)
+            
+    context = {
+        'u_form':u_form,
+        'active':'btn btn-success',
+    }
+
+    return render(request, 'profile/profile.html', context)
 
 def menulist(request,pk):
     menulists = Product.objects.filter(category=pk)
@@ -95,11 +117,15 @@ def signup(request):
         if form.is_valid():
             form.save()
             username = form.cleaned_data.get('username')
-            name = form.cleaned_data.get('name').split(' ')
+            firstname = form.cleaned_data.get('first_name')
+            lastname = form.cleaned_data.get('last_name')
+            # name = form.cleaned_data.get('name').split(' ')
             usr = User.objects.get(username=username)
             usr.email = username
-            usr.first_name = name[0]
-            usr.last_name = name[1]
+            usr.first_name = firstname
+            usr.last_name = lastname
+            # usr.first_name = name[0]
+            # usr.last_name = name[1]
             usr.is_active = False
             usr.save()
             usr_otp = random.randint(100000, 999999)
@@ -167,6 +193,7 @@ def login_view(request):
         user = authenticate(request, username = usrname, password = pword) #it returns none when username and password is invalid
         if user is not None:
             login(request, user)
+            messages.success(request, 'logged in')
             return redirect('home')
         elif not User.objects.filter(username = usrname).exists():
             messages.warning(request, f'Please enter a correct username and password. Note that both fields may be case-sensitive.')
@@ -192,6 +219,7 @@ def login_view(request):
     form = AuthenticationForm()   
     return render(request, 'user/login.html', {'form':form})
 
+#review
 def submit_review(request):
     if request.user.is_authenticated:
         url = request.META.get('HTTP_REFERER')
@@ -267,6 +295,7 @@ def removecart(request):
 	t=render_to_string('ajax/cart.html',{'cart_data':request.session['cartdata'],'totalitems':len(request.session['cartdata']),'totalamount':total_amt,'finalamount':total_amt+70})
 	return JsonResponse({'data':t,'totalitems':len(request.session['cartdata'])})
 
+#update cart
 def updatecart(request):
 	p_id=str(request.GET['id'])
 	p_qty=request.GET['qty']
@@ -280,5 +309,135 @@ def updatecart(request):
 		total_amt+=int(item['quan'])*float(item['price'])
 	t=render_to_string('ajax/cart.html',{'cart_data':request.session['cartdata'],'totalitems':len(request.session['cartdata']),'totalamount':total_amt,'finalamount':total_amt+70})
 	return JsonResponse({'data':t,'totalitems':len(request.session['cartdata'])})
-        
+
+#checkout
+@login_required
+def checkout(request):
+    totalamount = 0
+    for pid,item in request.session['cartdata'].items():
+        totalamount += int(item['quan'])*float(item['price'])         
+    userprofile = CustomerProfile.objects.filter(user=request.user).first()        
+    return render(request, 'checkout/checkout.html',{'cart_data':request.session['cartdata'],'totalitems':len(request.session['cartdata']),'totalamount':totalamount+70,'up':userprofile})
+
+#place order
+def place_order(request):
+    totalamount = 0
+    if request.method == 'POST':
+        if not CustomerProfile.objects.filter(user=request.user):
+            userprofile = CustomerProfile()
+            userprofile.user = request.user
+            userprofile.phone = request.POST.get('phone')
+            userprofile.state = request.POST.get('state')
+            userprofile.city = request.POST.get('city')
+            userprofile.address = request.POST.get('address')
+            userprofile.zipcode = request.POST.get('zipcode')
+            userprofile.save()
+
+        neworder = Order()
+        neworder.user = request.user
+        neworder.fname = request.POST.get('fname')
+        neworder.lname = request.POST.get('lname')
+        neworder.email = request.POST.get('email')
+        neworder.phone = request.POST.get('phone')
+        neworder.state = request.POST.get('state')
+        neworder.city = request.POST.get('city')
+        neworder.address = request.POST.get('address')
+        neworder.zipcode = request.POST.get('zipcode')
+        neworder.payment_type = request.POST.get('payment_type')
+        for pid,item in request.session['cartdata'].items():
+            totalamount += int(item['quan'])*float(item['price'])
+        # print("wtf"+str(finalamount))
+        neworder.total_price = totalamount + 70
+
+        track_number = str(random.randint(1111111,9999999))
+        while Order.objects.filter(tracking_number=track_number) is None:
+            track_number = str(random.randint(1111111,9999999))
+        neworder.tracking_number = track_number
+        neworder.save()
+
+        customer = CustomerProfile.objects.get(user=request.user)
+        print(customer)
+        for pid,item in request.session['cartdata'].items():
+            totalamount += int(item['quan'])*float(item['price'])
+            print("rijan"+str(pid))
+            #order items
+            items = OrderItem.objects.create(
+                order = neworder,
+                customer = customer,
+                product = item['title'],
+                price = item['price'],
+                quantity = item['quan']
+            )
+            
+    del request.session['cartdata']
+    return redirect("order")
+
+@login_required
+def order(request):
+    return render(request, 'order/order.html')
+
+#address
+@login_required
+def address(request):
+    if request.user.is_authenticated:
+        address = CustomerProfile.objects.filter(user=request.user)
+    return render(request, 'address/address.html', {'add':address ,'active':'btn-success'})
+
+#create address
+@method_decorator(login_required, name='dispatch')
+class AddressView(View):
+    def get(self, request):
+        form = CustomerAddressForm()
+        return render(request, 'address/createAddress.html', {'form':form, 'active':'btn-success'})
     
+    def post(self, request):
+        form = CustomerAddressForm(request.POST)
+        duplicateEntry = CustomerProfile.objects.filter(user=request.user)
+        count = 0
+        check = duplicateEntry.count()
+        if check > 0:
+            count = count + 1
+        if form.is_valid():
+            if count == 0: 
+                usr = request.user
+                state = form.cleaned_data['state']
+                city = form.cleaned_data['city']
+                address = form.cleaned_data['address']
+                zip_code = form.cleaned_data['zipcode']
+                phone = form.cleaned_data['phone']
+                reg = CustomerProfile(user=usr, state=state, city=city, address=address, zipcode=zip_code, phone=phone)
+                reg.save()
+                messages.success(request, 'Congratulations!! Profile Created Successfully')
+            else:
+                messages.warning(request, 'Profile Already Created')
+        return redirect('address')
+        context = {
+            'form':form,
+            'active':'btn-success'
+        }
+        return render(request, 'address/createAddress.html', context)
+
+#edit address
+@login_required    
+def edit_address(request, pk):
+    user_profile = CustomerProfile.objects.get(id=pk)
+    form = CustomerAddressForm(instance=user_profile)
+    if request.method == "POST":
+        form = CustomerAddressForm(request.POST, instance=user_profile)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Your profile has been updated')
+            return redirect('address')
+    context = {
+        'form':form,
+        'active':'btn-success',
+    }
+    return render(request, 'address/editAddress.html', context)
+
+#delete address
+@login_required
+def delete_address(request, pk):
+    user_profile = CustomerProfile.objects.filter(id=pk)
+    user_profile.delete()
+    messages.success(request, 'Address Deleted Successfully')
+    return redirect('address')

@@ -1,0 +1,109 @@
+{% extends 'index.html' %}
+{% load static %}
+<!-- {% load crispy_forms_tags %} -->
+{% block title %}Checkout{% endblock title %}
+{% block main-content %}  
+<div class="mt-2 py-3"><span class="fw-bold">
+  <div class="container">
+          <a class="text-black" href="{% url 'home' %}" a style="text-decoration: none;color:black;">Home / </a>
+          <a class="text-black" href="{% url 'cart' %}" a style="text-decoration: none;color:black;">Cart /</a>
+          <a class="text-black" href="{% url 'checkout' %}" a style="text-decoration: none;color:black;">Checkout</a>
+  </div></span>
+</div>
+<div class="container mt-4">
+  <form action="{% url 'placeorder' %}" method="POST">
+    {% csrf_token %}
+    <div class="row checkoutform">
+      <div class="col-md-7">
+        <div class="card shadow">
+          <div class="card-body">
+            <h6>Basic Details</h6>
+            <hr>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="md-form ">
+                  <label for="firstName" class="">First name</label>
+                  <input type="text" name="fname" class="form-control" placeholder="Enter First Name" value="{{ request.user.first_name }}" required>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="md-form">
+                  <label for="lastName" class="">Last name</label>
+                  <input type="text" name="lname" class="form-control" placeholder="Enter Last Name" value="{{ request.user.last_name }}" required>
+                </div>
+              </div>
+              <div class="col-md-6 mt-3">
+                <label for="email" class="">Email</label>
+                <input type="text" name="email" class="form-control" placeholder="Enter Email Address" value="{{ request.user.email }}" required>
+              </div>
+              <div class="col-md-6 mt-3">
+                <label for="email" class="">Phone Number</label>
+                <input type="text" name="phone" class="form-control" placeholder="Enter Phone Number" value="{{ up.phone }}" required>
+              </div>
+                <div class="col-lg-6 col-md-6 mt-3">
+                  <label for="state">State</label>
+                  <input type="text" name="state" class="form-control" placeholder="Enter State" value="{{ up.state }}" required>
+                </div>
+              <div class="md-form col-md-6 mt-3">
+                <label for="city" class="">City</label>
+                <input type="text" name="city" class="form-control" placeholder="Enter City" value="{{ up.city }}" required>
+              </div>
+              <div class="md-form col-md-6 mt-3">
+                <label for="address" class="">Address</label>
+                <input type="text" name="address" class="form-control" placeholder="Enter Address" value="{{ up.address }}" required>
+              </div>
+              <div class="md-form col-md-6 mt-3">
+                <label for="zip">Zip Code</label>
+                <input type="text" name="zipcode" class="form-control"  placeholder="Enter Zipcode" value="{{ up.zipcode }}" required>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!--/.Order Summary-->
+      <div class="col-md-5 mb-3">
+        <div class="card shadow">
+          <div class="card-body">
+            <h6>Order Summary</h6>
+            <hr>
+            {% if totalitems %}
+              <table class="table table-striped table-bordereds">
+                <thead>
+                  <tr class="ordersum">
+                      <th>No</th>
+                      <th> Product </th>
+                      <th> Qty </th>
+                      <th> Price </th>
+                  </tr>
+                </thead>
+                <tbody> 
+                {% for product_id,item in cart_data.items %}
+                    <tr class="ordersum">
+                      <td>{{forloop.counter}}</td>
+                      <td>{{ item.title }}</td>
+                      <td> {{ item.quan }}</td>
+                      <td>Rs {{ item.price }}</td> 
+                    </tr>
+                {% endfor %}
+                </tbody> 
+                </table>
+                <hr>
+                <h6 class="fw-bold"> Grand Total(+ Delivery Charge)               
+                  <!-- <span class="float-end"> Rs {{ total_price }} </span> -->
+                  <span class="float-end"> Rs {{totalamount}}</span>
+                </h6> 
+                <input type="hidden" value="COD" name="payment_type">
+                <div class="mt-3">
+                  <button type="submit" class="btn btn-success w-100">COD | Place Order</a>
+                </div>
+            <!-- {% else %} -->
+            <!-- <h4> Your cart is empty </h4> -->
+            <!-- {% endif %} -->
+          </div>
+        </div>
+      </div>  
+    </div>
+  </form>
+</div>
+{% endblock main-content %}

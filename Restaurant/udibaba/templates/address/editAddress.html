@@ -1,0 +1,80 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block title %}Edit Address{% endblock title %}
+{% load crispy_forms_tags %}
+{% block main-content %}
+<div class="container my-5">
+    <div class="row">
+     <div class="col-sm-2 border-end">
+      <ul class="list-unstyled">
+        <li class="d-grid"><a href="{% url 'address' %}" class="btn btn-success"><i class="fa fa-arrow-left" aria-hidden="true"></i> Go Back</a></li>
+      </ul>
+     </div>
+     <div class="col-sm-8 offset-sm-1">
+        <h3>Edit Address</h3>
+        <hr>
+      <form action="" method="POST" novalidate class="shadow p-3">
+       {% csrf_token %}
+       {{ form|crispy }}
+       <div class="col-12 mt-3">
+         <button type="submit" class="btn btn-success">Submit</button>
+       </div> 
+      </form>
+      {% if messages %}
+      {% for message in messages %}
+      <br>
+          <p {% if message.tags %} class="alert alert - {{message.tags}} mb-5 text-center" {% endif %}>{{message}}</p>
+      {% endfor %}
+      {% endif %} 
+     </div>
+    </div>
+   </div>
+   <style>
+     .form-control{
+       width: 70%;
+     }
+   </style>
+<!-- <div class="container my-5">
+    <div class="row">
+     <div class="col-sm-1 border-right">
+        <ul class="list-unstyled">
+            <li class="d-grid"><a href="{% url 'address' %}" class="btn btn-success">Back</a></li>
+          </ul>
+     </div>
+     <div class="col-sm-7 offset-sm-1">
+        <h3>Edit Address</h3>
+        <hr>
+        <form action="#" method="POST" novalidate class="shadow p-3">
+            {% csrf_token %}
+            <div class="col-md-14"> 
+                <div class="row">
+                    <div class="md-form col-md-9 mb-4">
+                        <label for="state">State:</label>
+                        <input type="text" name="state" class="form-control" placeholder="Enter State" value="{{ up.state }}" required>
+                    </div>
+                    <div class="md-form col-md-9 mb-4">
+                        <label for="city" class="">City:</label>
+                        <input type="text" name="city" class="form-control" placeholder="Enter City" value="{{ up.city }}" required>
+                    </div>
+                    <div class="md-form col-md-9 mb-4">
+                        <label for="address" class="">Address:</label>
+                        <input type="text" name="address" class="form-control" placeholder="Enter Address" value="{{ up.address }}" required>
+                    </div>
+                    <div class="md-form col-md-9 mb-4">
+                        <label for="zip">Zip Code:</label>
+                        <input type="text" name="zipcode" class="form-control"  placeholder="Enter Zipcode" value="{{ up.zipcode }}" required>
+                    </div>
+                    <div class="col-md-9 mb-4">
+                        <label for="email" class="">Phone Number:</label>
+                        <input type="text" name="phone" class="form-control" placeholder="Enter Phone Number" value="{{ up.phone }}" required>
+                    </div>
+                    <div class="col-12 mb-4">
+                        <button type="submit" class="btn btn-primary mb-3">Save</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div> -->
+{% endblock main-content %}
+

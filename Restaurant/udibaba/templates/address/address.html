@@ -1,0 +1,39 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block title %}Address{% endblock title %}
+{% block main-content %}
+<div class="container my-5">
+    <div class="row">
+      <div class="col-sm-2 border-end">
+        <ul class="list-unstyled">
+          <li class="d-grid"><a href="{% url 'profile' %}" class="btn"> <i class="fa fa-arrow-left"></i> Go Back</a></li>
+          <li class="d-grid"><a href="{% url 'address' %}" class="btn {{active}}"><i class="fa fa-map-marker" aria-hidden="true"></i> Address</a></li>
+          <li class="d-grid"><a href="{% url 'create-address' %}" class="btn"><i class="fa fa-plus" aria-hidden="true"></i> Create</a></li>
+      </ul>
+     </div>
+     <div class="col-sm-9 offset-sm-1">
+       <h3>My Address</h3>
+       <hr>
+      <div class="row">
+        {% for ad in add %}
+        <div class="col-sm-11">
+          <div class="card o-hidden border-0 shadow-lg my-2 col-lg-11">
+          <div class="card-body">
+            <p>Region: {{ad.state}}</p>
+            <p>City: {{ad.city}}</p>
+            <p>Area: {{ad.address}}</p>
+            <p>ZipCode: {{ad.zipcode}}</p>
+            <p>Phone Number: {{ad.phone}}</p>
+          <a href="{% url 'edit-address' ad.id %}"><input type="submit" value="Edit" class="btn btn-primary mt-2"></a>
+          <a href="{% url 'delete-address' ad.id %}"><input type="submit" value="Delete" class="btn btn-danger mt-2"></a>
+         </div>
+        </div>
+       </div>
+       {% endfor %}
+      </div>
+     </div>
+  </div>
+</div>
+  
+{% endblock main-content %}
+
