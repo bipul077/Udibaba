@@ -131,6 +131,47 @@
 <!-- deal section ends -->
 {% endblock livesale %}
 
+{% block review %}
+<h2 class="mobfcategories">Customer Review</h2>
+  <div class="wrapper">
+    {% for rev in review %}
+    <div class="box mb-4">
+        <div class="sub">
+          <b class="subject">{{rev.subject}}</b>
+          <div class="quote">
+            <i class="fa fa-quote-left quote"></i>
+          </div>
+          <p class="text-justify">{{rev.review}}</p>
+        </div>
+        <div class="content">
+          <div class="info">
+            <div class="name">By - {{rev.user.first_name}} {{rev.user.last_name}}</div>
+            <!-- <div class="job" style="font-weight: bold;">Customer</div> -->
+            <div class="rating-star">
+              <span>
+                  <i class="fa fa-star star{% if rev.rating < 1 %}-o {% endif %}" aria-hidden="true"></i>
+                  <i class="fa fa-star star{% if rev.rating < 2 %}-o {% endif %}" aria-hidden="true"></i>
+                  <i class="fa fa-star star{% if rev.rating < 3 %}-o {% endif %}" aria-hidden="true"></i>
+                  <i class="fa fa-star star{% if rev.rating < 4 %}-o {% endif %}" aria-hidden="true"></i>
+                  <i class="fa fa-star star{% if rev.rating < 5 %}-o {% endif %}" aria-hidden="true"></i>
+              </span>
+            </div>
+          </div>
+          <div class="customer">
+            <a><span class="customerlog">
+              <b class="username">{{rev.user.first_name.0|capfirst}}</b>
+            </span></a>
+          </div>
+
+          <!-- <div class="image">
+            <img src="{% static 'img/avatar.png' %}" alt="">
+          </div> -->
+        </div>
+    </div>
+    {% endfor %}
+  </div>
+{% endblock review %}
+
 {% block main-content %}
   <!-- Carousel wrapper -->
   <div class="container-fluids">

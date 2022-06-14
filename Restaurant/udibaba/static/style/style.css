@@ -924,5 +924,23 @@ ol {
 		margin-right: 5rem;
 		margin-top: 1rem;
 	}
+}
 
+/* for orderpage,address and profile page */
+.d-grid a{
+	font-family: cursive;
+	color: black;
+	font-weight: bold;
+}
+.row h3{
+	width: 100%;
+}
+.border-end {
+	border-right: 1px solid #dee2e6!important;
+}
+.d-grid{
+	text-align: center;
+}
+.activebar{
+	width: 100%;
 }

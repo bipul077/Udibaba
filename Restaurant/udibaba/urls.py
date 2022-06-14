@@ -7,7 +7,6 @@ from .forms import MyPasswordChangeForm, MyPasswordResetForm, MySetPasswordForm
 
 urlpatterns = [
      path('', views.home, name='home'),
-     path('addtocart/', views.addtocart, name='addtocart'),
      path('contact/', views.contact, name='contact'),
      path('about/', views.about, name='about'),
      path('review/', views.review, name='review'),
@@ -28,8 +27,11 @@ urlpatterns = [
      path('password-reset-complete/', auth_views.PasswordResetCompleteView.as_view(template_name='user/reset-password/password_reset_complete.html'), name='password_reset_complete'),
      #start of resend otp
      path('resendOTP', views.resend_otp),
-     #cart
+     #reviews
+     path('submit-review/', views.submit_review, name='submit_review'),
+     #start of cart
      path('cart/',views.cart_list,name='cart'),
+     path('addtocart/', views.addtocart, name='addtocart'),
      path('removecart/',views.removecart,name='removecart'),
      path('updatecart/',views.updatecart,name='updatecart'),
      #checkout
@@ -37,4 +39,9 @@ urlpatterns = [
      path('menulist/<int:pk>', views.menulist, name='menulist'),
      path('place-order/', views.place_order, name='placeorder'),
      path('order/', views.order, name='order'),
+     #start of address
+     path('address/', views.address, name='address'),
+     path('create-address/', views.AddressView.as_view(), name='create-address'),
+     path('edit-address/<str:pk>', views.edit_address, name='edit-address'),
+     path('delete-address/<str:pk>', views.delete_address, name='delete-address'),
 ]

@@ -2,4 +2,50 @@
 {% load static %}
 {% block title %}Review{% endblock title %}
 {% block main-content %}
+<!--Review-->
+<section class="section-content padding-y bg">
+    <div class="container">
+        <div class="row">
+            <div class="card-body">
+                <div class="card o-hidden border-0 shadow-lg my-2 col-lg-15">
+                    <div class="col-md-9 m-2">
+                        <form action="{% url 'submit_review' %}" method="POST">
+                            {% csrf_token %}
+                            {% if messages %}
+                                {% for mess in messages %}
+                                    <div class="alert alert- {{mess.tags}}" role="alert">
+                                        {{mess}}
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+                            <h5>Write Your Review</h5>
+                            <label>How do you rate this product?</label>
+                            <br>
+                            <div class="rate">
+                                <input type="radio" name="rating" id="rating5" value="5" required /><label for="rating5" title="5"></label>
+                                <input type="radio" name="rating" id="rating4" value="4" required /><label for="rating4" title="4"></label>
+                                <input type="radio" name="rating" id="rating3" value="3" required /><label for="rating3" title="3"></label>
+                                <input type="radio" name="rating" id="rating2" value="2" required /><label for="rating2" title="2"></label>
+                                <input type="radio" name="rating" id="rating1" value="1" required /><label for="rating1" title="1"></label>
+                            </div>
+                            <br>
+                            <div class="cusreview" style="width: 90%;">
+                                Review Title:
+                                <input type="text" class="form-control review-form-control" name="subject" placeholder="Title" required> 
+                                <br>
+                                Review :
+                                <textarea name="review" class="form-control review-form-control" maxlength="100" rows="4" placeholder="Your Review" required></textarea>
+                                <br>
+                                <input type="submit" value="Submit Review" class="btn btn-success mb-2">    
+                                {% if not user.is_authenticated %}
+                                    <p>You must be logged in to post a review. <span><a href="{% url 'login' %}" class="login" style="color: red;">Login now</a></span></p>
+                                {% endif %}
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 {% endblock main-content %}

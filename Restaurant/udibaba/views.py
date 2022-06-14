@@ -1,9 +1,10 @@
 from zipapp import create_archive
 from django.shortcuts import render, redirect
-from .forms import SignUpForm
+from .forms import SignUpForm, ReviewForm, CustomerAddressForm, CustomerDetailsUpdateForm
 from django.contrib.auth.models import User
+from django.views import View
 from django.contrib import messages
-from .models import Banner, Gallery, Video, Product, Category, Event, Contact, UserOTP,Order,OrderItem,CustomerProfile
+from .models import Banner, Gallery, Video, Product, Category, Event, Contact, Review, UserOTP, Order, OrderItem, CustomerProfile
 from django.http.response import JsonResponse
 from django.shortcuts import render,get_object_or_404,redirect
 import random
@@ -11,14 +12,17 @@ from django.core.mail import send_mail #for otp
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
-from django.contrib.auth.forms import AuthenticationForm
 from django.template.loader import render_to_string
+from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import authenticate, login #inbuilt function
+from django.contrib.auth.decorators import login_required #for function based view
+from django.utils.decorators import method_decorator #for class based view
 
 def home(request):
     banners = Banner.objects.all().order_by('-id')
     video = Video.objects.all()
     featured = Product.objects.filter(is_featured=True)
+    myreviews = Review.objects.filter(status=True)
     abc = Event.objects.count()
     if abc:
         event = Event.objects.get()
@@ -26,11 +30,13 @@ def home(request):
         'video':video,
         'featured':featured,
         'event':event,
+        'review':myreviews,
         }
     else:
         context = {'banner':banners,
         'video':video,
         'featured':featured,
+        'review':myreviews,
         }
     return render(request,'home.html',context)
 
@@ -56,8 +62,26 @@ def menu(request):
     menu = Category.objects.all()
     return render(request, 'menu/menu.html',{'menu':menu})
 
+#update Customer Details
+@login_required
 def profile(request):
-    return render(request, 'profile/profile.html')
+    if request.method == "POST":
+        u_form = CustomerDetailsUpdateForm(request.POST, instance = request.user)
+        if u_form.is_valid():
+            u_form.save()
+            messages.success(request, 'Profile Updated Successfully')
+            return redirect('profile')
+        else:
+            messages.error(request, 'There was an error updating your profile')
+    else:
+        u_form = CustomerDetailsUpdateForm(instance=request.user)
+            
+    context = {
+        'u_form':u_form,
+        'activea':'btn-success',
+    }
+
+    return render(request, 'profile/profile.html', context)
 
 def menulist(request,pk):
     menulists = Product.objects.filter(category=pk)
@@ -93,11 +117,15 @@ def signup(request):
         if form.is_valid():
             form.save()
             username = form.cleaned_data.get('username')
-            name = form.cleaned_data.get('name').split(' ')
+            firstname = form.cleaned_data.get('first_name')
+            lastname = form.cleaned_data.get('last_name')
+            # name = form.cleaned_data.get('name').split(' ')
             usr = User.objects.get(username=username)
             usr.email = username
-            usr.first_name = name[0]
-            usr.last_name = name[1]
+            usr.first_name = firstname
+            usr.last_name = lastname
+            # usr.first_name = name[0]
+            # usr.last_name = name[1]
             usr.is_active = False
             usr.save()
             usr_otp = random.randint(100000, 999999)
@@ -112,9 +140,8 @@ def signup(request):
                 settings.EMAIL_HOST_USER, #3 argument - host user
                 [usr.email], #4 argument - whom to send
                 fail_silently = False # 5 argument - fail silently
-            )
-            
-        return render(request, 'user/signup.html', {'otp':True, 'usr':usr}) #To take otp
+            )   
+            return render(request, 'user/signup.html', {'otp':True, 'usr':usr}) #To take otp
     else:
         form = SignUpForm()
         
@@ -166,6 +193,7 @@ def login_view(request):
         user = authenticate(request, username = usrname, password = pword) #it returns none when username and password is invalid
         if user is not None:
             login(request, user)
+            messages.success(request, 'logged in')
             return redirect('home')
         elif not User.objects.filter(username = usrname).exists():
             messages.warning(request, f'Please enter a correct username and password. Note that both fields may be case-sensitive.')
@@ -191,7 +219,43 @@ def login_view(request):
     form = AuthenticationForm()   
     return render(request, 'user/login.html', {'form':form})
 
-    
+#review
+def submit_review(request):
+    if request.user.is_authenticated:
+        url = request.META.get('HTTP_REFERER')
+        if request.method == "POST":
+            try:
+                reviews = Review.objects.get(user__id=request.user.id)
+                form = ReviewForm(request.POST, instance=reviews)
+                form.save()
+                messages.success(request, 'Your reviews has been updated!!')
+                return redirect(url)
+            except Review.DoesNotExist:
+                form = ReviewForm(request.POST)
+                if form.is_valid():
+                    data = Review()
+                    data.subject = form.cleaned_data['subject']
+                    data.review = form.cleaned_data['review']
+                    data.rating = form.cleaned_data['rating']
+                    data.ip = request.META.get('REMOTE_ADDR')
+                    data.user_id = request.user.id
+                    data.save()
+                    messages.success(request, 'Thank you! Your review has been submitted')
+                    return redirect(url)
+                return render(request, 'review/review.html')
+    messages.error(request, 'You must be login to provide a review.')
+    return redirect('review')
+
+# Cart List Page
+def cart_list(request):
+	total_amt=0  
+	if 'cartdata' in request.session:
+		for p_id,item in request.session['cartdata'].items():
+			total_amt+=int(item['quan'])*float(item['price'])
+		return render(request, 'cart/cart.html',{'cart_data':request.session['cartdata'],'totalitems':len(request.session['cartdata']),'totalamount':total_amt,'finalamount':total_amt+70})
+	else:
+		return render(request, 'cart/cart.html',{'cart_data':'','totalitems':0,'total_amt':total_amt})
+            
 # Add to cart
 def addtocart(request):
 	# del request.session['cartdata']
@@ -216,17 +280,6 @@ def addtocart(request):
 		request.session['cartdata']=cart_p
 	return JsonResponse({'data':request.session['cartdata'],'totalitems':len(request.session['cartdata'])})
 
-    # Cart List Page
-def cart_list(request):
-	total_amt=0
-    
-	if 'cartdata' in request.session:
-		for p_id,item in request.session['cartdata'].items():
-			total_amt+=int(item['quan'])*float(item['price'])
-		return render(request, 'cart/cart.html',{'cart_data':request.session['cartdata'],'totalitems':len(request.session['cartdata']),'totalamount':total_amt,'finalamount':total_amt+70})
-	else:
-		return render(request, 'cart/cart.html',{'cart_data':'','totalitems':0,'total_amt':total_amt})
-
 # Delete Cart Item
 def removecart(request):
 	pid=str(request.GET['id'])
@@ -242,6 +295,7 @@ def removecart(request):
 	t=render_to_string('ajax/cart.html',{'cart_data':request.session['cartdata'],'totalitems':len(request.session['cartdata']),'totalamount':total_amt,'finalamount':total_amt+70})
 	return JsonResponse({'data':t,'totalitems':len(request.session['cartdata'])})
 
+#update cart
 def updatecart(request):
 	p_id=str(request.GET['id'])
 	p_qty=request.GET['qty']
@@ -323,5 +377,71 @@ def place_order(request):
 
 @login_required
 def order(request):
-    op = OrderItem.objects.filter(user=request.user)
-    return render(request, 'order/order.html',{'order_placed':op})
+    op = OrderItem.objects.filter(user=request.user).order_by('-order')
+    return render(request, 'order/order.html',{'order_placed':op,'activec':'btn-success'})
+
+#address
+@login_required
+def address(request):
+    if request.user.is_authenticated:
+        address = CustomerProfile.objects.filter(user=request.user)
+    return render(request, 'address/address.html', {'add':address ,'activeb':'btn-success'})
+
+#create address
+@method_decorator(login_required, name='dispatch')
+class AddressView(View):
+    def get(self, request):
+        form = CustomerAddressForm()
+        return render(request, 'address/createAddress.html', {'form':form, 'activeb':'btn-success'})
+    
+    def post(self, request):
+        form = CustomerAddressForm(request.POST)
+        duplicateEntry = CustomerProfile.objects.filter(user=request.user)
+        count = 0
+        check = duplicateEntry.count()
+        if check > 0:
+            count = count + 1
+        if form.is_valid():
+            if count == 0: 
+                usr = request.user
+                state = form.cleaned_data['state']
+                city = form.cleaned_data['city']
+                address = form.cleaned_data['address']
+                zip_code = form.cleaned_data['zipcode']
+                phone = form.cleaned_data['phone']
+                reg = CustomerProfile(user=usr, state=state, city=city, address=address, zipcode=zip_code, phone=phone)
+                reg.save()
+                messages.success(request, 'Congratulations!! Profile Created Successfully')
+            else:
+                messages.warning(request, 'Profile Already Created')
+        return redirect('address')
+        context = {
+            'form':form,
+            'active':'btn-success'
+        }
+        return render(request, 'address/createAddress.html', context)
+
+#edit address
+@login_required    
+def edit_address(request, pk):
+    user_profile = CustomerProfile.objects.get(id=pk)
+    form = CustomerAddressForm(instance=user_profile)
+    if request.method == "POST":
+        form = CustomerAddressForm(request.POST, instance=user_profile)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Your profile has been updated')
+            return redirect('address')
+    context = {
+        'form':form,
+        'active':'btn-success',
+    }
+    return render(request, 'address/editAddress.html', context)
+
+#delete address
+@login_required
+def delete_address(request, pk):
+    user_profile = CustomerProfile.objects.filter(id=pk)
+    user_profile.delete()
+    messages.success(request, 'Address Deleted Successfully')
+    return redirect('address')

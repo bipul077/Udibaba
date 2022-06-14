@@ -10,6 +10,7 @@ from .models import(
     Gallery,
     Event,
     Contact,
+    Review,
     Order,
     OrderItem
 )
@@ -21,7 +22,6 @@ class GalleryAdmin(admin.ModelAdmin):
     list_display = ('id', 'title')
 admin.site.register(Gallery, GalleryAdmin)
 
-
 admin.site.register(Video)
 admin.site.register(Category)
 admin.site.register(Product)
@@ -32,6 +32,9 @@ class ContactAdmin(admin.ModelAdmin):
     list_display = ('id', 'email')
 admin.site.register(Contact, ContactAdmin)
 
+class ReviewAdmin(admin.ModelAdmin):
+    list_display = ('id', 'user', 'subject', 'created_at', 'updated_at')
+admin.site.register(Review, ReviewAdmin)
 
 class OrderAdmin(admin.ModelAdmin):
     list_display = ('user', 'address','status')

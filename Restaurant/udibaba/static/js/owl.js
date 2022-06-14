@@ -203,6 +203,3 @@ $(document).on('click','.update-item',function(){
     });
     // End
 });
-console.log("wow");
-let text = document.getElementByClass("asteriskField").innerHTML;
-console.log(text);
