@@ -96,7 +96,7 @@ font-weight: bold
 }
 
 .cardcart a {
-    padding: 0 1vh;
+    padding: 0 0vh;
 }
 
 .close{
@@ -179,7 +179,13 @@ font-weight: bold
     .col input{
         width: 80%;
     }
+    #cartquan::-webkit-inner-spin-button {
+        opacity: 1;
+    }
 }
 .yellow{
     width: 100%;
+}
+#cartquan::-webkit-inner-spin-button {
+    opacity: 1;
 }

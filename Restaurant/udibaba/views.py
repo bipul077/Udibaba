@@ -1,13 +1,15 @@
+from zipapp import create_archive
 from django.shortcuts import render, redirect
 from .forms import SignUpForm
 from django.contrib.auth.models import User
 from django.contrib import messages
-from .models import Banner, Gallery, Video, Product, Category, Event, Contact, Cart, UserOTP
+from .models import Banner, Gallery, Video, Product, Category, Event, Contact, UserOTP,Order,OrderItem,CustomerProfile
 from django.http.response import JsonResponse
 from django.shortcuts import render,get_object_or_404,redirect
 import random
 from django.core.mail import send_mail #for otp
 from django.conf import settings
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.contrib.auth.forms import AuthenticationForm
 from django.template.loader import render_to_string
@@ -253,5 +255,73 @@ def updatecart(request):
 		total_amt+=int(item['quan'])*float(item['price'])
 	t=render_to_string('ajax/cart.html',{'cart_data':request.session['cartdata'],'totalitems':len(request.session['cartdata']),'totalamount':total_amt,'finalamount':total_amt+70})
 	return JsonResponse({'data':t,'totalitems':len(request.session['cartdata'])})
+
+    #checkout
+@login_required
+def checkout(request):
+    totalamount = 0
+    for pid,item in request.session['cartdata'].items():
+        totalamount += int(item['quan'])*float(item['price'])         
+    userprofile = CustomerProfile.objects.filter(user=request.user).first()        
+    return render(request, 'checkout/checkout.html',{'cart_data':request.session['cartdata'],'totalitems':len(request.session['cartdata']),'totalamount':totalamount+70,'up':userprofile})
+
+def place_order(request):
+    totalamount = 0
+    if request.method == 'POST':
+        if not CustomerProfile.objects.filter(user=request.user):
+                userprofile = CustomerProfile()
+                userprofile.user = request.user
+                userprofile.phone = request.POST.get('phone')
+                userprofile.state = request.POST.get('state')
+                userprofile.city = request.POST.get('city')
+                userprofile.address = request.POST.get('address')
+                userprofile.zipcode = request.POST.get('zipcode')
+                userprofile.save()
         
-    
+        
+        neworder = Order()
+        neworder.user = request.user
+        neworder.fname = request.POST.get('fname')
+        neworder.lname = request.POST.get('lname')
+        neworder.email = request.POST.get('email')
+        neworder.phone = request.POST.get('phone')
+        neworder.state = request.POST.get('state')
+        neworder.city = request.POST.get('city')
+        neworder.address = request.POST.get('address')
+        neworder.zipcode = request.POST.get('zipcode')
+        neworder.payment_type = request.POST.get('payment_type')
+        for pid,item in request.session['cartdata'].items():
+            totalamount += int(item['quan'])*float(item['price'])
+        # print("wtf"+str(finalamount))
+        neworder.total_price = totalamount + 70
+
+        track_number = str(random.randint(1111111,9999999))
+        while Order.objects.filter(tracking_number=track_number) is None:
+            track_number = str(random.randint(1111111,9999999))
+        neworder.tracking_number = track_number
+        neworder.save()
+
+        customer = CustomerProfile.objects.get(user=request.user)
+        print(customer)
+        for pid,item in request.session['cartdata'].items():
+            totalamount += int(item['quan'])*float(item['price'])
+            print("rijan"+str(pid))
+            products = Product.objects.get(id=pid)
+            #order items
+            items = OrderItem.objects.create(
+                order = neworder,
+                user = request.user,
+                customer = customer,
+                product = products,
+                price = item['price'],
+                quantity = item['quan']
+            )
+        
+    del request.session['cartdata']
+    messages.success(request,'Your order has been succesfully placed')
+    return redirect("order")
+
+@login_required
+def order(request):
+    op = OrderItem.objects.filter(user=request.user)
+    return render(request, 'order/order.html',{'order_placed':op})

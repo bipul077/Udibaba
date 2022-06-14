@@ -22,12 +22,12 @@ button:focus,
 textarea:focus {
 	outline: none;
 }
-
+a{
+	color: black;
+}
 a:hover,
 a:focus {
 	text-decoration: none;
-	outline: none;
-	color: #ffffff;
 }
 
 ul,
@@ -576,7 +576,7 @@ ol {
 	cursor: pointer;
 	display: grid;
 	place-items: center;
-	right: 1.6rem;
+	right: 2.0rem;
 }
 
 
@@ -662,7 +662,7 @@ ol {
 .carousel-captions{
 	position: absolute;
 	right: 35%;
-	bottom: 20px;
+	bottom: 35px;
 	left: 35%;
 	z-index: 10;
 	padding-top: 20px;
@@ -735,7 +735,7 @@ ol {
 	text-align: center;
 	color: black;
 	font-family: cursive;
-	font-size: 14px; 
+	font-size: 17px; 
 }
 .pricecap{
     font-weight: bold;
@@ -840,7 +840,7 @@ ol {
 	position: absolute;
     right: 0px;
     top: 50px;
-    width: 85px;
+    width: auto;
     background: #111111;
     text-align: left;
     padding: 5px 0;
@@ -903,7 +903,7 @@ ol {
 } */
 
 .userlog{
-	padding: 0px 7px 4px 7px;
+	padding: 1px 8px 4px 8px;
 	background-color: black;
 	color: white;
   	border-radius: 50%;

@@ -1,16 +1,20 @@
 from django.contrib import admin
+from django.utils.html import format_html
+from django.urls import reverse
 from .models import(
     Banner,
+    CustomerProfile,
     Video,
     Product,
     Category,
     Gallery,
     Event,
     Contact,
-    Cart
+    Order,
+    OrderItem
 )
 class BannerAdmin(admin.ModelAdmin):
-    list_display = ('headertext', 'img',)
+    list_display = ('headertext', 'img','image_tag')
 admin.site.register(Banner,BannerAdmin)
 
 class GalleryAdmin(admin.ModelAdmin):
@@ -22,8 +26,20 @@ admin.site.register(Video)
 admin.site.register(Category)
 admin.site.register(Product)
 admin.site.register(Event)
-admin.site.register(Cart)
+admin.site.register(CustomerProfile)
 
 class ContactAdmin(admin.ModelAdmin):
     list_display = ('id', 'email')
 admin.site.register(Contact, ContactAdmin)
+
+
+class OrderAdmin(admin.ModelAdmin):
+    list_display = ('user', 'address','status')
+admin.site.register(Order, OrderAdmin)
+
+@admin.register(OrderItem)
+class OrderItemAdmin(admin.ModelAdmin):
+    list_display = ('order', 'price','quantity','customer_info')
+    def customer_info(self,obj):
+        link = reverse("admin:udibaba_order_change",args=[obj.order.pk])
+        return format_html('<a href="{}">{}</a>',link,obj.order.user.first_name + " " + obj.order.user.last_name)
