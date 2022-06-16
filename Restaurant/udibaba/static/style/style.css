@@ -932,7 +932,7 @@ ol {
 	color: black;
 	font-weight: bold;
 }
-.row h3{
+#row h3{
 	width: 100%;
 }
 .border-end {
@@ -943,4 +943,19 @@ ol {
 }
 .activebar{
 	width: 100%;
+}
+/* for homepage add to cart button */
+.btnmodaladd{
+	margin-top: 10px;
+	text-align: center;
+}
+.modaladd{
+	border-radius: 25%;
+}
+.buybutton{
+	font-family: cursive;
+	font-weight: bold;
+}
+.popfp{
+	font-family: Lucida Handwriting;
 }

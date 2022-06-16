@@ -365,7 +365,6 @@ def place_order(request):
             items = OrderItem.objects.create(
                 order = neworder,
                 user = request.user,
-                customer = customer,
                 product = products,
                 price = item['price'],
                 quantity = item['quan']
@@ -385,7 +384,10 @@ def order(request):
 def address(request):
     if request.user.is_authenticated:
         address = CustomerProfile.objects.filter(user=request.user)
-    return render(request, 'address/address.html', {'add':address ,'activeb':'btn-success'})
+        if address:
+            return render(request, 'address/address.html', {'add':address ,'activeb':'btn-success'})
+        else:
+            return redirect('create-address')
 
 #create address
 @method_decorator(login_required, name='dispatch')

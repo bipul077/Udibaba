@@ -52,6 +52,7 @@ function myFunction(x) {
     $('#foodtitle').html($(this).data('name'));
     $('#foodprice').html($(this).data('price'));
     $('#fooddesc').html($(this).data('des'));
+    $('#prod_id').val($(this).data('id'));
     console.log($(this).data('des'));
     a = $(this).data('img')
     console.log(a);
@@ -126,7 +127,7 @@ $('.decrements-btn').click(function (e) {
         $(this).closest('.menulistqty').find('.qty-input').val(value);
     }
 });
-
+//for menulist page add to cart
 $(document).on('click',".addtocart",function(){
     var qty= $(this).closest('.contentmodal').find('.qty-input').val();
     var pid= $(this).closest('.contentmodal').find('.product-id').val();
@@ -135,7 +136,8 @@ $(document).on('click',".addtocart",function(){
     var pimage=$(this).closest('.contentmodal').find('.product-image').val();
     var price=$(this).closest('.contentmodal').find('.product-price').val();
     // var pprice=$(".product-price-"+_index).text();
-    console.log(pid,ptitle,qty,price)
+    console.log(typeof(price));
+    console.log(pid,ptitle,qty,price,pimage)
     // Ajax
     $.ajax({
         url:'/addtocart',
@@ -153,6 +155,34 @@ $(document).on('click',".addtocart",function(){
         }
     });
     // End
+});
+// End
+//for home page add to cart
+$(document).on('click',".modaladd",function(){
+    var qty = document.getElementById("quantity").value;
+    var pid = document.getElementById("prod_id").value;
+    var ptitle = document.getElementById("foodtitle").textContent;
+    var pimage = document.getElementById("imgpop").src;
+    var price = document.getElementById("foodprice").textContent;
+    console.log(ptitle,qty,pid,pimage,price);
+    // console.log(pid,ptitle,qty,price)
+    //Ajax
+    $.ajax({
+        url:'/addtocart',
+        data:{
+            'id': pid,
+            'qty': qty,
+            'title': ptitle,
+            'price': price,
+            'image': pimage
+        },
+        dataType:'json',
+        success:function(res){
+            $(".cartlist").text(res.totalitems);
+            alertify.success("Item has been added to cart")
+        }
+    });
+    //End
 });
 // End
 
@@ -174,6 +204,7 @@ $(document).on('click','.removeitem',function(){
             vm.attr('disabled',false);
             $(".cartlist").text(res.totalitems);
             $("#card").html(res.data);
+            alertify.success("Item deleted")
         }
     });
     // End

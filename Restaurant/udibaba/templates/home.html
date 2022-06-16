@@ -44,7 +44,7 @@
   <div class="owl-carousel owl-theme">
   {% for b in featured %}
   <div class="mobileitem">
-        <a href=""  class="alink"  data-toggle="modal" data-target="#popmenu" data-img="{{b.product_image.url}}" data-name="{{b.title}}" data-price="{{b.item_price}}" data-des="{{b.description}}">
+        <a href=""  class="alink"  data-toggle="modal" data-target="#popmenu" data-img="{{b.product_image.url}}" data-name="{{b.title}}" data-price="{{b.item_price}}" data-des="{{b.description}}" data-id="{{b.id}}">
         <img id="imgid" src="{{b.product_image.url}}" height="200">
         <!-- product_image bhaneko models.y ko Product model ko product_image ho -->
         <p class="cap">{{b.title}}</p>
@@ -74,13 +74,15 @@
               <span class="dec qtybtn decrement-btn">-</span>
               <input type="text" name="quantity" class="qty-input" value="1" id="quantity">
               <span class="dec qtybtn increment-btn newhover">+</span>
-              <!-- <input type="hidden" name="prod_id" id="prod_id">to get the product id we do this -->
+              <input type="hidden" name="prod_id" id="prod_id" value=""><!--to get the product id we do this-->>
           </form>
-      </div>
+        </div>
+        <div class="btnmodaladd">
+          <button type="button" class="btn btn-success modaladd"><span class="buybutton">Add to Cart</span></button>
+        </div> 
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-danger"><span class="buybutton">Order Now</span></button>
-        <button type="button" class="btn btn-warning"><span class="buybutton">Add to Cart</span></button>
+        <p>Note: We charged Rs 70 for the delivery charge.</p>
       </div>
     </div>
   </div>
