@@ -109,9 +109,10 @@
                                 <li>
                                     <a><span class="userlog"><b>{{request.user.first_name.0|capfirst}}</b></span></a>
                                     <ul class="dropdown">
-                                        <p style="color:white; text-align:center; font-size:10px;">{{request.user.first_name}} {{request.user.last_name}}</p>
+                                        <!-- <p style="color:white; text-align:center; font-size:10px;">{{request.user.first_name}} {{request.user.last_name}}</p> -->
                                         <li><a href="{% url 'profile' %}">Profile</a></li>
-                                        <li><a href="{% url 'order' %}">My order</a></li>
+                                        <li><a href="{% url 'passwordchange' %}">Password</a></li>
+                                        <li><a href="{% url 'order' %}">Order</a></li>
                                         <li><a href="{% url 'logout' %}">Logout</a></li>
                                     </ul>
                                 </li>

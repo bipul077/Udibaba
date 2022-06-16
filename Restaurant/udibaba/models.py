@@ -84,7 +84,6 @@ class Review(models.Model):
     def __str__(self):
         return self.subject
   
-#order
 # Order
 ORDER_STATUS=(
   ('process','In Process'),

@@ -12,17 +12,17 @@
               {% csrf_token %}
               <div class="row">
                 <div class="col-md-6 form-group mb-5">
-                  <label for="" class="col-form-label">Name *</label>
+                  <label>Name *</label>
                   <input type="text" class="form-control" name="name" id="name" placeholder="Your name" required>
                 </div>
                 <div class="col-md-6 form-group mb-5">
-                  <label for="" class="col-form-label">Email *</label>
+                  <label>Email *</label>
                   <input type="text" class="form-control" name="email" id="email"  placeholder="Your email" required>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-12 form-group mb-5">
-                  <label for="message" class="col-form-label">Message *</label>
+                  <label>Message *</label>
                   <textarea class="form-control" name="message" id="message" cols="30" rows="2"  placeholder="Write your message" required></textarea>
                 </div>
               </div>
@@ -32,12 +32,6 @@
                   <span class="submitting"></span>
                 </div>
               </div>
-              {% if messages %}
-              {% for message in messages %}
-              <br>
-                  <p {% if message.tags %} class="alert alert- {{message.tags}} mb-5 text-center" {% endif %}>{{message}}</p>
-              {% endfor %}
-              {% endif %} 
             </form>
           </div>
         </div>

@@ -927,20 +927,12 @@ ol {
 }
 
 /* for orderpage,address and profile page */
-.d-grid a{
-	font-family: cursive;
-	color: black;
-	font-weight: bold;
-}
-.row h3{
+
+/* .row h3{
 	width: 100%;
 }
-.border-end {
-	border-right: 1px solid #dee2e6!important;
-}
-.d-grid{
-	text-align: center;
-}
-.activebar{
+
+/* .activebar{
 	width: 100%;
-}
+	color: white;
+} */
