@@ -397,7 +397,14 @@ ol {
 		width: 150px;
 		border-style: ridge;
 	}
+
 }
+
+.search-box:hover > .searchbutton{
+	right: -1rem;
+}
+
+
 @media only screen and (min-width: 768px) and (max-width: 820px) {
 	.search-box:hover > .searchtext{
 		width: 130px;
@@ -500,7 +507,10 @@ ol {
 	.offcanvas__nav__option {
 		text-align: center;
 		margin-bottom: 25px;
-	}W
+		display: flex;
+    	justify-content: space-evenly;
+	}
+
 	.offcanvas__nav__option a {
 		display: inline-block;
 		margin-right: 26px;
@@ -579,6 +589,9 @@ ol {
 	right: 2.0rem;
 }
 
+.searchbutton:after{
+	right: -1rem;
+}
 
 /* for mobilev version search box */
 .responsivesearch-box{
@@ -927,12 +940,30 @@ ol {
 }
 
 /* for orderpage,address and profile page */
-
-/* .row h3{
+.d-grid a{
+	color: black;
+	font-weight: bold;
+}
+#row h3{
 	width: 100%;
 }
-
-/* .activebar{
+.border-end {
+	border-right: 1px solid #dee2e6!important;
+}
+.d-grid{
+	text-align: center;
+}
+.activebar{
 	width: 100%;
-	color: white;
-} */
+	margin-left: -14px;
+}
+
+/* for homepage add to cart button */
+.btnmodaladd{
+	margin-top: 10px;
+	text-align: center;
+}
+
+.buybutton{
+	font-weight: bold;
+}

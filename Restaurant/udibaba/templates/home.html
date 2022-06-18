@@ -44,7 +44,7 @@
   <div class="owl-carousel owl-theme">
   {% for b in featured %}
   <div class="mobileitem">
-        <a href=""  class="alink"  data-toggle="modal" data-target="#popmenu" data-img="{{b.product_image.url}}" data-name="{{b.title}}" data-price="{{b.item_price}}" data-des="{{b.description}}">
+        <a href=""  class="alink"  data-toggle="modal" data-target="#popmenu" data-img="{{b.product_image.url}}" data-name="{{b.title}}" data-price="{{b.item_price}}" data-des="{{b.description}}" data-id="{{b.id}}">
         <img id="imgid" src="{{b.product_image.url}}" height="200">
         <!-- product_image bhaneko models.y ko Product model ko product_image ho -->
         <p class="cap">{{b.title}}</p>
@@ -74,13 +74,15 @@
               <span class="dec qtybtn decrement-btn">-</span>
               <input type="text" name="quantity" class="qty-input" value="1" id="quantity">
               <span class="dec qtybtn increment-btn newhover">+</span>
-              <!-- <input type="hidden" name="prod_id" id="prod_id">to get the product id we do this -->
+              <input type="hidden" name="prod_id" id="prod_id" value=""><!--to get the product id we do this-->>
           </form>
-      </div>
+        </div>
+        <div class="btnmodaladd">
+          <button type="button" class="btn btn-success modaladd"><span class="buybutton">Add to Cart</span></button>
+        </div> 
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-danger"><span class="buybutton">Order Now</span></button>
-        <button type="button" class="btn btn-warning"><span class="buybutton">Add to Cart</span></button>
+        <p>Note: We charged Rs 70 for the delivery charge.</p>
       </div>
     </div>
   </div>
@@ -97,10 +99,7 @@
     <img src="{% static 'img/slider1.jpg' %}" height="500" alt="Snow" style="width:100%;">
     {% endif %}
     {% if event %}
-    <div class="contentsed">
-     
-      <!-- <p class="eventdesc">{{event.description}}</p> -->
-      
+    <div class="contentsed">      
       <h3 class="eventtitle">{{event.title}}</h3> 
       <div class="count-down" id="countdown">
           <div class="box">
@@ -121,7 +120,6 @@
           </div>
       </div>
       <span id="date">Starting date & time: {{event.date|date:"Y-m-d H:i:s"}}</span>
-      <!-- <p>{{event.description}}</p> -->
     </div>
     {% else %}
     <h2 class="noevent">No event available currently</h2>
@@ -132,51 +130,39 @@
 {% endblock livesale %}
 
 {% block review %}
-<h2 class="mobfcategories">Customer Review</h2>
-  <div class="wrapper">
-    {% for rev in review %}
-    <div class="box mb-4">
-        <div class="sub">
-          <b class="subject">{{rev.subject}}</b>
-          <div class="quote">
-            <i class="fa fa-quote-left quote"></i>
-          </div>
-          <p class="text-justify">{{rev.review}}</p>
-        </div>
-        <div class="content">
-          <div class="info">
-            <div class="name">By - {{rev.user.first_name}} {{rev.user.last_name}}</div>
-            <!-- <div class="job" style="font-weight: bold;">Customer</div> -->
-            <div class="rating-star">
-              <span>
-                  <i class="fa fa-star star{% if rev.rating < 1 %}-o {% endif %}" aria-hidden="true"></i>
-                  <i class="fa fa-star star{% if rev.rating < 2 %}-o {% endif %}" aria-hidden="true"></i>
-                  <i class="fa fa-star star{% if rev.rating < 3 %}-o {% endif %}" aria-hidden="true"></i>
-                  <i class="fa fa-star star{% if rev.rating < 4 %}-o {% endif %}" aria-hidden="true"></i>
-                  <i class="fa fa-star star{% if rev.rating < 5 %}-o {% endif %}" aria-hidden="true"></i>
-              </span>
-            </div>
-          </div>
-          <div class="customer">
-            <a><span class="customerlog">
-              <b class="username">{{rev.user.first_name.0|capfirst}}</b>
-            </span></a>
-          </div>
-
-          <!-- <div class="image">
-            <img src="{% static 'img/avatar.png' %}" alt="">
-          </div> -->
-        </div>
+<div class="featuredslider">
+  <h2 class="mobfcategories">Customer Review</h2>
+  <div class=" review-carousel owl-carousel owl-theme">
+  {% for rev in review %}
+  <figure class="snip1390">
+    <div class="customer">
+      <a><span class="customerlog">
+        <b class="username">{{rev.user.first_name.0|capfirst}}</b>
+      </span></a>
     </div>
-    {% endfor %}
+    <figcaption>
+      <b style="color: white;">{{rev.user.first_name}} {{rev.user.last_name}}</b>
+      <div class="rating-star">
+        <span>
+            <i class="fa fa-star star{% if rev.rating < 1 %}-o {% endif %}" aria-hidden="true"></i>
+            <i class="fa fa-star star{% if rev.rating < 2 %}-o {% endif %}" aria-hidden="true"></i>
+            <i class="fa fa-star star{% if rev.rating < 3 %}-o {% endif %}" aria-hidden="true"></i>
+            <i class="fa fa-star star{% if rev.rating < 4 %}-o {% endif %}" aria-hidden="true"></i>
+            <i class="fa fa-star star{% if rev.rating < 5 %}-o {% endif %}" aria-hidden="true"></i>
+        </span>
+      </div>
+      <blockquote style="text-align: justify;">{{rev.review}}</blockquote>
+    </figcaption>
+  </figure>
+  {% endfor %}
   </div>
+</div>
 {% endblock review %}
 
 {% block main-content %}
   <!-- Carousel wrapper -->
   <div class="container-fluids">
     <div id="carouselExampleControls" class="carousel slide" data-interval="10000"  data-ride="carousel">
-        <!-- data-interval for slider timer i.e.10000 = 10s -->
         <div class="carousel-inner" role="listbox">
             {% for videos in video %}
             {% if forloop.counter == 1 %}
