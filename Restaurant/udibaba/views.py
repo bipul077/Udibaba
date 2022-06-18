@@ -335,7 +335,6 @@ def place_order(request):
                 userprofile.zipcode = request.POST.get('zipcode')
                 userprofile.save()
         
-        
         neworder = Order()
         neworder.user = request.user
         neworder.fname = request.POST.get('fname')

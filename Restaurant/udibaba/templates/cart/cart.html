@@ -5,13 +5,13 @@
 
 <div class="cardcart" id="card">
     <div class="row" id="row">
+        <p class="bg-success text-center" style="color:white; width:100%;">Please press <i class="fa fa-refresh"></i> after changing the quantity</p>
         <div class="col-md-8 cart">
             <div class="titles">
                 <div class="row">
                     <div class="col">
                         <h4 style="margin-top: 20px;"><b><span id="s1">Shopping Cart</span></b></h4>
                     </div>
-                    <!-- <div class="col align-self-center text-right text-muted">3 items</div> -->
                 </div>
             </div>
             <hr>
@@ -20,10 +20,9 @@
                 <div class="row main align-items-center">
                     <div class="col-2"><img class="img-fluid" src="{{item.image}}" alt="image"></div>
                     <div class="col">
-                        <!-- <div class="row text-muted">CHicken</div> -->
                         <div class="row">{{item.title}}</div>
                     </div>
-                    <div class="col"> <input type="number" class="product-qty-{{product_id}}" id="cartquan" value="{{item.quan}}" min="1" max="10"/> </div>
+                    <div class="col"> <input type="text" class="product-qty-{{product_id}}" id="cartquan" value="{{item.quan}}" min="1" maxlength="1"/> </div>
                     <div class="col">Rs {{item.price}}</div>
                     <div class="col" style="display: flex;">
                         <button class="btn btn-sm btn-primary update-item" style="margin-right:10px" data-item="{{product_id}}"><i class="fa fa-refresh"></i></button>
