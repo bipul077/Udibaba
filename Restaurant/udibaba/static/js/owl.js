@@ -259,4 +259,36 @@ $(document).on('click','.update-item',function(){
     // End
 });
 
-  
+$("#loadmore").on('click',function(){
+    var currentproducts = $(".Photos").length;//this currentproducts means how many products are shown in productlist html
+    var limit=$(this).attr('data-limit');//this is the number of products we want to show in a row
+    var total = $(this).attr('data-total');//this total means the total products we have in database
+    console.log("hahha"+currentproducts,limit,total)
+    var url = "/load-more-data/"
+    //start ajax
+    $.ajax({
+        url: url,
+        data: {//this data is sent to the server
+            limit: limit,
+            curproducts: currentproducts
+        },
+        dataType:'json',
+        beforeSend:function(){//data fetch hune agadi chalne code when users click on load more button
+            $("#loadmore").attr('disabled',true);
+            $(".load-more-icon").addClass('fa-spin');
+        },
+        success:function(res){//catches the data which is given by views.py
+            console.log("success")
+            $(".mixit-container").append(res.datas);
+            $("#loadmore").attr('disabled',false);
+            $(".load-more-icon").removeClass('fa-spin');
+
+            var curtotalproducts = $(".Photos").length;
+            if(curtotalproducts==total){
+                $("#loadmore").remove();
+            }
+        }
+            
+    })
+    //end ajax
+})

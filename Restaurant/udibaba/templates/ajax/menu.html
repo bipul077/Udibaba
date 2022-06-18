@@ -1,0 +1,13 @@
+{% for menu in menulist %}
+<div class="Photos">
+    <div class= "gallery">                    
+      <a href="/menulist/{{menu.id}}"  class="menulink">
+       <img src="{{menu.img.url}}" width="300" height="200">
+        <div class="des">
+            <p>{{menu.title}}</p>
+            <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+        </div>
+       </a>
+    </div>
+</div>
+{% endfor %}
