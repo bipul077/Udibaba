@@ -1,0 +1,63 @@
+<html>
+    <body>
+        
+        <div class="card-body">
+            <div class="row">
+                <div class="row bb pb-3">
+                    <div class="col-7">
+                        <h2 style="font-size: large;text-decoration: underline;">Udibaba Restaurant</h2>
+                        <p style="font-size: large;">Dear user,</p>                                       
+                        <p class="address" style="font-size: large;">Your order has been received.</p>
+                    </div>
+                </div>
+
+                {% for op in order %}
+                {% if forloop.counter == 1 %}
+                <div class="col-sm-6 mb-1">
+                    <div class="card">
+                    <div class="card-body">
+                    <hr>
+                    <p>Name: {{op.order.fname}} {{op.order.lname}}</p><!--phone vaneko models.py ko customer class ko ho -->
+                    <p>Address: {{ op.order.state}},{{op.order.city}},{{op.order.address}}</p>
+                    <p>Phone: {{op.order.phone}}</p>
+                    <p>Status: {{op.order.status}}</p>
+                    <p>Ordered Date: {{op.order.ordered_date}}</p>
+                    <p>Payment method: {{op.order.payment_type}}</p>
+                    <hr>
+                    </div>
+                </div>
+                </div>
+                {% endif %}
+                {% endfor %}
+                
+            </div>
+            <table class="table" style="width: 60%;">
+                <thead>
+                    <th>S.N</th>
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th>Price(Each)</th>
+                </thead>
+                <tbody>
+                    
+                    {% for ol in order %}
+                            <tr>
+                            <td data-label="image" style="text-align: center;">{{forloop.counter}}</td>
+                            <td data-label="name" style="text-align: center;">{{ol.product.title}}</td>
+                            <td data-label="quantity text-center" style="text-align: center;">{{ol.quantity}}</td>
+                            <td data-label="price" style="text-align: center;">{{ol.product.item_price}}</td>
+                            </tr>
+                            <!-- <tr>
+                                <td data-label="image"><img src="prod.jpg"></td>
+                                <td data-label="name">Iphone</td>
+                                <td data-label="remove"><i class="fa fa-trash" aria-hidden="true"></i></td>
+                            </tr> -->
+                    {% endfor %}
+                </tbody>
+            </table>
+            <p><b>Grand Total(inc.shipping cost): {{tot}}</b></p> 
+        
+        </div>
+        
+</body>
+</html>

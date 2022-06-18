@@ -21,7 +21,7 @@
            <!-- start gallery content -->
            <div class="mu-gallery-content">
              <div class="mu-gallery-body">
-               <ul id="mixit-container" class="row">
+               <ul id="mixit-container" class="mixit-container">
                  <!--Started using for loop in image-->
                  {% for menu in menu %}
                  <div class="Photos">
@@ -44,6 +44,8 @@
           </div>
          </div>
       </div>
+      <p class="my-4 text-center"><button class="btn btn-dark btn-sm" id="loadmore" data-limit="4" data-total="{{totaldata}}">Load More <i class="fa fa-refresh load-more-icon" aria-hidden="true"></i></button></p>
+        <!-- data limit is how many data or products we want to show in html page and data-total means how many data or products we have in database which is passed from views.py dictionary-->
   </div>
   </section><!-- End gallery  --> 
 

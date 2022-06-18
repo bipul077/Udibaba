@@ -110,7 +110,8 @@ class Order(models.Model):
   updated_date = models.DateTimeField(auto_now=True)
   payment_completed = models.BooleanField(default=False, null=True, blank=True)
   def __str__(self):
-      return '{} - {}'.format(self.id, self.tracking_number)
+      # return '{} - {}'.format(self.id, self.tracking_number)
+      return self.tracking_number
 
 
 

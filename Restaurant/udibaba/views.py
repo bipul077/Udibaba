@@ -17,6 +17,8 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import authenticate, login #inbuilt function
 from django.contrib.auth.decorators import login_required #for function based view
 from django.utils.decorators import method_decorator #for class based view
+from django.template.loader import get_template
+from django.core.mail import EmailMessage
 
 def home(request):
     banners = Banner.objects.all().order_by('-id')
@@ -59,8 +61,9 @@ def review(request):
     return render(request, 'review/review.html')
 
 def menu(request):
-    menu = Category.objects.all()
-    return render(request, 'menu/menu.html',{'menu':menu})
+    menu = Category.objects.all().order_by('id')[:4]
+    totaldata = Category.objects.all().count()
+    return render(request, 'menu/menu.html',{'menu':menu,'totaldata':totaldata})
 
 #update Customer Details
 @login_required
@@ -372,7 +375,7 @@ def place_order(request):
         
     del request.session['cartdata']
     messages.success(request,'Your order has been succesfully placed')
-    return redirect("order")
+    return redirect("/sendemail/"+str(neworder.id))
 
 @login_required
 def order(request):
@@ -447,3 +450,43 @@ def delete_address(request, pk):
     user_profile.delete()
     messages.success(request, 'Address Deleted Successfully')
     return redirect('address')
+
+def sendemail(request,tid):
+    templatepath = 'order/ordermail.html'
+    print(tid)
+    op = OrderItem.objects.filter(order=tid)
+    print("udibabababa"+str(op))
+    totamnt = 0
+    for o in op:
+        totamnt = o.order.total_price
+    useremail = User.objects.filter(username=request.user)
+    for b in useremail:
+        uemail = b.email
+        print("useremail"+uemail)
+    context={'order':op,'tot':totamnt}
+    template = get_template(templatepath)
+    html = template.render(context)
+    email_subject = "Your Order has been placed"
+    email_body = html
+    emails = EmailMessage(
+        email_subject,
+        email_body,
+        'noreply@semycolon.com',
+    [uemail],
+    )
+    emails.content_subtype = 'html'
+    emails.send(fail_silently=False)#error dekhaune ho vane we do this
+    #error dekhaune ho vane we do this
+    response = redirect("order")
+    return response
+
+class load_more(View):
+    def get(self, request):
+        start=int(request.GET['curproducts'])
+        limit=int(request.GET['limit'])
+        prods = Category.objects.all().order_by('id')[start:start+limit]#fetch the latest product according to category with order_by,[:3]fetches first 3 products only
+        t = render_to_string('ajax/menu.html',
+        {
+            'menulist':prods,
+        })
+        return JsonResponse({'datas':t})
