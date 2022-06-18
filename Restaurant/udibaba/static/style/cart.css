@@ -35,20 +35,20 @@ font-weight: bold
     background-color: #e8e9eb;
     padding: 4vh 5vh;
     border-bottom-left-radius: 1rem;
-    border-top-left-radius: 1rem
+    /* border-top-left-radius: 1rem */
 }
 
 @media(max-width:767px) {
     .cart {
         padding: 1.5vh;
         border-bottom-left-radius: unset;
-        border-top-right-radius: 1rem
+        /* border-top-right-radius: 1rem */
     }
 }
 
 .summary {
     background-color: #edf3fc;
-    border-top-right-radius: 1rem;
+    /* border-top-right-radius: 1rem; */
     border-bottom-right-radius: 1rem;
     padding: 4vh;
     color: rgb(65, 65, 65)
@@ -64,7 +64,7 @@ font-weight: bold
     .back-to-shop {
         position: absolute;
         bottom: 0;
-        margin-bottom: 1rem;  
+        margin-bottom: 0.5rem;  
     }
 }
 

@@ -2,7 +2,7 @@ function myFunction(x) {
     if (x.matches) { // If media query matches
         $('.owl-carousel').owlCarousel({
             loop:true,
-            margin: 20,
+            margin: 10,
             nav:false,
             dots:false,
             autoplay: false,
@@ -23,7 +23,7 @@ function myFunction(x) {
     } else {
         $('.owl-carousel').owlCarousel({
             loop:true,
-            margin: 20,
+            margin: 10,
             nav:false,
             dots:false,
             autoplay: false,
@@ -42,9 +42,30 @@ function myFunction(x) {
             }
         })
     }
-  }
-  
-  var x = window.matchMedia("(max-width: 700px)")
+}
+//Review Owl Carousel
+$('.review-carousel').owlCarousel({
+    loop:true,
+    margin:10,
+    nav:false,
+    dots:false,
+    autoplay: true,
+    autoplayTimeout: 1000,
+    responsive:{
+        0:{
+            items:1
+        },
+        600:{
+            items:3
+        },
+        1000:{
+            items:5
+        }
+    }
+})
+
+
+var x = window.matchMedia("(max-width: 700px)")
   myFunction(x) // Call listener function at run time
   x.addListener(myFunction) // Attach listener function on state changes
   $('.alink').click(function () {
@@ -67,9 +88,11 @@ function myFunction(x) {
     // img.src = ids;
     // div.appendChild(img);
 })
+
 $(document).ready(function(){
     $("#menulistpop").modal('show');
 });
+
 $('.menulink').click(function () {
     console.log("clicked");
     console.log($(this).data('id'));
@@ -127,6 +150,7 @@ $('.decrements-btn').click(function (e) {
         $(this).closest('.menulistqty').find('.qty-input').val(value);
     }
 });
+
 //for menulist page add to cart
 $(document).on('click',".addtocart",function(){
     var qty= $(this).closest('.contentmodal').find('.qty-input').val();

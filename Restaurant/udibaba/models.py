@@ -84,7 +84,6 @@ class Review(models.Model):
     def __str__(self):
         return self.subject
   
-#order
 # Order
 ORDER_STATUS=(
   ('process','In Process'),
@@ -113,8 +112,6 @@ class Order(models.Model):
       # return '{} - {}'.format(self.id, self.tracking_number)
       return self.tracking_number
 
-
-
 STATE_CHOICES = (
     ('Bagmati Province', 'Bagmati Province'),
     ('Gandaki Province', 'Gandaki Province'),
@@ -136,7 +133,6 @@ class CustomerProfile(models.Model):
 class OrderItem(models.Model):
   user = models.OneToOneField(User, on_delete=models.CASCADE)
   order = models.ForeignKey(Order, on_delete=models.CASCADE)
-  # customer = models.ForeignKey(CustomerProfile,on_delete=models.CASCADE)
   product = models.ForeignKey(Product,on_delete=models.CASCADE)
   price = models.FloatField(null=False)
   quantity = models.IntegerField(null=False)

@@ -1,4 +1,4 @@
-
+//Event
 let abc = document.getElementById("date").textContent
 let cc = document.getElementById("countdown")
 let countDate = new Date(abc).getTime();
@@ -34,4 +34,5 @@ function CountDown(){
 setInterval(function(){
     CountDown();
 },1000)
+
 

@@ -44,6 +44,7 @@ urlpatterns = [
      path('create-address/', views.AddressView.as_view(), name='create-address'),
      path('edit-address/<str:pk>', views.edit_address, name='edit-address'),
      path('delete-address/<str:pk>', views.delete_address, name='delete-address'),
+     path('search/', views.search, name='search'),
      path('sendemail/<int:tid>',views.sendemail,name='sendemail'),
      path('load-more-data/',views.load_more.as_view(),name='loadmore'),
 ]

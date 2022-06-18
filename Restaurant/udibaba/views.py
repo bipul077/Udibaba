@@ -335,7 +335,6 @@ def place_order(request):
                 userprofile.zipcode = request.POST.get('zipcode')
                 userprofile.save()
         
-        
         neworder = Order()
         neworder.user = request.user
         neworder.fname = request.POST.get('fname')
@@ -439,7 +438,7 @@ def edit_address(request, pk):
             return redirect('address')
     context = {
         'form':form,
-        'active':'btn-success',
+        'activeb':'btn-success',
     }
     return render(request, 'address/editAddress.html', context)
 
@@ -451,6 +450,14 @@ def delete_address(request, pk):
     messages.success(request, 'Address Deleted Successfully')
     return redirect('address')
 
+#search
+def search(request):
+    q = request.GET['q']
+    data = Product.objects.filter(title__icontains=q).order_by('-id')#-id descending filter
+    context = {
+            'data':data
+    }
+    return render(request, 'search.html', context)
 def sendemail(request,tid):
     templatepath = 'order/ordermail.html'
     print(tid)

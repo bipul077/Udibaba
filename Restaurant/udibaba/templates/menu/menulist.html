@@ -27,7 +27,6 @@
                 <p class="grid-item" style="width: 115px">{{menulist.title}}</p>
                 <p class="grid-item" style="width: 65px">Rs {{menulist.item_price}}</p>
                 <div class="menulistqty grid-item">
-                   
                         <input type="hidden" class="product-id" value="{{menulist.id}}"/>
                         <input type="hidden" class="product-image" value="{{menulist.product_image.url}}" />
                         <input type="hidden" class="product-title" value="{{menulist.title}}" />
@@ -41,16 +40,12 @@
                   <!-- <button type="button" class="button grid-item"><i class="fa fa-bolt" aria-hidden="true"></i></button> -->
                   <button type="button" class="buttonred grid-item addtocart"><i class="fa fa-shopping-cart" aria-hidden="true"></i></button>
              </div>
-          
           {% endfor %}
-         
         </div>
-        <div class="modal-footer">
-            <button type="button" class="button grid-item"><i class="fa fa-bolt" aria-hidden="true"></i></i></button>
-            <p>Order Now</p>
+        <!-- <div class="modal-footer">
           <button type="button" class="buttonred grid-item"><i class="fa fa-shopping-cart" aria-hidden="true"></i></button>
           <p>Add to cart</p>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
