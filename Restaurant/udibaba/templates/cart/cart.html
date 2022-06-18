@@ -23,7 +23,7 @@
                         <!-- <div class="row text-muted">CHicken</div> -->
                         <div class="row">{{item.title}}</div>
                     </div>
-                    <div class="col"> <input type="number" class="product-qty-{{product_id}}" id="cartquan" value="{{item.quan}}" min="1" max="10"/> </div>
+                    <div class="col"> <input type="number" class="product-qty-{{product_id}}" id="cartquan" value="{{item.quan}}" maxlength="2"/> </div>
                     <div class="col">Rs {{item.price}}</div>
                     <div class="col" style="display: flex;">
                         <button class="btn btn-sm btn-primary update-item" style="margin-right:10px" data-item="{{product_id}}"><i class="fa fa-refresh"></i></button>
