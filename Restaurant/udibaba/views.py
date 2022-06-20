@@ -19,6 +19,7 @@ from django.contrib.auth.decorators import login_required #for function based vi
 from django.utils.decorators import method_decorator #for class based view
 from django.template.loader import get_template
 from django.core.mail import EmailMessage
+from django.core.mail import mail_admins
 
 def home(request):
     banners = Banner.objects.all().order_by('-id')
@@ -460,6 +461,7 @@ def search(request):
     return render(request, 'search.html', context)
 def sendemail(request,tid):
     templatepath = 'order/ordermail.html'
+    admintemplatepath = 'order/orderadminmail.html'
     print(tid)
     op = OrderItem.objects.filter(order=tid)
     print("udibabababa"+str(op))
@@ -473,14 +475,26 @@ def sendemail(request,tid):
     context={'order':op,'tot':totamnt}
     template = get_template(templatepath)
     html = template.render(context)
+    admintemplate = get_template(admintemplatepath)
+    htmladmin = admintemplate.render(context)
     email_subject = "Your Order has been placed"
+    email_adminsubject = "Order has been made by the user"
     email_body = html
+    email_bodyadmin = htmladmin
     emails = EmailMessage(
         email_subject,
         email_body,
         'noreply@semycolon.com',
-    [uemail],
+        [uemail],
     )
+    emailsadmin = EmailMessage(
+        email_adminsubject,
+        email_bodyadmin,
+        'noreply@semycolon.com',
+        ['udibaba9741@gmail.com'],
+    )
+    emailsadmin.content_subtype = 'html'
+    emailsadmin.send(fail_silently=False)
     emails.content_subtype = 'html'
     emails.send(fail_silently=False)#error dekhaune ho vane we do this
     #error dekhaune ho vane we do this

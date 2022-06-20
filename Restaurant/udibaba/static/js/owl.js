@@ -254,6 +254,7 @@ $(document).on('click','.update-item',function(){
             vm.attr('disabled',false);
             // $(".cart-list").text(res.totalitems);
             $("#card").html(res.data);
+            alertify.success("Quantity and Price updated")
         }
     });
     // End

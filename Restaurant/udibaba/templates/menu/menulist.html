@@ -24,7 +24,7 @@
             {% for menulist in menulists %}
             <div class="contentmodal">
                 <p class="grid-item">{{forloop.counter}}.</p>
-                <p class="grid-item" style="width: 115px">{{menulist.title}}</p>
+                <p class="grid-item" id="menulisttitle">{{menulist.title}}</p>
                 <p class="grid-item" style="width: 65px">Rs {{menulist.item_price}}</p>
                 <div class="menulistqty grid-item">
                         <input type="hidden" class="product-id" value="{{menulist.id}}"/>
@@ -42,10 +42,10 @@
              </div>
           {% endfor %}
         </div>
-        <!-- <div class="modal-footer">
+        <div class="modal-footer">
           <button type="button" class="buttonred grid-item"><i class="fa fa-shopping-cart" aria-hidden="true"></i></button>
           <p>Add to cart</p>
-        </div> -->
+        </div> 
       </div>
     </div>
   </div>

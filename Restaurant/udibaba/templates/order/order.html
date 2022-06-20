@@ -29,13 +29,13 @@
 
             {% if op.order.status == 'shipped' %}
             <div class="progress mb-2">
-                <div class="progress-bar bg-info" role="progressbar" style="width:55" aria-voluenow="20" aria-valuemin="0" aria-valuemax="100"></div>
+                <div class="progress-bar bg-info" role="progressbar" style="width:55%" aria-voluenow="20" aria-valuemin="0" aria-valuemax="100"></div>
             </div>
             {% endif %}
 
             {% if op.order.status == 'delivered' %}
             <div class="progress mb-2">
-                <div class="progress-bar bg-success role="progressbar" style="width:100%" aria-voluenow="20" aria-valuemin="0" aria-valuemax="100"></div>
+                <div class="progress-bar bg-success" role="progressbar" style="width:100%" aria-voluenow="20" aria-valuemin="0" aria-valuemax="100"></div>
             </div>
             {% endif %}
         </div>
