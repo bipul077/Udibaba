@@ -19,11 +19,10 @@ class SignUpForm(UserCreationForm):
 class CustomerDetailsUpdateForm(forms.ModelForm):
     first_name = forms.CharField(label = ("First Name"))
     last_name = forms.CharField(label = ("Last Name"))
-    username = forms.EmailField(label = ("Email"))#username = email address
     
     class Meta:
         model = User
-        fields = ('first_name', 'last_name', 'username')
+        fields = ('first_name', 'last_name')
         
 #Password Change Form
 class MyPasswordChangeForm(PasswordChangeForm):

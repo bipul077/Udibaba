@@ -131,7 +131,7 @@ class CustomerProfile(models.Model):
 
 # OrderItems
 class OrderItem(models.Model):
-  user = models.OneToOneField(User, on_delete=models.CASCADE)
+  user = models.CharField(max_length=50, null=False)
   order = models.ForeignKey(Order, on_delete=models.CASCADE)
   product = models.ForeignKey(Product,on_delete=models.CASCADE)
   price = models.FloatField(null=False)

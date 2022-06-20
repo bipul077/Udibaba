@@ -50,7 +50,7 @@ $('.review-carousel').owlCarousel({
     nav:false,
     dots:false,
     autoplay: true,
-    autoplayTimeout: 1000,
+    autoplayTimeout: 4000,
     responsive:{
         0:{
             items:1
@@ -254,6 +254,7 @@ $(document).on('click','.update-item',function(){
             vm.attr('disabled',false);
             // $(".cart-list").text(res.totalitems);
             $("#card").html(res.data);
+            alertify.success("Quantiy and Price Updated")
         }
     });
     // End

@@ -20,29 +20,53 @@ admin.site.register(Banner,BannerAdmin)
 
 class GalleryAdmin(admin.ModelAdmin):
     list_display = ('id', 'title')
+    list_display_links = ('title',)
 admin.site.register(Gallery, GalleryAdmin)
 
-admin.site.register(Video)
-admin.site.register(Category)
-admin.site.register(Product)
-admin.site.register(Event)
-admin.site.register(CustomerProfile)
+class VideoAdmin(admin.ModelAdmin):
+    list_display = ('id', 'title')
+    list_display_links = ('title',)
+admin.site.register(Video, VideoAdmin)
+
+class CategoryAdmin(admin.ModelAdmin):
+    list_display = ('id', 'title')
+    list_display_links = ('title',)
+admin.site.register(Category, CategoryAdmin)
+
+class ProductAdmin(admin.ModelAdmin):
+    list_display = ('id', 'title')
+    list_display_links = ('title',)
+admin.site.register(Product, ProductAdmin)
+
+class EventAdmin(admin.ModelAdmin):
+    list_display = ('id', 'title')
+    list_display_links = ('title',)
+admin.site.register(Event, EventAdmin)
+
+class CustomerProfileAdmin(admin.ModelAdmin):
+    list_display = ('id', 'user')
+    list_display_links = ('user',)
+admin.site.register(CustomerProfile, CustomerProfileAdmin)
 
 class ContactAdmin(admin.ModelAdmin):
     list_display = ('id', 'email')
+    list_display_links = ('email',)
 admin.site.register(Contact, ContactAdmin)
 
 class ReviewAdmin(admin.ModelAdmin):
     list_display = ('id', 'user', 'subject', 'created_at', 'updated_at')
+    list_display_links = ('user',)
 admin.site.register(Review, ReviewAdmin)
 
 class OrderAdmin(admin.ModelAdmin):
     list_display = ('user', 'address','status')
+    list_display_links = ('user',)
 admin.site.register(Order, OrderAdmin)
 
 @admin.register(OrderItem)
 class OrderItemAdmin(admin.ModelAdmin):
-    list_display = ('order', 'price','quantity','customer_info')
+    list_display = ('customer_info','order', 'price','quantity')
+    list_display_links = ('customer_info', 'order')
     def customer_info(self,obj):
         link = reverse("admin:udibaba_order_change",args=[obj.order.pk])
         return format_html('<a href="{}">{}</a>',link,obj.order.user.first_name + " " + obj.order.user.last_name)
