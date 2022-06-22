@@ -105,7 +105,7 @@ $('.increment-btn').click(function (e) {
     var inc_value = $(this).closest('.pro-qty').find('.qty-input').val();
     var value = parseInt(inc_value,10);
     value = isNaN(value) ? 0 : value;
-    if(value < 10)
+    if(value < 9)
     {
         value++;
         $(this).closest('.pro-qty').find('.qty-input').val(value);
@@ -132,7 +132,7 @@ $('.increments-btn').click(function (e) {
     var inc_value = $(this).closest('.menulistqty').find('.qty-input').val();
     var value = parseInt(inc_value,10);
     value = isNaN(value) ? 0 : value;
-    if(value < 10)
+    if(value < 9)
     {
         value++;
         $(this).closest('.menulistqty').find('.qty-input').val(value);

@@ -55,7 +55,8 @@
                                 <a href="{% url 'password_reset' %}" style="color:red">Forget Password ?</a>
                             </div>
                             <div class="form-grounp">
-                                <button class="btn btn-success loginbtn" type="submit">Log In</button>
+                                <button class="btn btn-success loginbtn" type="submit">Log In</button> <p style="color: grey; font-size:small;">Or Login with</p>
+                                <a href="{% url 'social:begin' 'google-oauth2' %}" class="btn btn-danger"><i class="fa fa-google-plus" aria-hidden="true"></i>Google</a> 
                                 <small class="float-right text-muted">Have't an Account ?<a href="{% url 'signup' %}" class="text-dark"> Signup</a></small>
                             </div>
                         </form>

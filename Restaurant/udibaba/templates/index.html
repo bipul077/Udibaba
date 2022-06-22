@@ -83,8 +83,9 @@
                                 </ul>
                             </li>
                             <li><a href="{% url 'contact' %}">Contacts</a></li>
-                            
+
                             <!--To show profile on mobile version only-->
+                            {% if request.user.is_authenticated %}
                             <li class="level0 level-top showonmobile" style="position: relative;">
                                 <a><span class="userlog"><b>{{request.user.first_name.0|capfirst}}</b></span></a>
                                 <ul class="dropdown">
@@ -94,6 +95,7 @@
                                     <li><a href="{% url 'logout' %}">Logout</a></li>
                                 </ul>
                             </li>
+                            {% endif %}
                         </ul>
                     </nav>
                 </div>

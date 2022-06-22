@@ -22,7 +22,7 @@ from django.core.mail import EmailMessage
 from django_mail_admin import mail
 
 def home(request):
-    banners = Banner.objects.all().order_by('-id')
+    banners = Banner.objects.all().order_by()
     video = Video.objects.all()
     featured = Product.objects.filter(is_featured=True)
     myreviews = Review.objects.filter(status=True)
@@ -225,6 +225,7 @@ def login_view(request):
     return render(request, 'user/login.html', {'form':form})
 
 #review
+@login_required
 def submit_review(request):
     if request.user.is_authenticated:
         url = request.META.get('HTTP_REFERER')
@@ -324,6 +325,7 @@ def checkout(request):
     userprofile = CustomerProfile.objects.filter(user=request.user).first()        
     return render(request, 'checkout/checkout.html',{'cart_data':request.session['cartdata'],'totalitems':len(request.session['cartdata']),'totalamount':totalamount+70,'up':userprofile})
 
+@login_required
 def place_order(request):
     totalamount = 0
     if request.method == 'POST':
@@ -334,7 +336,6 @@ def place_order(request):
                 userprofile.state = request.POST.get('state')
                 userprofile.city = request.POST.get('city')
                 userprofile.address = request.POST.get('address')
-                userprofile.zipcode = request.POST.get('zipcode')
                 userprofile.save()
         
         neworder = Order()
@@ -346,7 +347,6 @@ def place_order(request):
         neworder.state = request.POST.get('state')
         neworder.city = request.POST.get('city')
         neworder.address = request.POST.get('address')
-        neworder.zipcode = request.POST.get('zipcode')
         neworder.payment_type = request.POST.get('payment_type')
         for pid,item in request.session['cartdata'].items():
             totalamount += int(item['quan'])*float(item['price'])
@@ -413,9 +413,8 @@ class AddressView(View):
                 state = form.cleaned_data['state']
                 city = form.cleaned_data['city']
                 address = form.cleaned_data['address']
-                zip_code = form.cleaned_data['zipcode']
                 phone = form.cleaned_data['phone']
-                reg = CustomerProfile(user=usr, state=state, city=city, address=address, zipcode=zip_code, phone=phone)
+                reg = CustomerProfile(user=usr, state=state, city=city, address=address, phone=phone)
                 reg.save()
                 messages.success(request, 'Congratulations!! Profile Created Successfully')
             else:
@@ -461,6 +460,7 @@ def search(request):
     }
     return render(request, 'search.html', context)
 
+@login_required
 def sendemail(request,tid):
     templatepath = 'order/ordermail.html'
     admintemplatepath = 'order/orderadminmail.html'

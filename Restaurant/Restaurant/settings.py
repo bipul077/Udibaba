@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'cloudinary_storage',
     'crispy_forms',
     'django_mail_admin',
+    'social_django',
 
 ]
 
@@ -55,6 +56,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'social_django.middleware.SocialAuthExceptionMiddleware',
 ]
 
 ROOT_URLCONF = 'Restaurant.urls'
@@ -70,6 +72,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
@@ -91,7 +95,6 @@ DATABASES = {
         'PORT' : '3306',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -143,8 +146,6 @@ EMAIL_HOST_USER = 'udibaba9741@gmail.com'  #sender's email-id
 EMAIL_HOST_PASSWORD = 'hjiwkuhkwkhjhukl'  #password associated with above email-id
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-LOGIN_URL = 'login'
-
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
@@ -179,6 +180,19 @@ JAZZMIN_SETTINGS = {
     "site_brand": "Login to Udibaba Admin Panel",
 
     # Welcome text on the login screen
-    "welcome_sign":"Welcome to Udiaba Admin Panel"
-    
+    "welcome_sign":"Welcome to Udiaba Admin Panel"    
 }
+
+#social app custom settings
+AUTHENTICATION_BACKENDS = [
+    'social_core.backends.google.GoogleOAuth2',
+    
+    'django.contrib.auth.backends.ModelBackend',
+
+]
+
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'home'
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '1080162923317-rt3dqbdjchhqtnmcg8hg6pjmpa7gce4g.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'

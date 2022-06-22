@@ -8,6 +8,7 @@
 .popfp{
     text-align: center;
     margin-top: 5px;
+	font-family: MV Boli;
 }
 
 #foodtitle{
@@ -100,7 +101,7 @@
   .contentmodal{
     display: grid;
     column-gap: 4px;
-    grid-template-columns: auto auto auto auto auto auto;
+    grid-template-columns: auto auto auto auto auto;
     padding: 5px;
 }
 .grid-item {

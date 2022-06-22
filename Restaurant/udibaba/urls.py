@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, include
 from . import views
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
@@ -16,6 +16,7 @@ urlpatterns = [
      #registration and login
      path('signup/', views.signup, name='signup'),
      path('login/', views.login_view, name='login'),
+     path('social-auth/', include('social_django.urls', namespace='social')),#google
      path('logout/', LogoutView.as_view(next_page = 'login'), name = 'logout'),
      #start of password change
      path('password-change/', auth_views.PasswordChangeView.as_view(template_name = 'user/change-password/passwordchange.html', form_class=MyPasswordChangeForm, success_url='/password-change-successfully/'), name='passwordchange'),

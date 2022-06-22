@@ -31,7 +31,7 @@ class Product(models.Model):
   item_price = models.FloatField()
   description = models.TextField()
   category = models.ForeignKey(Category,on_delete=models.CASCADE)
-  product_image = models.FileField(upload_to='img/%m', blank = True)
+  product_image = models.FileField(upload_to='img/%m', blank = False)
   is_featured = models.BooleanField(default=False)
   def __str__(self):
     return str(self.id) + " " + str(self.title)
@@ -49,7 +49,7 @@ class Gallery(models.Model):
     return self.title 
 
 class Event(models.Model):
-  title = models.CharField(max_length=50, unique=False)
+  title = models.CharField(max_length=30, unique=False)
   description = models.CharField(max_length=250)
   date = models.DateTimeField(default=datetime.now, blank=True)
   image = models.ImageField(upload_to='event_imgs/',default="default.jpg")
@@ -99,7 +99,6 @@ class Order(models.Model):
   state = models.CharField(max_length=150, null=False)
   city = models.CharField(max_length=150, null=False)
   address = models.CharField(max_length=150, null=False)
-  zipcode = models.CharField(max_length=150, null=False)
   total_price = models.PositiveIntegerField(null=False)
   payment_type = models.CharField(max_length=100, null=False)
   status = models.CharField(max_length=50, choices=ORDER_STATUS,default='Pending')
@@ -114,7 +113,6 @@ class Order(models.Model):
 
 STATE_CHOICES = (
     ('Bagmati Province', 'Bagmati Province'),
-    ('Gandaki Province', 'Gandaki Province'),
 )
 
 class CustomerProfile(models.Model):
@@ -123,7 +121,6 @@ class CustomerProfile(models.Model):
   state = models.CharField(choices = STATE_CHOICES, max_length=50)
   city = models.CharField(max_length=50, null=False)
   address = models.CharField(max_length=50, null=False)
-  zipcode = models.CharField(max_length=50, null=False)
   created_at = models.DateTimeField(auto_now_add=True)
 
   def __str__(self):
