@@ -31,7 +31,7 @@ class Product(models.Model):
   item_price = models.FloatField()
   description = models.TextField()
   category = models.ForeignKey(Category,on_delete=models.CASCADE)
-  product_image = models.FileField(upload_to='img/%m', blank = True)
+  product_image = models.FileField(upload_to='img/%m', blank = False)
   is_featured = models.BooleanField(default=False)
   def __str__(self):
     return str(self.id) + " " + str(self.title)
@@ -49,7 +49,7 @@ class Gallery(models.Model):
     return self.title 
 
 class Event(models.Model):
-  title = models.CharField(max_length=50, unique=False)
+  title = models.CharField(max_length=30, unique=False)
   description = models.CharField(max_length=250)
   date = models.DateTimeField(default=datetime.now, blank=True)
   image = models.ImageField(upload_to='event_imgs/',default="default.jpg")
@@ -131,7 +131,7 @@ class CustomerProfile(models.Model):
 
 # OrderItems
 class OrderItem(models.Model):
-  user = models.OneToOneField(User, on_delete=models.CASCADE)
+  user = models.CharField(max_length=50, null=False)
   order = models.ForeignKey(Order, on_delete=models.CASCADE)
   product = models.ForeignKey(Product,on_delete=models.CASCADE)
   price = models.FloatField(null=False)

@@ -19,7 +19,7 @@ from django.contrib.auth.decorators import login_required #for function based vi
 from django.utils.decorators import method_decorator #for class based view
 from django.template.loader import get_template
 from django.core.mail import EmailMessage
-from django.core.mail import mail_admins
+
 
 def home(request):
     banners = Banner.objects.all().order_by('-id')
@@ -197,7 +197,8 @@ def login_view(request):
         user = authenticate(request, username = usrname, password = pword) #it returns none when username and password is invalid
         if user is not None:
             login(request, user)
-            messages.success(request, 'logged in')
+            mess = f"Welcome {user.first_name} {user.last_name}"
+            messages.success(request, mess)
             return redirect('home')
         elif not User.objects.filter(username = usrname).exists():
             messages.warning(request, f'Please enter a correct username and password. Note that both fields may be case-sensitive.')
@@ -459,6 +460,7 @@ def search(request):
             'data':data
     }
     return render(request, 'search.html', context)
+
 def sendemail(request,tid):
     templatepath = 'order/ordermail.html'
     admintemplatepath = 'order/orderadminmail.html'

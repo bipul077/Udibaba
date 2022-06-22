@@ -968,3 +968,8 @@ ol {
 .buybutton{
 	font-weight: bold;
 }
+
+/*To show profile on mobile version*/
+@media only screen and (min-width:767px) {
+	li.showonmobile { display:none; visibility: hidden; }
+}

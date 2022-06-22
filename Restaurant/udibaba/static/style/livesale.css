@@ -6,7 +6,7 @@
 
 .contentsed{
   height: 105px;
-  background-color: lightblue;
+  background-color: #2ed487;
   display: flex;
   justify-content: space-between;
   width: 100%;
@@ -183,7 +183,7 @@
 }
 .noevent{
  text-align: center;
- padding: 1.8rem 0rem;
+ padding: 0.8rem 0rem;
  height: 100px;
  background-color: lightblue;
 }

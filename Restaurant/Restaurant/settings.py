@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'cloudinary_storage',
     'crispy_forms',
-
+    'django_mail_admin',
 ]
 
 MIDDLEWARE = [
@@ -139,13 +139,11 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'dangolr05@gmail.com'  #sender's email-id
-EMAIL_HOST_PASSWORD = 'hwxklemzlyznucrm'  #password associated with above email-id
+EMAIL_HOST_USER = 'udibaba9741@gmail.com'  #sender's email-id
+EMAIL_HOST_PASSWORD = 'hjiwkuhkwkhjhukl'  #password associated with above email-id
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 LOGIN_URL = 'login'
-
-LOGIN_REDIRECT_URL = '/profile/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
@@ -174,12 +172,12 @@ MESSAGE_TAGS = {
 JAZZMIN_SETTINGS = {
 
     # Title on the login screen (19 chars max) (defaults to current_admin_site.site_header if absent or None)
-    "site_header": "Udibaba Restro",
+    "site_header": "Udibaba",
     
     # Title on the brand (19 chars max) (defaults to current_admin_site.site_header if absent or None)
     "site_brand": "Login to Udibaba Admin Panel",
 
     # Welcome text on the login screen
-    "welcome_sign":"Welcome to Udibaba Admin Panel"
+    "welcome_sign":"Welcome to Udiaba Admin Panel"
     
 }
