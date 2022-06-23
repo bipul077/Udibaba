@@ -12,8 +12,10 @@ from .models import(
     Contact,
     Review,
     Order,
-    OrderItem
+    OrderItem,
+    Deliverycharge
 )
+admin.site.register(Deliverycharge)
 class BannerAdmin(admin.ModelAdmin):
     list_display = ('headertext', 'img','image_tag')
 admin.site.register(Banner,BannerAdmin)
@@ -34,7 +36,7 @@ class CategoryAdmin(admin.ModelAdmin):
 admin.site.register(Category, CategoryAdmin)
 
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ('id', 'title','is_featured')
+    list_display = ('id', 'title', 'is_featured')
     list_display_links = ('title',)
     list_editable = ('is_featured',)
 admin.site.register(Product, ProductAdmin)
@@ -55,8 +57,10 @@ class ContactAdmin(admin.ModelAdmin):
 admin.site.register(Contact, ContactAdmin)
 
 class ReviewAdmin(admin.ModelAdmin):
-    list_display = ('id', 'user', 'subject', 'created_at', 'updated_at')
+    list_display = ('id', 'user', 'subject', 'created_at', 'updated_at', 'status')
     list_display_links = ('user',)
+    list_editable = ('status',)
+
 admin.site.register(Review, ReviewAdmin)
 
 class OrderAdmin(admin.ModelAdmin):

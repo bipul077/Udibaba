@@ -7,7 +7,7 @@
                     <div class="col-7">
                         <h2 style="font-size: large;text-decoration: underline;">Udibaba Restaurant</h2>
                         <p style="font-size: large;">Dear user,</p>                                       
-                        <p class="address" style="font-size: large;">Your order has been received.</p>
+                        <p class="address" style="font-size: large;">Your order has been {{status}}.</p>
                     </div>
                 </div>
 
@@ -56,7 +56,10 @@
                 </tbody>
             </table>
             <p><b>Grand Total(inc.shipping cost): {{tot}}</b></p> 
-        
+            <hr>
+            {% if mes %}
+            <p><b>Note: </b>{{mes}}</p>
+            {% endif %}
         </div>
         
 </body>

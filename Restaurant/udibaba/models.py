@@ -2,6 +2,12 @@ from django.db import models
 from django.utils.html import mark_safe
 from datetime import datetime
 from django.contrib.auth.models import User
+from django.utils.timezone import now
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+from django.core.mail import EmailMessage
+from numpy import False_
+from django.template.loader import get_template
 
 class Banner(models.Model):
   img = models.ImageField(upload_to='banner_imgs/')
@@ -86,7 +92,7 @@ class Review(models.Model):
   
 # Order
 ORDER_STATUS=(
-  ('process','In Process'),
+  ('cancelled','Cancelled'),
   ('shipped','Shipped'),
   ('delivered','Delivered'),
 )
@@ -99,22 +105,22 @@ class Order(models.Model):
   state = models.CharField(max_length=150, null=False)
   city = models.CharField(max_length=150, null=False)
   address = models.CharField(max_length=150, null=False)
-  zipcode = models.CharField(max_length=150, null=False)
   total_price = models.PositiveIntegerField(null=False)
   payment_type = models.CharField(max_length=100, null=False)
   status = models.CharField(max_length=50, choices=ORDER_STATUS,default='Pending')
   message = models.TextField(null=True)
   tracking_number = models.CharField(max_length=100, null=True)
-  ordered_date = models.DateTimeField(auto_now_add=True)
+  ordered_date = models.DateTimeField(default=now)
   updated_date = models.DateTimeField(auto_now=True)
   payment_completed = models.BooleanField(default=False, null=True, blank=True)
   def __str__(self):
       # return '{} - {}'.format(self.id, self.tracking_number)
       return self.tracking_number
+  
+  
 
 STATE_CHOICES = (
     ('Bagmati Province', 'Bagmati Province'),
-    ('Gandaki Province', 'Gandaki Province'),
 )
 
 class CustomerProfile(models.Model):
@@ -123,7 +129,6 @@ class CustomerProfile(models.Model):
   state = models.CharField(choices = STATE_CHOICES, max_length=50)
   city = models.CharField(max_length=50, null=False)
   address = models.CharField(max_length=50, null=False)
-  zipcode = models.CharField(max_length=50, null=False)
   created_at = models.DateTimeField(auto_now_add=True)
 
   def __str__(self):
@@ -145,3 +150,38 @@ class OrderItem(models.Model):
 
   def image_tag(self):
     return mark_safe('<img src="%s" width="30" height="30" />'%(self.image))
+
+class Deliverycharge(models.Model):
+  title = models.CharField(max_length=20,null=False,default="KTM")
+  Deliverycost = models.FloatField(null=False)
+
+  def __str__(self):
+    return self.title
+
+@receiver(post_save, sender=Order)
+def create_user_profile(sender, instance, created, **kwargs):
+    if created == False:
+      templatepath = 'order/ordermail.html'
+      print("asdfasdf ",instance.email, instance.status)
+      op = OrderItem.objects.filter(order=instance.id)
+      print("ohyes")
+      print(op)
+      context={'order':op,'tot':instance.total_price,'mes':instance.message,'status':instance.status}
+      template = get_template(templatepath)
+      html = template.render(context)
+      email_subject = "Your Order has been " + instance.status
+      email_body = html
+      emailsed = EmailMessage(
+        email_subject,
+        email_body,
+        'noreply@semycolon.com',
+        [instance.email],
+      )
+      emailsed.content_subtype = 'html'
+      emailsed.send(fail_silently=False)
+    # else:
+    #   print("created ",instance)
+
+# @receiver(post_save, sender=Order)
+# def save_user_profile(sender, instance, **kwargs):
+#     instance.profile.save()

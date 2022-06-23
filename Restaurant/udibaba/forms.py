@@ -49,6 +49,6 @@ class ReviewForm(forms.ModelForm):
 class CustomerAddressForm(forms.ModelForm):
     class Meta:
         model = CustomerProfile
-        fields = ['state', 'city', 'address', 'zipcode', 'phone']
-        widgets = {'state':forms.Select(), 'city':forms.TextInput(), 'address':forms.TextInput(), 'zipcode':forms.TextInput(), 'phone':forms.TextInput()}
+        fields = ['state', 'city', 'address', 'phone']
+        widgets = {'state':forms.Select(), 'city':forms.TextInput(), 'address':forms.TextInput(), 'phone':forms.TextInput()}
         

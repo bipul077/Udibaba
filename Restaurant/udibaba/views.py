@@ -1,10 +1,11 @@
+from winreg import DeleteKey
 from zipapp import create_archive
 from django.shortcuts import render, redirect
 from .forms import SignUpForm, ReviewForm, CustomerAddressForm, CustomerDetailsUpdateForm
 from django.contrib.auth.models import User
 from django.views import View
 from django.contrib import messages
-from .models import Banner, Gallery, Video, Product, Category, Event, Contact, Review, UserOTP, Order, OrderItem, CustomerProfile
+from .models import Banner, Deliverycharge, Gallery, Video, Product, Category, Event, Contact, Review, UserOTP, Order, OrderItem, CustomerProfile
 from django.http.response import JsonResponse
 from django.shortcuts import render,get_object_or_404,redirect
 import random
@@ -19,10 +20,10 @@ from django.contrib.auth.decorators import login_required #for function based vi
 from django.utils.decorators import method_decorator #for class based view
 from django.template.loader import get_template
 from django.core.mail import EmailMessage
-
+from django.utils import timezone
 
 def home(request):
-    banners = Banner.objects.all().order_by('-id')
+    banners = Banner.objects.all().order_by()
     video = Video.objects.all()
     featured = Product.objects.filter(is_featured=True)
     myreviews = Review.objects.filter(status=True)
@@ -225,6 +226,7 @@ def login_view(request):
     return render(request, 'user/login.html', {'form':form})
 
 #review
+@login_required
 def submit_review(request):
     if request.user.is_authenticated:
         url = request.META.get('HTTP_REFERER')
@@ -253,13 +255,15 @@ def submit_review(request):
 
 # Cart List Page
 def cart_list(request):
-	total_amt=0  
-	if 'cartdata' in request.session:
-		for p_id,item in request.session['cartdata'].items():
-			total_amt+=int(item['quan'])*float(item['price'])
-		return render(request, 'cart/cart.html',{'cart_data':request.session['cartdata'],'totalitems':len(request.session['cartdata']),'totalamount':total_amt,'finalamount':total_amt+70})
-	else:
-		return render(request, 'cart/cart.html',{'cart_data':'','totalitems':0,'total_amt':total_amt})
+        dc = Deliverycharge.objects.get(title='KTM')
+        print(dc.Deliverycost)
+        total_amt=0.0 
+        if 'cartdata' in request.session:
+            for p_id,item in request.session['cartdata'].items():
+                total_amt+=int(item['quan'])*float(item['price'])   
+            return render(request, 'cart/cart.html',{'cart_data':request.session['cartdata'],'totalitems':len(request.session['cartdata']),'totalamount':total_amt,'finalamount':total_amt+dc.Deliverycost})
+        else:
+            return render(request, 'cart/cart.html',{'cart_data':'','totalitems':0,'total_amt':total_amt})
             
 # Add to cart
 def addtocart(request):
@@ -287,45 +291,51 @@ def addtocart(request):
 
 # Delete Cart Item
 def removecart(request):
-	pid=str(request.GET['id'])
-	if 'cartdata' in request.session:
-		if pid in request.session['cartdata']:
-			cart_data=request.session['cartdata']
-			del request.session['cartdata'][pid]
-			request.session['cartdata']=cart_data
-	total_amt=0
-	for pid,item in request.session['cartdata'].items():
-		total_amt+=int(item['quan'])*float(item['price'])
-    
-	t=render_to_string('ajax/cart.html',{'cart_data':request.session['cartdata'],'totalitems':len(request.session['cartdata']),'totalamount':total_amt,'finalamount':total_amt+70})
-	return JsonResponse({'data':t,'totalitems':len(request.session['cartdata'])})
+        dc = Deliverycharge.objects.get(title='KTM')
+        pid=str(request.GET['id'])
+        if 'cartdata' in request.session:
+            if pid in request.session['cartdata']:
+                cart_data=request.session['cartdata']
+                del request.session['cartdata'][pid]
+                request.session['cartdata']=cart_data
+        total_amt=0
+        for pid,item in request.session['cartdata'].items():
+            total_amt+=int(item['quan'])*float(item['price'])
+        
+        t=render_to_string('ajax/cart.html',{'cart_data':request.session['cartdata'],'totalitems':len(request.session['cartdata']),'totalamount':total_amt,'finalamount':total_amt+dc.Deliverycost,'shippingcost':dc.Deliverycost})
+        return JsonResponse({'data':t,'totalitems':len(request.session['cartdata'])})
 
 #update cart
 def updatecart(request):
-	p_id=str(request.GET['id'])
-	p_qty=request.GET['qty']
-	if 'cartdata' in request.session:
-		if p_id in request.session['cartdata']:
-			cart_data=request.session['cartdata']
-			cart_data[str(request.GET['id'])]['quan']=p_qty
-			request.session['cartdata']=cart_data
-	total_amt=0
-	for p_id,item in request.session['cartdata'].items():
-		total_amt+=int(item['quan'])*float(item['price'])
-	t=render_to_string('ajax/cart.html',{'cart_data':request.session['cartdata'],'totalitems':len(request.session['cartdata']),'totalamount':total_amt,'finalamount':total_amt+70})
-	return JsonResponse({'data':t,'totalitems':len(request.session['cartdata'])})
+        dc = Deliverycharge.objects.get(title='KTM')
+        p_id=str(request.GET['id'])
+        p_qty=request.GET['qty']
+        if 'cartdata' in request.session:
+            if p_id in request.session['cartdata']:
+                cart_data=request.session['cartdata']
+                cart_data[str(request.GET['id'])]['quan']=p_qty
+                request.session['cartdata']=cart_data
+        total_amt=0
+        for p_id,item in request.session['cartdata'].items():
+            total_amt+=int(item['quan'])*float(item['price'])
+        t=render_to_string('ajax/cart.html',{'cart_data':request.session['cartdata'],'totalitems':len(request.session['cartdata']),'totalamount':total_amt,'finalamount':total_amt+dc.Deliverycost,'shippingcost':dc.Deliverycost})
+        return JsonResponse({'data':t,'totalitems':len(request.session['cartdata'])})
 
     #checkout
 @login_required
 def checkout(request):
-    totalamount = 0
-    for pid,item in request.session['cartdata'].items():
-        totalamount += int(item['quan'])*float(item['price'])         
-    userprofile = CustomerProfile.objects.filter(user=request.user).first()        
-    return render(request, 'checkout/checkout.html',{'cart_data':request.session['cartdata'],'totalitems':len(request.session['cartdata']),'totalamount':totalamount+70,'up':userprofile})
+        dc = Deliverycharge.objects.get(title='KTM')
+        totalamount = 0.0
+        for pid,item in request.session['cartdata'].items():
+            totalamount += int(item['quan'])*float(item['price'])         
+        userprofile = CustomerProfile.objects.filter(user=request.user).first()        
+        return render(request, 'checkout/checkout.html',{'cart_data':request.session['cartdata'],'totalitems':len(request.session['cartdata']),'totalamount':totalamount+dc.Deliverycost,'up':userprofile})
 
+@login_required
 def place_order(request):
-    totalamount = 0
+    print(timezone.localtime(timezone.now()))
+    dc = Deliverycharge.objects.get(title='KTM')
+    totalamount = 0.0
     if request.method == 'POST':
         if not CustomerProfile.objects.filter(user=request.user):
                 userprofile = CustomerProfile()
@@ -334,7 +344,6 @@ def place_order(request):
                 userprofile.state = request.POST.get('state')
                 userprofile.city = request.POST.get('city')
                 userprofile.address = request.POST.get('address')
-                userprofile.zipcode = request.POST.get('zipcode')
                 userprofile.save()
         
         neworder = Order()
@@ -346,12 +355,12 @@ def place_order(request):
         neworder.state = request.POST.get('state')
         neworder.city = request.POST.get('city')
         neworder.address = request.POST.get('address')
-        neworder.zipcode = request.POST.get('zipcode')
         neworder.payment_type = request.POST.get('payment_type')
+        neworder.ordered_date = timezone.localtime(timezone.now())
         for pid,item in request.session['cartdata'].items():
             totalamount += int(item['quan'])*float(item['price'])
         # print("wtf"+str(finalamount))
-        neworder.total_price = totalamount + 70
+        neworder.total_price = totalamount + dc.Deliverycost
 
         track_number = str(random.randint(1111111,9999999))
         while Order.objects.filter(tracking_number=track_number) is None:
@@ -359,8 +368,8 @@ def place_order(request):
         neworder.tracking_number = track_number
         neworder.save()
 
-        customer = CustomerProfile.objects.get(user=request.user)
-        print(customer)
+        # customer = CustomerProfile.objects.get(user=request.user)
+        # print(customer)
         for pid,item in request.session['cartdata'].items():
             totalamount += int(item['quan'])*float(item['price'])
             print("rijan"+str(pid))
@@ -413,9 +422,8 @@ class AddressView(View):
                 state = form.cleaned_data['state']
                 city = form.cleaned_data['city']
                 address = form.cleaned_data['address']
-                zip_code = form.cleaned_data['zipcode']
                 phone = form.cleaned_data['phone']
-                reg = CustomerProfile(user=usr, state=state, city=city, address=address, zipcode=zip_code, phone=phone)
+                reg = CustomerProfile(user=usr, state=state, city=city, address=address, phone=phone)
                 reg.save()
                 messages.success(request, 'Congratulations!! Profile Created Successfully')
             else:
@@ -461,6 +469,7 @@ def search(request):
     }
     return render(request, 'search.html', context)
 
+@login_required
 def sendemail(request,tid):
     templatepath = 'order/ordermail.html'
     admintemplatepath = 'order/orderadminmail.html'
@@ -474,7 +483,7 @@ def sendemail(request,tid):
     for b in useremail:
         uemail = b.email
         print("useremail"+uemail)
-    context={'order':op,'tot':totamnt}
+    context={'order':op,'tot':totamnt,'status':'placed'}
     template = get_template(templatepath)
     html = template.render(context)
     admintemplate = get_template(admintemplatepath)
