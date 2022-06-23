@@ -12,8 +12,10 @@ from .models import(
     Contact,
     Review,
     Order,
-    OrderItem
+    OrderItem,
+    Deliverycharge
 )
+admin.site.register(Deliverycharge)
 class BannerAdmin(admin.ModelAdmin):
     list_display = ('headertext', 'img','image_tag')
 admin.site.register(Banner,BannerAdmin)

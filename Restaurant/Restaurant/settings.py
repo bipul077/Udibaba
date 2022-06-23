@@ -45,7 +45,6 @@ INSTALLED_APPS = [
     'crispy_forms',
     'django_mail_admin',
     'social_django',
-
 ]
 
 MIDDLEWARE = [
@@ -74,6 +73,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'social_django.context_processors.backends',
                 'social_django.context_processors.login_redirect',
+                'udibaba.template_context.allfunc',
             ],
         },
     },
@@ -169,7 +169,6 @@ MESSAGE_TAGS = {
     messages.WARNING: 'alert-warning',
     messages.ERROR: 'alert-danger',
 }
-
 #JAZZMIN SETTINGS
 JAZZMIN_SETTINGS = {
 

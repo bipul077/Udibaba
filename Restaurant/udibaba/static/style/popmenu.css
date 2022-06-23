@@ -128,6 +128,14 @@
         line-height: 24px; 
     }
 }
+.modal-bodies{
+    position: relative;
+    padding: 0;
+    flex: 1 1 auto;
+}
+#menulisttitle{
+	width: 130px;
+}
 @media screen and (max-width:300px){
     .contentmodal {
 		display: grid;
@@ -135,9 +143,7 @@
 		grid-template-columns: auto auto auto;
 		padding: 5px;
 	}
-}
-.modal-bodies{
-    position: relative;
-    padding: 0;
-    flex: 1 1 auto;
+	#menulisttitle{
+		width: 115px;
+	}
 }

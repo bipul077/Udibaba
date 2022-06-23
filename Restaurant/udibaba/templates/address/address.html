@@ -14,7 +14,7 @@
               <div class="card-body">
                 <p>Region: {{ad.state}}</p>
                 <p>City: {{ad.city}}</p>
-                <p>Area: {{ad.address}}</p>
+                <p>Area: {{ad.address}}</p> 
                 <p>Phone Number: {{ad.phone}}</p>
                 <a href="{% url 'edit-address' ad.id %}"><input type="submit" value="Edit" class="btn btn-primary mt-2"></a>
                 <a href="{% url 'delete-address' ad.id %}"><input type="submit" value="Delete" class="btn btn-danger mt-2"></a>
@@ -29,7 +29,6 @@
               <p>Region: {{ad.state}}</p>
               <p>City: {{ad.city}}</p>
               <p>Area: {{ad.address}}</p>
-              <p>ZipCode: {{ad.zipcode}}</p>
               <p>Phone Number: {{ad.phone}}</p>
               <a href="{% url 'create-address' %}"><input type="submit" value="Add" class="btn btn-danger mt-2"></a>
             </div>
