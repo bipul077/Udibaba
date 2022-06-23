@@ -48,7 +48,8 @@
                                 {{ form|crispy }}
                             </fieldset>
                             <div class="form-grounp">
-                                <button class="btn btn-success loginbtn" type="submit">Sign Up</button>
+                                <button class="btn btn-success loginbtn" type="submit">Sign Up</button><p style="color: grey; font-size:small;">Or Login with</p>
+                                <a href="{% url 'social:begin' 'google-oauth2' %}" class="btn btn-danger"><i class="fa fa-google-plus" aria-hidden="true"></i>Google</a> 
                                 <small class="float-right text-muted mb-5 haacc">Already have a Account ?<a href="{% url 'login' %}" class="text-dark"> Login</a></small>
                             </div>
                         </form>

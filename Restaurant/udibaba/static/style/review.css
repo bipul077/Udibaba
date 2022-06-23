@@ -233,3 +233,48 @@ figure.snip1390 .profile {
       margin-right: 4.5rem;
   }
 }
+
+.reviewcontainer{
+  background-size: cover;
+  padding-top: 0rem;
+  padding-bottom: 0rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  position: relative;
+}
+
+.reviewcontainer .title{
+position: absolute;
+left: 50%;
+top: 90%;
+transform: translate(-50%, -50%);
+z-index: 10;
+text-align: center;
+background: rgb(225, 232, 234);
+width: 17%;
+font-weight: bold;
+font-size: 2rem;
+color: white;
+}
+
+@media (max-width: 768px){
+  .reviewcontainer img{
+    height: 250px;
+  }
+
+  .reviewcontainer .title{
+    position: absolute;
+    top: 90%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    padding-top: 10px;
+    padding-bottom: 20px;
+    text-align: center;
+    background: rgb(225, 232, 234);
+    width: 20%;
+    font-weight: bold;
+    height: 15%;
+    font-size:1rem;
+  }
+}

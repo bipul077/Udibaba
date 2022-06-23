@@ -320,10 +320,11 @@ def updatecart(request):
 @login_required
 def checkout(request):
     totalamount = 0
+    form = CustomerAddressForm()
     for pid,item in request.session['cartdata'].items():
         totalamount += int(item['quan'])*float(item['price'])         
     userprofile = CustomerProfile.objects.filter(user=request.user).first()        
-    return render(request, 'checkout/checkout.html',{'cart_data':request.session['cartdata'],'totalitems':len(request.session['cartdata']),'totalamount':totalamount+70,'up':userprofile})
+    return render(request, 'checkout/checkout.html',{'cart_data':request.session['cartdata'],'totalitems':len(request.session['cartdata']),'totalamount':totalamount+70,'up':userprofile, 'form':form})
 
 @login_required
 def place_order(request):

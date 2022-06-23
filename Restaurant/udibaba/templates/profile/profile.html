@@ -15,7 +15,15 @@
                <form method="POST" enctype="multipart/form-data"> <!-- multipart/form-data--> <!--Encoding Data type used to load picture--> 
                  {% csrf_token %}
                  <fieldset class="form-group">
-                   <legend class="border-bottom mb-4">Profile Information</legend> 
+                   <legend class="border-bottom mb-4">Profile Information</legend>
+                   <!-- <label>First Name*</label>
+                    {{ u_form.first_name }}
+                    <label class="mt-3">Last Name*</label>
+                    {{ u_form.last_name }} 
+                    <label>User Name*</label>
+                    {{ u_form.user_name }}
+                    <label class="mt-3">Email*</label>
+                    {{ u_form.email }} -->
                    {{ u_form|crispy }}
                  </fieldset>
                  <div class="form-group">
