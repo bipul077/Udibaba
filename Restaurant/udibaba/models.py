@@ -93,9 +93,10 @@ class Review(models.Model):
 # Order
 ORDER_STATUS=(
   ('cancelled','Cancelled'),
-  ('shipped','Shipped'),
+  ('on the way','On The Way'),
   ('delivered','Delivered'),
 )
+
 class Order(models.Model):
   user = models.ForeignKey(User, on_delete=models.CASCADE)
   fname = models.CharField(max_length=150, null=False)

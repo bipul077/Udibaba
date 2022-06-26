@@ -44,7 +44,13 @@ INSTALLED_APPS = [
     'cloudinary_storage',
     'crispy_forms',
     'django_mail_admin',
-    'social_django',
+    'social_django',#for google
+    #for facebook
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.facebook',
+    'django.contrib.sites',
 ]
 
 MIDDLEWARE = [
@@ -184,11 +190,18 @@ JAZZMIN_SETTINGS = {
 
 #social app custom settings
 AUTHENTICATION_BACKENDS = [
+    #for google
     'social_core.backends.google.GoogleOAuth2',
     
+    #both google and facebook
     'django.contrib.auth.backends.ModelBackend',
+    
+    #for facebook
+    'allauth.account.auth_backends.AuthenticationBackend',
 
 ]
+
+SITE_ID = 1 
 
 LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'home'
