@@ -158,6 +158,21 @@ class Deliverycharge(models.Model):
   def __str__(self):
     return self.title
 
+class AdHeader(models.Model):
+  Info = models.CharField(max_length=50,null=True,blank=True)
+  addesc = models.CharField(max_length=70,null=True,blank=True)
+
+  def __str__(self):
+    return self.Info
+
+class Multipleadimage(models.Model):
+  prod = models.ForeignKey(AdHeader, default=None, on_delete=models.CASCADE)
+  images = models.FileField(upload_to = 'img/ad')
+  addesc = models.CharField(max_length=20,null=True,blank=True)
+  link = models.CharField(max_length=100,null=True,blank=True)
+  def __str__(self):
+        return self.prod.Info 
+
 @receiver(post_save, sender=Order)
 def create_user_profile(sender, instance, created, **kwargs):
     if created == False:
@@ -179,9 +194,5 @@ def create_user_profile(sender, instance, created, **kwargs):
       )
       emailsed.content_subtype = 'html'
       emailsed.send(fail_silently=False)
-    # else:
-    #   print("created ",instance)
-
-# @receiver(post_save, sender=Order)
-# def save_user_profile(sender, instance, **kwargs):
-#     instance.profile.save()
+ 
+ 

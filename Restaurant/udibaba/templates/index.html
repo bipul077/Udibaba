@@ -44,6 +44,18 @@
 </head>
 <body>
     <div class="maincontent">
+        <div class="adheader">
+            {% for ad in adhead %}
+                <p>{{ad.Info}}</p>
+                <p>{{ad.addesc}}</p>
+            {% endfor %} 
+            <div class="subadheader">
+                {% for ads in adimg %}
+                <a href="{{ads.link}}" target="_blank">  <img class="adimg" src="{{ads.images.url}}" height="20" width="20"></a>
+                <p class="addesc">{{ads.addesc}}</a></p>
+                {% endfor %}
+            </div>       
+        </div>
         <!-- Offcanvas Menu Begin -->
     <div class="offcanvas-menu-overlay"></div>
     <div class="offcanvas-menu-wrapper">
@@ -166,10 +178,10 @@
                 <div class="footer-col">
                     <h1>follow us</h1>
                     <div class="social-links">
-                        <a href="#"><i class="fa fa-facebook-f"></i></a>
-                        <a href="#"><i class="fa fa-twitter"></i></a>
+                        <a href="https://www.facebook.com/udibaba.restro" target="_blank"><i class="fa fa-facebook-f"></i></a>
+                        <a href="#"><i class="fa fa-youtube-play" aria-hidden="true"></i></a>
                         <a href="#"><i class="fa fa-instagram"></i></a>
-                        <a href="#"><i class="fa fa-youtube"></i></a>
+                        <a href="#"><i class="fa fa-twitter"></i></a>
                     </div>
                     <p>Opening time:<br>10 AM - 10 PM</p>
                 </div>
