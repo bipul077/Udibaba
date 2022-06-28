@@ -44,13 +44,12 @@ INSTALLED_APPS = [
     'cloudinary_storage',
     'crispy_forms',
     'django_mail_admin',
-    'social_django',#for google
+    'social_django',
     #for facebook
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.facebook',
-    'django.contrib.sites',
 ]
 
 MIDDLEWARE = [
@@ -148,9 +147,10 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'udibaba9741@gmail.com'  #sender's email-id
-EMAIL_HOST_PASSWORD = 'hjiwkuhkwkhjhukl'  #password associated with above email-id
+EMAIL_HOST_USER = 'restaurantudibaba@gmail.com'  #sender's email-id
+EMAIL_HOST_PASSWORD = 'emvpsocssaxbtanh'  #password associated with above email-id
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
@@ -193,6 +193,8 @@ AUTHENTICATION_BACKENDS = [
     #for google
     'social_core.backends.google.GoogleOAuth2',
     
+    'social_core.backends.facebook.FacebookOAuth2',
+    
     #both google and facebook
     'django.contrib.auth.backends.ModelBackend',
     
@@ -201,10 +203,17 @@ AUTHENTICATION_BACKENDS = [
 
 ]
 
-SITE_ID = 1 
-
 LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'home'
+LOGOUT_URL = 'logout'
 
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '1080162923317-rt3dqbdjchhqtnmcg8hg6pjmpa7gce4g.apps.googleusercontent.com'
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
+
+SOCIAL_AUTH_FACEBOOK_KEY='1395580810936659'
+SOCIAL_AUTH_FACEBOOK_SECRET='2355ccc454f6bdbaba76e0d04e70d4ad'
+
+#for extra info
+SOCIAL_AUTH_FACEBOOK_SCOPE = [
+    'email'
+]
