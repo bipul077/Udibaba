@@ -8,14 +8,11 @@
   <div class="col-sm-9 offset-sm-1 ordermain">
     {% for op in order_placed %}
     <div class="row shadow mb-3">
-        <div clsas="col-sm-2">
-            <img src="{{op.product.product_image.url}}" alt="" srcset="" class="img-fluid" height="150" width="150">
-        </div>
         <div class="col-sm-7 ordercon">
-            <p>Product: {{op.product.title}}</p>
+            <p>Fish item: {{op.product.title}}</p>
             <p>Quantity: {{op.quantity}}</p>
             <p>Price(Each): Rs.{{op.price}}</p> 
-            
+            <p>Tracking number: {{op.order.tracking_number}}</p>
         </div>
         <div class="col-sm-4 fw-bold ordercon">
             <p>Ordered date: {{op.order.ordered_date}}</p> 
@@ -56,6 +53,9 @@
     .ordercon{
         margin-left: 10px;
         margin-top: 10px; 
+    }
+    .ordercon p{
+        font-size: 18px;
     }
     .d-grid a{
         font-family: cursive;

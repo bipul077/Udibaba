@@ -17,6 +17,7 @@ urlpatterns = [
      path('signup/', views.signup, name='signup'),
      path('login/', views.login_view, name='login'),
      path('social-auth/', include('social_django.urls', namespace='social')),#google
+     path('accounts/', include('allauth.urls')), #facebook
      path('logout/', LogoutView.as_view(next_page = 'login'), name = 'logout'),
      #start of password change
      path('password-change/', auth_views.PasswordChangeView.as_view(template_name = 'user/change-password/passwordchange.html', form_class=MyPasswordChangeForm, success_url='/password-change-successfully/'), name='passwordchange'),
@@ -48,4 +49,6 @@ urlpatterns = [
      path('search/', views.search, name='search'),
      path('sendemail/<int:tid>',views.sendemail,name='sendemail'),
      path('load-more-data/',views.load_more.as_view(),name='loadmore'),
+     path('pluscart/',views.plus_cart,name='pluscart'),
+     path('minuscart/',views.minus_cart,name='minuscart'),
 ]

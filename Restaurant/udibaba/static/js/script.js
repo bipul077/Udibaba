@@ -35,4 +35,5 @@ setInterval(function(){
     CountDown();
 },1000)
 
+document.getElementsByClassName('invalid-feedback').innerText = "Email Already Stored"
 

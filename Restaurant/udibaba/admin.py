@@ -33,7 +33,7 @@ class VideoAdmin(admin.ModelAdmin):
 admin.site.register(Video, VideoAdmin)
 
 class CategoryAdmin(admin.ModelAdmin):
-    list_display = ('id', 'title')
+    list_display = ('id', 'title','image_tag')
     list_display_links = ('title',)
 admin.site.register(Category, CategoryAdmin)
 

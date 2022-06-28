@@ -50,7 +50,7 @@ $('.review-carousel').owlCarousel({
     nav:false,
     dots:false,
     autoplay: true,
-    autoplayTimeout: 4000,
+    autoplayTimeout: 3000,
     responsive:{
         0:{
             items:1
@@ -105,7 +105,7 @@ $('.increment-btn').click(function (e) {
     var inc_value = $(this).closest('.pro-qty').find('.qty-input').val();
     var value = parseInt(inc_value,10);
     value = isNaN(value) ? 0 : value;
-    if(value < 9)
+    if(value < 10)
     {
         value++;
         $(this).closest('.pro-qty').find('.qty-input').val(value);
@@ -132,7 +132,7 @@ $('.increments-btn').click(function (e) {
     var inc_value = $(this).closest('.menulistqty').find('.qty-input').val();
     var value = parseInt(inc_value,10);
     value = isNaN(value) ? 0 : value;
-    if(value < 9)
+    if(value < 10)
     {
         value++;
         $(this).closest('.menulistqty').find('.qty-input').val(value);
@@ -157,11 +157,10 @@ $(document).on('click',".addtocart",function(){
     var pid= $(this).closest('.contentmodal').find('.product-id').val();
     // var pimg=$(".product-image-"+_index).val();
     var ptitle=$(this).closest('.contentmodal').find('.product-title').val();
-    var pimage=$(this).closest('.contentmodal').find('.product-image').val();
     var price=$(this).closest('.contentmodal').find('.product-price').val();
     // var pprice=$(".product-price-"+_index).text();
     console.log(typeof(price));
-    console.log(pid,ptitle,qty,price,pimage)
+    console.log(pid,ptitle,qty,price)
     // Ajax
     $.ajax({
         url:'/addtocart',
@@ -170,7 +169,6 @@ $(document).on('click',".addtocart",function(){
             'qty': qty,
             'title': ptitle,
             'price': price,
-            'image': pimage
         },
         dataType:'json',
         success:function(res){
@@ -186,9 +184,8 @@ $(document).on('click',".modaladd",function(){
     var qty = document.getElementById("quantity").value;
     var pid = document.getElementById("prod_id").value;
     var ptitle = document.getElementById("foodtitle").textContent;
-    var pimage = document.getElementById("imgpop").src;
     var price = document.getElementById("foodprice").textContent;
-    console.log(ptitle,qty,pid,pimage,price);
+    console.log(ptitle,qty,pid,price);
     // console.log(pid,ptitle,qty,price)
     //Ajax
     $.ajax({
@@ -198,7 +195,6 @@ $(document).on('click',".modaladd",function(){
             'qty': qty,
             'title': ptitle,
             'price': price,
-            'image': pimage
         },
         dataType:'json',
         success:function(res){
@@ -292,4 +288,55 @@ $("#loadmore").on('click',function(){
             
     })
     //end ajax
+})
+
+$('.plus-cart').click(function () {
+    console.log("plus-clicked")
+    var id = $(this).attr("pid").toString();
+    var eml = this.parentNode.children[1].textContent
+    var emls = this.parentNode.children[1]
+    console.log("yes"+id)
+    console.log("yeseml "+eml)
+    
+    $.ajax({
+        type: "GET",
+        url: "/pluscart",
+        data: {
+            prod_id: id,
+            qty: eml,//prod_id=id goes to url pluscart
+        },
+        success: function(data){//if success then success function is called
+            console.log(data) 
+            console.log(data.quantity) 
+            emls.innerText = data.quantity
+            document.getElementById("amount").innerText = data.totalamount
+            document.getElementById("totamount").innerText = data.finalamount               
+        }      
+    })
+})
+
+$('.minus-cart').click(function () {
+    console.log("minus-clicked")
+    var id = $(this).attr("pid").toString();
+    var eml = this.parentNode.children[1].textContent
+    var emls = this.parentNode.children[1]
+    console.log("yes"+id)
+    console.log("yeseml "+eml)
+    $.ajax({
+        type: "GET",
+        url: "/minuscart",
+        data: {
+            prod_id: id,
+            qty: eml,//prod_id=id goes to url minuscart
+        },
+        success: function(data){//if success then success function is called
+            console.log(data)
+            if(data.quantity>0){
+                console.log("success")
+                emls.innerText = data.quantity
+                document.getElementById("amount").innerText = data.totalamount
+                document.getElementById("totamount").innerText = data.finalamount
+            }
+        }          
+    })
 })

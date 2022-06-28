@@ -38,16 +38,14 @@
               </div>
               <div class="col-md-6 mt-3">
                 <label for="email" class="">Phone Number</label>
-                <input type="text" name="phone" class="form-control" placeholder="Enter Phone Number" value="{{ up.phone }}" required>
+                <input type="text" maxlength="10" minlength="10" name="phone" class="form-control" placeholder="Enter Phone Number" value="{{ up.phone }}" required>
               </div>
-                <div class="col-lg-6 col-md-6 mt-3">
-                  <label for="state">State</label>
-                  <br>
-                  <!-- <input type="text" name="state" class="form-control" placeholder="Enter State" value="{{ up.state }}" required> -->
-                  <select name="state">
-                    <option value="Bagmati Province">Bagmati Province</option>
-                  </select>
-                </div>
+              <div class="col-md-12 mt-3 form-group">
+                <label for="id_state" class="requiredField">State</label>
+                <select name="state" class="select form-control">
+                  <option value="Bagmati Province">Bagmati Province</option>
+                </select>
+              </div>  
               <div class="md-form col-md-6 mt-3">
                 <label for="city" class="">City</label>
                 <input type="text" name="city" class="form-control" placeholder="Enter City" value="{{ up.city }}" required>

@@ -44,7 +44,13 @@ INSTALLED_APPS = [
     'cloudinary_storage',
     'crispy_forms',
     'django_mail_admin',
-    'social_django',
+    'social_django',#for google
+    #for facebook
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.facebook',
+    'django.contrib.sites',
 ]
 
 MIDDLEWARE = [
@@ -142,8 +148,8 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'udibaba9741@gmail.com'  #sender's email-id
-EMAIL_HOST_PASSWORD = 'hjiwkuhkwkhjhukl'  #password associated with above email-id
+EMAIL_HOST_USER = 'restaurantudibaba@gmail.com' #sender's email-id
+EMAIL_HOST_PASSWORD = 'emvpsocssaxbtanh' #password associated with above email-id
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 # Default primary key field type
@@ -184,11 +190,18 @@ JAZZMIN_SETTINGS = {
 
 #social app custom settings
 AUTHENTICATION_BACKENDS = [
+    #for google
     'social_core.backends.google.GoogleOAuth2',
     
+    #both google and facebook
     'django.contrib.auth.backends.ModelBackend',
+    
+    #for facebook
+    'allauth.account.auth_backends.AuthenticationBackend',
 
 ]
+
+SITE_ID = 1 
 
 LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'home'

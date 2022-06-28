@@ -29,6 +29,9 @@ class Category(models.Model):
   title = models.CharField(max_length=100)
   img = models.ImageField(upload_to='category_imgs/',default='')
 
+  def image_tag(self):
+    return mark_safe('<img src="%s" width="50" height="50" />'%(self.img.url))
+
   def __str__(self):
     return str(self.title)
 
@@ -37,15 +40,10 @@ class Product(models.Model):
   item_price = models.FloatField()
   description = models.TextField()
   category = models.ForeignKey(Category,on_delete=models.CASCADE)
-  product_image = models.FileField(upload_to='img/%m', blank = False)
+  product_image = models.FileField(upload_to='img/%m', blank = True,null=True)
   is_featured = models.BooleanField(default=False)
   def __str__(self):
     return str(self.id) + " " + str(self.title)
-def image_tag(self):
-      return mark_safe('<img src="%s" width="50" />' % (self.product_image))
-
-def __str__(self):
-    return str(self.id)+ " " + str(self.headertext)
 
 class Gallery(models.Model):
   title = models.CharField(max_length=50, unique=False)
@@ -93,9 +91,10 @@ class Review(models.Model):
 # Order
 ORDER_STATUS=(
   ('cancelled','Cancelled'),
-  ('shipped','Shipped'),
+  ('on the way','On The Way'),
   ('delivered','Delivered'),
 )
+
 class Order(models.Model):
   user = models.ForeignKey(User, on_delete=models.CASCADE)
   fname = models.CharField(max_length=150, null=False)
@@ -117,8 +116,6 @@ class Order(models.Model):
       # return '{} - {}'.format(self.id, self.tracking_number)
       return self.tracking_number
   
-  
-
 STATE_CHOICES = (
     ('Bagmati Province', 'Bagmati Province'),
 )

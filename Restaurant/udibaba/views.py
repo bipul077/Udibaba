@@ -63,7 +63,7 @@ def review(request):
     return render(request, 'review/review.html')
 
 def menu(request):
-    menu = Category.objects.all().order_by('id')[:4]
+    menu = Category.objects.all().order_by('id')[:8]
     totaldata = Category.objects.all().count()
     return render(request, 'menu/menu.html',{'menu':menu,'totaldata':totaldata})
 
@@ -270,7 +270,6 @@ def addtocart(request):
 	# del request.session['cartdata']
 	cart_p={}
 	cart_p[str(request.GET['id'])]={
-		'image':request.GET['image'],
 		'title':request.GET['title'],
 		'quan':request.GET['qty'],
 		'price':request.GET['price'],
@@ -463,7 +462,7 @@ def delete_address(request, pk):
 #search
 def search(request):
     q = request.GET['q']
-    data = Product.objects.filter(title__icontains=q).order_by('-id')#-id descending filter
+    data = Category.objects.filter(title__icontains=q).order_by('-id')#-id descending filter
     context = {
             'data':data
     }
@@ -522,3 +521,54 @@ class load_more(View):
             'menulist':prods,
         })
         return JsonResponse({'datas':t})
+
+def plus_cart(request):
+    dc = Deliverycharge.objects.get(title='KTM')
+    prod_id = request.GET['prod_id']
+    p_qty=request.GET['qty']
+    print(prod_id,p_qty)
+    iqty = int(p_qty)
+    if(iqty<10):
+        iqty += 1
+    abc = str(iqty)
+    if 'cartdata' in request.session:
+            if prod_id in request.session['cartdata']:
+                cart_data=request.session['cartdata']
+                cart_data[str(request.GET['prod_id'])]['quan'] = abc
+                request.session['cartdata']=cart_data
+    total_amt=0
+    for p_id,item in request.session['cartdata'].items():
+        total_amt+=int(item['quan'])*float(item['price'])
+    data = {
+        'quantity': cart_data[str(request.GET['prod_id'])]['quan'],
+        'totalitems':len(request.session['cartdata']),
+        'totalamount':total_amt,
+        'finalamount':total_amt+dc.Deliverycost   
+        }
+    return JsonResponse(data)
+
+def minus_cart(request):
+    dc = Deliverycharge.objects.get(title='KTM')
+    prod_id = request.GET['prod_id']
+    p_qty=request.GET['qty']
+    print(prod_id,p_qty)
+    iqty = int(p_qty)
+    iqty -= 1
+    abc = str(iqty)
+    if 'cartdata' in request.session:
+            if prod_id in request.session['cartdata']:
+                cart_data=request.session['cartdata']
+                cart_data[str(request.GET['prod_id'])]['quan'] = abc
+                request.session['cartdata']=cart_data
+    total_amt=0
+    for p_id,item in request.session['cartdata'].items():
+        total_amt+=int(item['quan'])*float(item['price'])
+    data = {
+        'quantity': cart_data[str(request.GET['prod_id'])]['quan'],
+        'totalitems':len(request.session['cartdata']),
+        'totalamount':total_amt,
+        'finalamount':total_amt+dc.Deliverycost   
+        }
+    return JsonResponse(data)
+
+

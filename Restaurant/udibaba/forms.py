@@ -19,10 +19,16 @@ class SignUpForm(UserCreationForm):
 class CustomerDetailsUpdateForm(forms.ModelForm):
     first_name = forms.CharField(label = ("First Name"))
     last_name = forms.CharField(label = ("Last Name"))
+    # username = forms.CharField(label = ("User Name"))#username = email address
+    email = forms.EmailField(label = ("Email"))#username = email address
+
+    def __init__(self, *args, **kwargs):
+        super(CustomerDetailsUpdateForm, self).__init__(*args, **kwargs)
+        self.fields['email'].widget.attrs['readonly'] = True
     
     class Meta:
         model = User
-        fields = ('first_name', 'last_name')
+        fields = ('first_name', 'last_name', 'email')
         
 #Password Change Form
 class MyPasswordChangeForm(PasswordChangeForm):
@@ -50,5 +56,5 @@ class CustomerAddressForm(forms.ModelForm):
     class Meta:
         model = CustomerProfile
         fields = ['state', 'city', 'address', 'phone']
-        widgets = {'state':forms.Select(), 'city':forms.TextInput(), 'address':forms.TextInput(), 'phone':forms.TextInput()}
+        widgets = {'state':forms.Select(), 'city':forms.TextInput(), 'address':forms.TextInput(), 'phone':forms.NumberInput()}
         

@@ -189,3 +189,6 @@ font-weight: bold
 #cartquan::-webkit-inner-spin-button {
     opacity: 1;
 }
+.col a{
+    padding: 0 1vh;
+}
