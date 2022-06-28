@@ -29,6 +29,9 @@ class Category(models.Model):
   title = models.CharField(max_length=100)
   img = models.ImageField(upload_to='category_imgs/',default='')
 
+  def image_tag(self):
+    return mark_safe('<img src="%s" width="50" height="50" />'%(self.img.url))
+
   def __str__(self):
     return str(self.title)
 
@@ -37,15 +40,10 @@ class Product(models.Model):
   item_price = models.FloatField()
   description = models.TextField()
   category = models.ForeignKey(Category,on_delete=models.CASCADE)
-  product_image = models.FileField(upload_to='img/%m', blank = False)
+  product_image = models.FileField(upload_to='img/%m', blank = True,null=True)
   is_featured = models.BooleanField(default=False)
   def __str__(self):
     return str(self.id) + " " + str(self.title)
-def image_tag(self):
-      return mark_safe('<img src="%s" width="50" />' % (self.product_image))
-
-def __str__(self):
-    return str(self.id)+ " " + str(self.headertext)
 
 class Gallery(models.Model):
   title = models.CharField(max_length=50, unique=False)
@@ -157,6 +155,21 @@ class Deliverycharge(models.Model):
   def __str__(self):
     return self.title
 
+class AdHeader(models.Model):
+  Info = models.CharField(max_length=50,null=True,blank=True)
+  addesc = models.CharField(max_length=70,null=True,blank=True)
+
+  def __str__(self):
+    return self.Info
+
+class Multipleadimage(models.Model):
+  prod = models.ForeignKey(AdHeader, default=None, on_delete=models.CASCADE)
+  images = models.ImageField(upload_to = 'img/ad')
+  addesc = models.CharField(max_length=20,null=True,blank=True)
+  link = models.CharField(max_length=100,null=True,blank=True)
+  def __str__(self):
+        return self.prod.Info 
+
 @receiver(post_save, sender=Order)
 def create_user_profile(sender, instance, created, **kwargs):
     if created == False:
@@ -178,3 +191,5 @@ def create_user_profile(sender, instance, created, **kwargs):
       )
       emailsed.content_subtype = 'html'
       emailsed.send(fail_silently=False)
+ 
+ 

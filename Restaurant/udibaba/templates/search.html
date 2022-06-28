@@ -9,7 +9,7 @@
         <div class="col-md-3 mb-4">
             <div class="card">
                 <div class="category-image m-2">
-                    <a href="#" class="alink" data-toggle="modal" data-target="#popmenu" data-img="{{b.product_image.url}}" data-name="{{b.title}}" data-price="{{b.item_price}}" data-des="{{b.description}}" data-id="{{b.id}}"><img src="{{b.product_image.url}}" class="card-img-top" height="200px" width="200px"></a>
+                  <a href="/menulist/{{b.id}}" class="menulink"><img src="{{b.img.url}}" class="card-img-top" height="200px" width="200px"></a>
                 </div>
                 <div class="card-body">
                     <div class="row" style="justify-content: center; font-weight:bold;"><span class="fs-5">{{b.title}}</span></div>
@@ -23,36 +23,4 @@
         {% endfor %}
     </div>
 </div>
-<!-- Modal -->
-<div class="modal fade" id="popmenu" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content menumodal">
-        <div class="modal-header">
-          <h5 class="modal-title" id="foodtitle">Modal title</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body" id="modalbody">
-          <img id="imgpop" src="{% static 'img/momo.jpg' %}" width="200" height="150">
-          <p class="popfp" style="font-weight: bold;">Rs <span id="foodprice"></span></p>
-          <p id="fooddesc" class="popfp"></p>
-          <div class="pro-qty">
-            <form action="">
-                <span class="dec qtybtn decrement-btn">-</span>
-                <input type="text" name="quantity" class="qty-input" value="1" id="quantity">
-                <span class="dec qtybtn increment-btn newhover">+</span>
-                <input type="hidden" name="prod_id" id="prod_id" value=""><!--to get the product id we do this-->>
-            </form>
-          </div>
-          <div class="btnmodaladd">
-            <button type="button" class="btn btn-success modaladd"><span class="buybutton">Add to Cart</span></button>
-          </div> 
-        </div>
-        <div class="modal-footer" style="justify-content: center;">
-          <p>Note: We charged Rs 70 for the delivery charge.</p>
-        </div>
-      </div>
-    </div>
-  </div>
 {% endblock main-content %}

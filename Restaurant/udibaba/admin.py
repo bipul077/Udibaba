@@ -2,6 +2,7 @@ from django.contrib import admin
 from django.utils.html import format_html
 from django.urls import reverse
 from .models import(
+    AdHeader,
     Banner,
     CustomerProfile,
     Video,
@@ -13,7 +14,8 @@ from .models import(
     Review,
     Order,
     OrderItem,
-    Deliverycharge
+    Deliverycharge,
+    Multipleadimage
 )
 admin.site.register(Deliverycharge)
 class BannerAdmin(admin.ModelAdmin):
@@ -31,7 +33,7 @@ class VideoAdmin(admin.ModelAdmin):
 admin.site.register(Video, VideoAdmin)
 
 class CategoryAdmin(admin.ModelAdmin):
-    list_display = ('id', 'title')
+    list_display = ('id', 'title','image_tag')
     list_display_links = ('title',)
 admin.site.register(Category, CategoryAdmin)
 
@@ -75,3 +77,17 @@ class OrderItemAdmin(admin.ModelAdmin):
     def customer_info(self,obj):
         link = reverse("admin:udibaba_order_change",args=[obj.order.pk])
         return format_html('<a href="{}">{}</a>',link,obj.order.user.first_name + " " + obj.order.user.last_name)
+
+class MultipleimageAdmin(admin.StackedInline):#we are using StackedInline class to edit “PostImage” model inside “Post” model.
+    model = Multipleadimage
+
+@admin.register(AdHeader)
+class AdHeaderAdmin(admin.ModelAdmin):
+    inlines = [MultipleimageAdmin]
+ 
+    class Meta:
+       model = AdHeader
+
+@admin.register(Multipleadimage)
+class MultipleimageAdmin(admin.ModelAdmin):
+    pass

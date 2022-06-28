@@ -144,9 +144,12 @@ figure.snip1390 {
   font-family: 'Roboto', Arial, sans-serif;
   position: relative;
   overflow: hidden;
+<<<<<<< HEAD
   /* margin: 10px;
   min-width: 230px;
   max-width: 315px; */
+=======
+>>>>>>> 4b9f4fff79bd8a2ac748b8440f2490389bf3e57b
   width: 100%;
   color: #000000;
   text-align: center;

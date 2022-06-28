@@ -973,3 +973,27 @@ ol {
 @media only screen and (min-width:767px) {
 	li.showonmobile { display:none; visibility: hidden; }
 }
+/* for ad header */
+.adheader{
+	display: flex;
+	justify-content: space-around;
+	background-color: #337220;
+	color: #fff;
+	font-family: cursive;
+}
+
+.subadheader{
+	display: flex;
+}
+.adimg{
+	margin-right: 5px;
+}
+.addesc{
+	margin-right: 10px;
+}
+@media only screen and (max-width:767px) {
+	.adheader{
+		display: block;
+		padding-left: 20px;
+	}
+}

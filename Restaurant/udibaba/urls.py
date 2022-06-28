@@ -48,4 +48,6 @@ urlpatterns = [
      path('search/', views.search, name='search'),
      path('sendemail/<int:tid>',views.sendemail,name='sendemail'),
      path('load-more-data/',views.load_more.as_view(),name='loadmore'),
+     path('pluscart/',views.plus_cart,name='pluscart'),
+     path('minuscart/',views.minus_cart,name='minuscart'),
 ]
