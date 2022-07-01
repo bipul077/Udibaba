@@ -676,14 +676,14 @@ ol {
 	position: absolute;
 	right: 35%;
 	bottom: 35px;
-	left: 35%;
+	left: 29%;
 	z-index: 10;
 	padding-top: 20px;
 	padding-bottom: 0px;
 	text-align: center;
 	background: white;
 	border-radius: 3rem;
-	width: 30%;
+	width: 45%;
 	animation-name: example;
     animation-duration: 20s;
 	animation-iteration-count: infinite;

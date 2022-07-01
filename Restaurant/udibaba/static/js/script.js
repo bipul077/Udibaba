@@ -2,7 +2,6 @@
 let abc = document.getElementById("date").textContent
 let cc = document.getElementById("countdown")
 let countDate = new Date(abc).getTime();
-console.log(countDate)
 
 function CountDown(){
 

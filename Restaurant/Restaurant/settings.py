@@ -43,7 +43,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'cloudinary_storage',
     'crispy_forms',
-    'django_mail_admin',
     'social_django',
     #for facebook
     'allauth',

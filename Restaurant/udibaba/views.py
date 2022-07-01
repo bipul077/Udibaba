@@ -501,7 +501,7 @@ def sendemail(request,tid):
         email_adminsubject,
         email_bodyadmin,
         'noreply@semycolon.com',
-        ['udibaba9741@gmail.com'],
+        ['restaurantudibaba@gmail.com'],
     )
     emailsadmin.content_subtype = 'html'
     emailsadmin.send(fail_silently=False)
