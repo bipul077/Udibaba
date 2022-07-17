@@ -5,11 +5,11 @@ from .forms import SignUpForm, ReviewForm, CustomerAddressForm, CustomerDetailsU
 from django.contrib.auth.models import User
 from django.views import View
 from django.contrib import messages
-from .models import Banner, Deliverycharge, Gallery, Video, Product, Category, Event, Contact, Review, UserOTP, Order, OrderItem, CustomerProfile
+from .models import Banner, Deliverycharge, Gallery, Video, Product, Category, Event, Contact, Review, UserOTP, Order, OrderItem, CustomerProfile, Multiplegalleryimage
 from django.http.response import JsonResponse
 from django.shortcuts import render,get_object_or_404,redirect
 import random
-from django.core.mail import send_mail #for otp
+from django.core.mail import send_mail,send_mass_mail #for otp
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
@@ -63,7 +63,7 @@ def review(request):
     return render(request, 'review/review.html')
 
 def menu(request):
-    menu = Category.objects.all().order_by('id')[:8]
+    menu = Category.objects.all().order_by('title')[:8]
     totaldata = Category.objects.all().count()
     return render(request, 'menu/menu.html',{'menu':menu,'totaldata':totaldata})
 
@@ -336,7 +336,7 @@ def place_order(request):
     dc = Deliverycharge.objects.get(title='KTM')
     totalamount = 0.0
     if request.method == 'POST':
-        if not CustomerProfile.objects.filter(user=request.user):
+        if not CustomerProfile.objects.filter(user=request.user):#if registered current user not existed in CustomerProfile model or user hasnt filled up the address by going to profile
                 userprofile = CustomerProfile()
                 userprofile.user = request.user
                 userprofile.phone = request.POST.get('phone')
@@ -478,7 +478,7 @@ def sendemail(request,tid):
     totamnt = 0
     for o in op:
         totamnt = o.order.total_price
-    useremail = User.objects.filter(username=request.user)
+    useremail = Order.objects.filter(id=tid)
     for b in useremail:
         uemail = b.email
         print("useremail"+uemail)
@@ -506,6 +506,7 @@ def sendemail(request,tid):
     emailsadmin.content_subtype = 'html'
     emailsadmin.send(fail_silently=False)
     emails.content_subtype = 'html'
+    # send_mass_mail((emails, emailsadmin), fail_silently=False)
     emails.send(fail_silently=False)#error dekhaune ho vane we do this
     #error dekhaune ho vane we do this
     response = redirect("order")
@@ -515,7 +516,7 @@ class load_more(View):
     def get(self, request):
         start=int(request.GET['curproducts'])
         limit=int(request.GET['limit'])
-        prods = Category.objects.all().order_by('id')[start:start+limit]#fetch the latest product according to category with order_by,[:3]fetches first 3 products only
+        prods = Category.objects.all().order_by('title')[start:start+limit]#fetch the latest product according to category with order_by,[:3]fetches first 3 products only
         t = render_to_string('ajax/menu.html',
         {
             'menulist':prods,
@@ -571,4 +572,9 @@ def minus_cart(request):
         }
     return JsonResponse(data)
 
-
+class Subgallery(View):
+    def get(self, request, pk):
+        print("yahooooo")
+        gid = get_object_or_404(Gallery, pk=pk)
+        photos = Multiplegalleryimage.objects.filter(gallery=gid)
+        return render(request,'gallery/subgallery.html',{'photos':photos})

@@ -139,7 +139,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 # MEDIA_URL = "/media/"#media url is the reference url for browser to access the files over HTTP
 # MEDIA_ROOT = os.path.join(BASE_DIR,"media/")#BASE_DIR means the directory of manage.py
-
+# MEDIA_PATH = "Media"
 # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' #To send link in terminal
 #To send link in email
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend' 

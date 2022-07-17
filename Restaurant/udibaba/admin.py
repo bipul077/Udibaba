@@ -15,17 +15,13 @@ from .models import(
     Order,
     OrderItem,
     Deliverycharge,
-    Multipleadimage
+    Multipleadimage,
+    Multiplegalleryimage
 )
 admin.site.register(Deliverycharge)
 class BannerAdmin(admin.ModelAdmin):
     list_display = ('headertext', 'img','image_tag')
 admin.site.register(Banner,BannerAdmin)
-
-class GalleryAdmin(admin.ModelAdmin):
-    list_display = ('id', 'title')
-    list_display_links = ('title',)
-admin.site.register(Gallery, GalleryAdmin)
 
 class VideoAdmin(admin.ModelAdmin):
     list_display = ('id', 'title')
@@ -77,6 +73,23 @@ class OrderItemAdmin(admin.ModelAdmin):
     def customer_info(self,obj):
         link = reverse("admin:udibaba_order_change",args=[obj.order.pk])
         return format_html('<a href="{}">{}</a>',link,obj.order.user.first_name + " " + obj.order.user.last_name)
+
+class MultiplegalleryimageAdmin(admin.StackedInline):#we are using StackedInline class to edit “PostImage” model inside “Post” model.
+    model = Multiplegalleryimage
+
+@admin.register(Gallery)
+class GalleryAdmin(admin.ModelAdmin):
+    list_display = ('id', 'title')
+    list_display_links = ('title',)
+
+    inlines = [MultiplegalleryimageAdmin]
+ 
+    class Meta:
+       model = Gallery 
+
+@admin.register(Multiplegalleryimage)
+class MultiplegalleryimageAdmin(admin.ModelAdmin):
+    pass
 
 class MultipleimageAdmin(admin.StackedInline):#we are using StackedInline class to edit “PostImage” model inside “Post” model.
     model = Multipleadimage

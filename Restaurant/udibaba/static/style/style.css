@@ -973,13 +973,21 @@ ol {
 @media only screen and (min-width:767px) {
 	li.showonmobile { display:none; visibility: hidden; }
 }
+
+/* for navigation bar */
+.header{
+	left: 0; 
+	z-index: 9999; 
+	width: 100%; 
+	height: 100px; 
+}
 /* for ad header */
 .adheader{
 	display: flex;
 	justify-content: space-around;
 	background-color: #337220;
 	color: #fff;
-	font-family: cursive;
+	/* font-family: cursive; */
 }
 
 .subadheader{
@@ -995,5 +1003,111 @@ ol {
 	.adheader{
 		display: block;
 		padding-left: 20px;
+	}
+}
+.sticky {
+	position: fixed;
+	top: 0;
+	width: 100%;
+}
+/* for bubble tea */
+.mainteacontent{
+	position: relative;
+	margin-left: 20px;
+	margin-right: 20px;
+}
+.teacontent{
+	position: relative;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+.teacontent .teatextbox{
+	position: relative;
+	max-width: 300px;
+}
+.teacontent .teatextbox h2{
+	color: rgb(171, 23, 23);
+	font-size: 4em;
+	line-height: 1.4em;
+	font-weight: 500;
+}
+.teacontent .teatextbox h2 span{
+	color: green;
+	font-size: 1.2em;
+	font-weight: 900;
+}
+.teacontent .teatextbox p{
+	color: #333;
+}
+.teacontent .teatextbox a{
+	display: inline-block;
+	margin-top: 20px;
+	padding: 8px 20px;
+	background: #017143;
+	color: #fff;
+	border-radius: 40px;
+	font-weight: 500;
+	letter-spacing: 1px;
+	text-decoration: none;
+}
+.teacontent .imgBox{
+	display: flex;
+	justify-content: flex-end;
+	padding-right: 50px;
+	margin-top: 50px;
+}
+.teacontent .imgBox img{
+	max-width: 340px;
+}
+.thumb{
+	position: absolute;
+	left: 50%;
+	bottom: 20px;
+	transform: translateX(-50%);
+	display: flex;
+}
+.thumb li{
+	list-style: none;
+	display: inline-block;
+	margin: 0 20px;
+	cursor: pointer;
+	transition: 0.5s;
+}
+.thumb li:hover{
+	transform: translateY(-15px);
+}
+.thumb li img{
+	max-width: 60px;
+}
+.circle{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: #017143;
+	clip-path: circle(650px at right 800px);
+}
+@media only screen and (max-width:767px) {
+	.teacontent .teatextbox{
+		position: relative;
+		max-width: 200px;
+	}
+	.teacontent {
+		position: relative;
+		display: inline-block;
+	}
+	.thumb{
+		bottom: 5px;
+	}
+	.teacontent .imgBox img{
+		margin-bottom: 20%;
+	}
+	.circle{
+		clip-path: circle(500px at right 1000px);
+	}
+	.teacontent .teatextbox h2 span{	
+		font-size: 1.0em;	
 	}
 }

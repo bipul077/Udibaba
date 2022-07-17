@@ -15,12 +15,16 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content menumodal">
         <div class="modal-header">
-          <h5 class="modal-title" id="foodtitle">Udibaba Menu</h5>
+          {% for menulist in menulists %}
+          {% if forloop.first %}
+          <h5 class="modal-title" id="foodtitle">{{menulist.category.title}}</h5>
+          {% endif %}
+          {% endfor %}
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <div class="modal-bodies" id="modalbodies">
+        <div class="modal-bodies" id="modalbodies" style="max-height: 400px; overflow: auto;">
             {% for menulist in menulists %}
             <div class="contentmodal">
                 <p class="grid-item">{{forloop.counter}}.</p>

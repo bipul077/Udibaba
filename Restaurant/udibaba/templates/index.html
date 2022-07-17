@@ -73,7 +73,7 @@
     <!-- Offcanvas Menu End -->
 
     <!-- Header Section Begin -->
-    <header class="header">
+    <header class="header" id="header">
         <div class="container">
             <div class="row">
                 <div class="col-lg-3 col-md-2">
@@ -152,6 +152,7 @@
     {% block banner %} {% endblock banner %}
     {% block trending_products %} {% endblock trending_products %}
     {% block livesale %} {% endblock livesale %}
+    {% block bubbletea %} {% endblock bubbletea %}
     {% block review %} {% endblock review %}
     {% block main-content %} {% endblock main-content %}
     <footer class="footer">
@@ -207,6 +208,20 @@
             alertify.set('notifier','position', 'bottom-right');
             alertify.success('{{ flashmsg }}');
         {% endfor %}
+        
+        window.onscroll = function() {myFunction()};
+
+        var navbar = document.getElementById("header");
+        var sticky = navbar.offsetTop;
+
+        function myFunction() {
+        if (window.pageYOffset >= sticky) {
+            navbar.classList.add("sticky")
+        } else {
+            navbar.classList.remove("sticky");
+        }
+        }
+
     </script>
 </body>
 

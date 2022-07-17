@@ -129,6 +129,27 @@
 <!-- deal section ends -->
 {% endblock livesale %}
 
+{% block bubbletea %}
+<div class="mainteacontent">
+<div class="circle"></div>
+<div class="teacontent">
+  <div class="teatextbox">
+      <h2>Introducing Udibaba's<br><span>BubbleTea</span></h2>
+      <!-- <p>asdfasdfasdfasdfffffffffadddddddddddddddddafdddddddddddddddddddddddddddddddddddasdasdasdasdasdddddddddddd</p> -->
+      <a href="">Learn More</a>
+  </div>
+    <div class="imgBox">
+      <img src="{% static 'img/img1.png' %}" class="starbucks">
+    </div>
+</div>
+<ul class="thumb">
+  <li><img src="{% static 'img/thumb1.png' %}" onclick="imgSlider('static/img/img1.png');changeCircleColor('#1eb044')"></li>
+  <li><img src="{% static 'img/thumb2.png' %}" onclick="imgSlider('static/img/img2.png');changeCircleColor('#900d7e')"></li>
+  <li><img src="{% static 'img/thumb3.png' %}" onclick="imgSlider('static/img/img3.png');changeCircleColor('#f4193d')"></li>
+</ul>
+</div>
+{% endblock bubbletea %}
+
 {% block review %}
 <div class="featuredslider">
   <h2 class="mobfcategories">Customer Review</h2>

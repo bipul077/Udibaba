@@ -13,6 +13,7 @@ urlpatterns = [
      path('menu/', views.menu, name='menu'),
      path('profile/', views.profile, name='profile'),
      path('gallery/', views.gallery, name='gallery'),
+     path('subgallery/<int:pk>', views.Subgallery.as_view(),name="subgallery"),
      #registration and login
      path('signup/', views.signup, name='signup'),
      path('login/', views.login_view, name='login'),

@@ -340,3 +340,12 @@ $('.minus-cart').click(function () {
         }          
     })
 })
+
+function imgSlider(anything){
+    console.log("yesnoyesno");
+    document.querySelector('.starbucks').src = anything;
+}
+function changeCircleColor(color){
+    var circle = document.querySelector('.circle');
+    circle.style.background = color;
+}

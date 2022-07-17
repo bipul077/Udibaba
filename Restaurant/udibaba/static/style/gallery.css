@@ -108,7 +108,7 @@
   #mu-gallery .mu-gallery-area .mu-gallery-content .mu-gallery-body ul li .mu-single-gallery .mu-single-gallery-item .mu-single-gallery-img {
     display: inline;
     float: left;
-    height: 220px;
+    height: 260px;
     overflow: hidden;
     width: 100%;
   }
@@ -224,5 +224,8 @@
     font-size:1rem;
   }
 }
-
-
+.singlegallerys{
+  border-width: 10px;
+  border-style: double;
+  Border-color: rgb(38, 48, 38)
+}

@@ -52,6 +52,15 @@ class Gallery(models.Model):
   def __str__(self):  
     return self.title 
 
+  @property
+  def image_count(self):
+      return self.multiplegalleryimage_set.count()
+
+class Multiplegalleryimage(models.Model):
+  gallery = models.ForeignKey(Gallery, default=None, on_delete=models.CASCADE)
+  images = models.FileField(upload_to = 'gallery_imgs/')
+  
+
 class Event(models.Model):
   title = models.CharField(max_length=30, unique=False)
   description = models.CharField(max_length=250)

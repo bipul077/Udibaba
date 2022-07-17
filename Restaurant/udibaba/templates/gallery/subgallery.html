@@ -24,17 +24,21 @@
              <div class="mu-gallery-body">
                <ul id="mixit-container" class="row">
                  <!--Started using for loop in image-->
-                {% for gallery in gallery_list %}
+                {% for gallery in photos %}
                  <!-- start single gallery image -->
                  <li class="col-md-4 col-sm-6 col-xs-12 mix lab cl-gallery galclass">
-                   <div class="mu-single-gallery singlegallerys">                  
+                   <div class="mu-single-gallery singlegallery">                  
                      <div class="mu-single-gallery-item">
-                       <div class="mu-single-gallery-img">      
-                         <a href="/subgallery/{{gallery.id}}"><img src="{{gallery.image.url}}" height="400"></a>
+                       <div class="mu-single-gallery-img">             
+                         <a><img src="{{gallery.images.url}}"></a>
                         </div>
-                        <h3 class="text-center">{{gallery.title}}</h3>
-                        <p class="text-center font-italic">{{gallery.image_count}} Photos</p>
-                                       
+                       <div class="mu-single-gallery-info">
+                         <div class="mu-single-gallery-info-inner">
+                           <!-- <h4>{{ gallery.title }}</h4>
+                           <p>{{ gallery.description }}</p> -->
+                          <a href="{{gallery.images.url}}" data-fancybox-group="gallery" class="fancybox"><span class="fa fa-eye"></span></a>
+                         </div>
+                       </div>                  
                      </div>
                    </div>
                  </li>
